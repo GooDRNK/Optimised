@@ -12,37 +12,43 @@ namespace Optimised
 {
     public partial class Optimised : Form
     {
-          string Parola;
-          string Username;
-          string Email;
-            string token;
-        public Optimised()
-        {
-            InitializeComponent();
-            if(Program.tokens!=string.Empty)
-            {
-                token = Program.tokens;
-            }
-            else
-            {
-                token = Login.token;
-            }
-            if (Program.Email_Autologin != string.Empty && Program.Parola_Autologin != string.Empty && Program.User_Autologin != string.Empty)
-            {
-                Parola = Program.Parola_Autologin;
-                Username = Program.User_Autologin;
-                Email = Program.Email_Autologin;
-            }
-            else
-            {
-            Parola = Login.Parola_Login;
-            Username = Login.User_Login;
-            Email = Login.Email_Login;
-            }
-            Console.WriteLine(token);
-            Console.WriteLine(Parola);
-            Console.WriteLine(Username);
-            Console.WriteLine(Email);
-        }
+        #region Variabile_Globale
+            //Variabile Globale Start
+            string Parola; //Aici se salveaza Parola.
+            string Username; //Aici se salveaza Utilizatorul.
+            string Email; //Aici se salveaza Emailul.
+            string token; //Aici se salveaza token-ul.
+                          //Variabile Globale End
+            #endregion
+        #region Initializare_App
+                public Optimised()
+                {
+                    InitializeComponent();
+                    if(Program.tokens!=string.Empty) //Se verifica daca token-ul trimis din AutoLogin este null.
+                    {
+                        token = Program.tokens; //Se seteaza token-ul trimis din AutoLogin.
+                    }
+                    else //Daca nu sa folosit AutoLogin trece aici.
+                    {
+                        token = Login.token; //Se seteaza token-ul trimis din Login.
+                    }
+                    if (Program.Email_Autologin != string.Empty && Program.Parola_Autologin != string.Empty && Program.User_Autologin != string.Empty) //Daca datele trimise din AutoLogin nu sunt nule sare aici.
+                    {
+                        //Seteaza datele primite din AutoLogin.
+                        Parola = Program.Parola_Autologin; 
+                        Username = Program.User_Autologin;
+                        Email = Program.Email_Autologin;
+                        //Seteaza datele primite din AutoLogin.
+                    }
+                    else //Daca nu sa folosit AutoLogin sare aici.
+                    {
+                        //Seteaza datele primite din Login.
+                        Parola = Login.Parola_Login;
+                        Username = Login.User_Login;
+                        Email = Login.Email_Login;
+                        //Seteaza datele primite din Login.
+                    }
+                }
+        #endregion
     }
 }

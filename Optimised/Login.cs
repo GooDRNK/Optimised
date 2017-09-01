@@ -79,34 +79,35 @@ namespace Optimised
 
                                 using (StreamWriter sw = File.CreateText(Functii.path)) //Creaza fisierul AutoLogin.ini.
                                 {
+                                    this.Hide(); //Ascunde Form-ul de Login.
                                     sw.Close();
                                     var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
                                     MyIni.Write("Password", password); //Scrie parola in fisierul AutoLogin.ini.
                                     MyIni.Write("Username", iTalk_TextBox_Big2.Text); //Scrie Utilizatorul in fisierul AutoLogin.ini.
                                     MyIni.Write("Email", iTalk_TextBox_Big1.Text); //Scrie Emailul in fisierul AutoLogin.ini.
-
                                     token = logininfo.ToString(); //Salveaza token-ul primit.
                                     User_Login = iTalk_TextBox_Big2.Text; //Salveaza Utilizatorul logat.
                                     Parola_Login = password; //Salveaza Parola folosita.
                                     Email_Login = iTalk_TextBox_Big1.Text; //Salveaza Emailul folosit.
-
                                     Optimised optimised = new Optimised(); //Deschide calea catre noul Form.
                                     notifyIcon1.Visible = false; //Stinge Iconita din sistem Tray.
-                                    optimised.Show(); //Porneste Form-ul cu aplicatia propriuzisa.
-                                    this.Hide(); //Ascunde Form-ul de Login.
+                                    optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
+                                    this.Close();
                                 }
                             }
                         }
                         else //Daca Remember Me nu este bifat trece mai departe.
                         {
+                            this.Hide(); //Ascunde Form-ul de Login.
                             token = logininfo.ToString(); //Salveaza token-ul primit.
                             User_Login = iTalk_TextBox_Big2.Text; //Salveaza Utilizatorul logat.
                             Parola_Login = password; //Salveaza Parola folosita.
                             Email_Login = iTalk_TextBox_Big1.Text; //Salveaza Emailul folosit.
                             Optimised optimised = new Optimised(); //Deschide calea catre noul Form.
                             notifyIcon1.Visible = false; //Stinge Iconita din sistem Tray.
-                            optimised.Show(); //Porneste Form-ul cu aplicatia propriuzisa.
-                            this.Hide(); //Ascunde Form-ul de Login.
+                            optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
+                            this.Close();
+                            
                         }
                     }
            

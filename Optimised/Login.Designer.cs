@@ -94,7 +94,7 @@
             this.iTalk_ThemeContainer1.Sizable = false;
             this.iTalk_ThemeContainer1.Size = new System.Drawing.Size(337, 329);
             this.iTalk_ThemeContainer1.SmartBounds = true;
-            this.iTalk_ThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
+            this.iTalk_ThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.iTalk_ThemeContainer1.TabIndex = 0;
             this.iTalk_ThemeContainer1.Text = "Optimised";
             // 
@@ -233,6 +233,7 @@
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(126, 39);
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Optimised";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
