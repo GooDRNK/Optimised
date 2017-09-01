@@ -236,7 +236,6 @@
             this.Text = "Optimised";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
-            this.Load += new System.EventHandler(this.Login_Load);
             this.iTalk_ThemeContainer1.ResumeLayout(false);
             this.iTalk_ThemeContainer1.PerformLayout();
             this.ResumeLayout(false);
@@ -257,8 +256,8 @@
         private iTalk.iTalk_TextBox_Big iTalk_TextBox_Big2;
         private iTalk.iTalk_TextBox_Big iTalk_TextBox_Big1;
         private System.Windows.Forms.Timer clearGC;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        public  System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 

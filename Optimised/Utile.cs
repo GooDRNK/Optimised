@@ -53,6 +53,23 @@ namespace Optimised
 
             return hash;
         }
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (var stream = client.OpenRead("http://optimised.biz"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
     public class IniFile
     {
