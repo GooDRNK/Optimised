@@ -1307,9 +1307,13 @@ namespace iTalk
         }
         protected override void OnCreateControl()
         {
-            base.OnCreateControl();
-            Point location = new Point(checked(this.FindForm().Width - 81), -1);
-            this.Location = location;
+            try
+            {
+                base.OnCreateControl();
+                Point location = new Point(checked(this.FindForm().Width - 81), -1);
+                this.Location = location;
+            }
+            catch { }
         }
 
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)

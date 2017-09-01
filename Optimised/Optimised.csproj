@@ -112,7 +112,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\on-off_icon&amp;32.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user_icon&amp;32.png" />
   </ItemGroup>
@@ -121,6 +123,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mail_icon&amp;32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\air_signal_icon&amp;32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_icon&amp;32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

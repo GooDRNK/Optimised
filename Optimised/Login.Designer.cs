@@ -30,10 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
+            iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
+            iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.clearGC = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
+            this.loginToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.registerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.goWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_LinkLabel1 = new iTalk.iTalk_LinkLabel();
             this.iTalk_Label2 = new iTalk.iTalk_Label();
@@ -44,6 +50,7 @@
             this.iTalk_TextBox_Big2 = new iTalk.iTalk_TextBox_Big();
             this.iTalk_TextBox_Big1 = new iTalk.iTalk_TextBox_Big();
             this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
+            this.iTalk_ContextMenuStrip1.SuspendLayout();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +61,8 @@
             this.imageList1.Images.SetKeyName(0, "2x2_grid_icon&32.png");
             this.imageList1.Images.SetKeyName(1, "3x3_grid_2_icon&32.png");
             this.imageList1.Images.SetKeyName(2, "air_signal_icon&32.png");
+            this.imageList1.Images.SetKeyName(3, "round_delete_icon&32.png");
+            this.imageList1.Images.SetKeyName(4, "paper_airplane_icon&32.png");
             // 
             // clearGC
             // 
@@ -62,15 +71,61 @@
             // notifyIcon1
             // 
             this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.ContextMenuStrip = this.iTalk_ContextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Optimised";
             this.notifyIcon1.Visible = true;
+            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             // 
-            // contextMenuStrip1
+            // iTalk_ContextMenuStrip1
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.iTalk_ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loginToolStripMenuItem1,
+            this.registerToolStripMenuItem1,
+            this.goWebToolStripMenuItem,
+            this.exitToolStripMenuItem1});
+            this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
+            controlRenderer1.ColorTable = msColorTable1;
+            controlRenderer1.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
+            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(117, 92);
+            // 
+            // loginToolStripMenuItem1
+            // 
+            this.loginToolStripMenuItem1.BackColor = System.Drawing.Color.Transparent;
+            this.loginToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.loginToolStripMenuItem1.Image = global::Optimised.Properties.Resources.user_icon_32;
+            this.loginToolStripMenuItem1.Name = "loginToolStripMenuItem1";
+            this.loginToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
+            this.loginToolStripMenuItem1.Text = "Login";
+            this.loginToolStripMenuItem1.Click += new System.EventHandler(this.loginToolStripMenuItem1_Click);
+            // 
+            // registerToolStripMenuItem1
+            // 
+            this.registerToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.registerToolStripMenuItem1.Image = global::Optimised.Properties.Resources.key_icon_32;
+            this.registerToolStripMenuItem1.Name = "registerToolStripMenuItem1";
+            this.registerToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
+            this.registerToolStripMenuItem1.Text = "Register";
+            this.registerToolStripMenuItem1.Click += new System.EventHandler(this.registerToolStripMenuItem1_Click);
+            // 
+            // goWebToolStripMenuItem
+            // 
+            this.goWebToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.goWebToolStripMenuItem.Image = global::Optimised.Properties.Resources.home_icon_32;
+            this.goWebToolStripMenuItem.Name = "goWebToolStripMenuItem";
+            this.goWebToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.goWebToolStripMenuItem.Text = "Go Web";
+            this.goWebToolStripMenuItem.Click += new System.EventHandler(this.goWebToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem1
+            // 
+            this.exitToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.exitToolStripMenuItem1.Image = global::Optimised.Properties.Resources.on_off_icon_32;
+            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
+            this.exitToolStripMenuItem1.Text = "Exit";
+            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
             // iTalk_ThemeContainer1
             // 
@@ -237,6 +292,7 @@
             this.Text = "Optimised";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
+            this.iTalk_ContextMenuStrip1.ResumeLayout(false);
             this.iTalk_ThemeContainer1.ResumeLayout(false);
             this.iTalk_ThemeContainer1.PerformLayout();
             this.ResumeLayout(false);
@@ -257,8 +313,12 @@
         private iTalk.iTalk_TextBox_Big iTalk_TextBox_Big2;
         private iTalk.iTalk_TextBox_Big iTalk_TextBox_Big1;
         private System.Windows.Forms.Timer clearGC;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         public  System.Windows.Forms.NotifyIcon notifyIcon1;
+        private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem registerToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem goWebToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
     }
 }
 

@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
+            iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
+            this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +63,14 @@
             this.iTalk_ControlBox1.TabIndex = 0;
             this.iTalk_ControlBox1.Text = "iTalk_ControlBox1";
             // 
+            // iTalk_ContextMenuStrip1
+            // 
+            this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
+            controlRenderer1.ColorTable = msColorTable1;
+            controlRenderer1.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
+            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(153, 26);
+            // 
             // Optimised
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -83,5 +94,6 @@
 
         private iTalk.iTalk_ThemeContainer iTalk_ThemeContainer1;
         private iTalk.iTalk_ControlBox iTalk_ControlBox1;
+        private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
     }
 }

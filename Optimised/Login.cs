@@ -113,5 +113,38 @@ namespace Optimised
            
                 }
         #endregion
+        #region Sistem_Tray_Meniu
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit(); //Stinge Aplicatia.
+        }
+
+        private void goWebToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://optimised.biz"); //Intra pe site.
+        }
+
+        private void registerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start("http:///optimised.biz/register"); //Intra in sectiunea de Register.
+        }
+
+        private void loginToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal; //Reaprinde Login-ul.
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Minimized; //Ascunde Login-ul.
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal; //Reaprinde Login-ul.
+            }
+        }
+#endregion
     }
 }
