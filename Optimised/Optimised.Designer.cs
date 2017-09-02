@@ -28,13 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
             iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Optimised));
+            this.GetApiData = new System.ComponentModel.BackgroundWorker();
+            this.Optimised_Only = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
             this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.Optimised_All = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // GetApiData
+            // 
+            this.GetApiData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.GetApiData_DoWork);
+            // 
+            // Optimised_Only
+            // 
+            this.Optimised_Only.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Optimised_Only_DoWork);
             // 
             // iTalk_ThemeContainer1
             // 
@@ -71,6 +85,17 @@
             this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
             this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.iTalk_ContextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // Optimised_All
+            // 
+            this.Optimised_All.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Optimised_All_DoWork);
+            // 
             // Optimised
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -96,5 +121,9 @@
         private iTalk.iTalk_ThemeContainer iTalk_ThemeContainer1;
         private iTalk.iTalk_ControlBox iTalk_ControlBox1;
         private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
+        private System.ComponentModel.BackgroundWorker GetApiData;
+        private System.ComponentModel.BackgroundWorker Optimised_Only;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.ComponentModel.BackgroundWorker Optimised_All;
     }
 }
