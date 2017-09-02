@@ -69,7 +69,7 @@
             controlRenderer1.ColorTable = msColorTable1;
             controlRenderer1.RoundedEdges = true;
             this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
-            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(153, 26);
+            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // Optimised
             // 
@@ -85,6 +85,7 @@
             this.Text = "Optimised";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Optimised_FormClosing);
             this.iTalk_ThemeContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 

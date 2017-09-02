@@ -18,7 +18,7 @@ namespace Optimised
             string Username; //Aici se salveaza Utilizatorul.
             string Email; //Aici se salveaza Emailul.
             string token; //Aici se salveaza token-ul.
-                          //Variabile Globale End
+            //Variabile Globale End
             #endregion
         #region Initializare_App
                 public Optimised()
@@ -50,5 +50,11 @@ namespace Optimised
                     }
                 }
         #endregion
+        #region Logout
+        private void Optimised_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola +"/" +token); //Cere informatii despre Login la API.
+        }
+#endregion
     }
 }
