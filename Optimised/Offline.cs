@@ -27,6 +27,7 @@ namespace Optimised
             this.Hide();
             Login login = new Login();
             login.ShowDialog();
+
             this.Close();
         }
 

@@ -323,6 +323,7 @@
             this.Text = "Optimised";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Login_FormClosing);
             this.iTalk_ContextMenuStrip1.ResumeLayout(false);
             this.iTalk_ThemeContainer1.ResumeLayout(false);
             this.iTalk_ThemeContainer1.PerformLayout();
@@ -344,7 +345,6 @@
         private iTalk.iTalk_TextBox_Big iTalk_TextBox_Big2;
         private iTalk.iTalk_TextBox_Big iTalk_TextBox_Big1;
         private System.Windows.Forms.Timer clearGC;
-        public  System.Windows.Forms.NotifyIcon notifyIcon1;
         private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem registerToolStripMenuItem1;
@@ -352,6 +352,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
         private iTalk.iTalk_Label iTalk_Label3;
         private iTalk.iTalk_Button_2 iTalk_Button_22;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 

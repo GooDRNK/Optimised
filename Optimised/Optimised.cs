@@ -453,6 +453,39 @@ namespace Optimised
             Functii.FlushMemory();
         }
 
+        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
+            this.Hide();
+            Login log = new Login();
+            notifyIcon1.Dispose();
+            log.ShowDialog();
+            this.Close();
+        }
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
 
+            Application.Exit(); //Stinge Aplicatia.
+        }
+        private void showToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal; //Reaprinde Login-ul.
+        }
+        private void updateToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal; //Reaprinde Login-ul.
+        }
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Minimized; //Ascunde Login-ul.
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal; //Reaprinde Login-ul.
+            }
+        }
     }
 }

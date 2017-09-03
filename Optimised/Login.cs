@@ -122,6 +122,11 @@ namespace Optimised
                 }
         #endregion
         #region Sistem_Tray_Meniu
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            notifyIcon1.Dispose();
+            Application.Exit();
+        }
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Application.Exit(); //Stinge Aplicatia.
@@ -154,6 +159,5 @@ namespace Optimised
             }
         }
         #endregion
-
     }
 }
