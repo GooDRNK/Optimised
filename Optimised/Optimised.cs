@@ -453,24 +453,6 @@ namespace Optimised
             Functii.FlushMemory();
         }
 
-        private void showToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
