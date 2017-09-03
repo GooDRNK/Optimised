@@ -29,20 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Optimised));
             iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
             iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Optimised));
             this.GetApiData = new System.ComponentModel.BackgroundWorker();
             this.Optimised_Only = new System.ComponentModel.BackgroundWorker();
             this.Optimised_All = new System.ComponentModel.BackgroundWorker();
             this.ClearRam = new System.Windows.Forms.Timer(this.components);
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
-            this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
-            this.checkUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.iTalk_TabControl1 = new iTalk.iTalk_TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -52,9 +47,14 @@
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iTalk_ThemeContainer1.SuspendLayout();
-            this.iTalk_ContextMenuStrip1.SuspendLayout();
             this.iTalk_TabControl1.SuspendLayout();
+            this.iTalk_ContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // GetApiData
@@ -100,49 +100,8 @@
             this.iTalk_ControlBox1.TabIndex = 0;
             this.iTalk_ControlBox1.Text = "iTalk_ControlBox1";
             // 
-            // iTalk_ContextMenuStrip1
-            // 
-            this.iTalk_ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.checkUpdateToolStripMenuItem,
-            this.logoutToolStripMenuItem,
-            this.exitToolStripMenuItem,
-            this.exitToolStripMenuItem1});
-            this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
-            controlRenderer1.ColorTable = msColorTable1;
-            controlRenderer1.RoundedEdges = true;
-            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
-            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(113, 92);
-            // 
-            // checkUpdateToolStripMenuItem
-            // 
-            this.checkUpdateToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.checkUpdateToolStripMenuItem.Name = "checkUpdateToolStripMenuItem";
-            this.checkUpdateToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.checkUpdateToolStripMenuItem.Text = "Show";
-            // 
-            // logoutToolStripMenuItem
-            // 
-            this.logoutToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.logoutToolStripMenuItem.Text = "Update";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.exitToolStripMenuItem.Text = "Logout";
-            // 
-            // exitToolStripMenuItem1
-            // 
-            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
-            this.exitToolStripMenuItem1.Text = "Exit";
-            // 
             // notifyIcon1
             // 
-            this.notifyIcon1.ContextMenuStrip = this.iTalk_ContextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Optimised";
             this.notifyIcon1.Visible = true;
@@ -183,7 +142,7 @@
             this.tabPage2.Location = new System.Drawing.Point(139, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(825, 515);
+            this.tabPage2.Size = new System.Drawing.Size(841, 557);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "File Shredder";
             // 
@@ -193,7 +152,7 @@
             this.tabPage3.Location = new System.Drawing.Point(139, 4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(825, 515);
+            this.tabPage3.Size = new System.Drawing.Size(841, 557);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Disk Defrag";
             // 
@@ -203,7 +162,7 @@
             this.tabPage4.Location = new System.Drawing.Point(139, 4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(825, 515);
+            this.tabPage4.Size = new System.Drawing.Size(841, 557);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Duplicate Finder";
             // 
@@ -213,7 +172,7 @@
             this.tabPage7.Location = new System.Drawing.Point(139, 4);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(825, 515);
+            this.tabPage7.Size = new System.Drawing.Size(841, 557);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "PC Specs";
             // 
@@ -223,7 +182,7 @@
             this.tabPage5.Location = new System.Drawing.Point(139, 4);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(825, 515);
+            this.tabPage5.Size = new System.Drawing.Size(841, 557);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Setting";
             // 
@@ -233,9 +192,54 @@
             this.tabPage6.Location = new System.Drawing.Point(139, 4);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(825, 515);
+            this.tabPage6.Size = new System.Drawing.Size(841, 557);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "About";
+            // 
+            // iTalk_ContextMenuStrip1
+            // 
+            this.iTalk_ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showToolStripMenuItem,
+            this.updateToolStripMenuItem,
+            this.logoutToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
+            controlRenderer1.ColorTable = msColorTable1;
+            controlRenderer1.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
+            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            // 
+            // showToolStripMenuItem
+            // 
+            this.showToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.showToolStripMenuItem.Text = "Show";
+            this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.updateToolStripMenuItem.Text = "Update";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.logoutToolStripMenuItem.Text = "Logout";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // Optimised
             // 
@@ -254,8 +258,8 @@
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Optimised_FormClosing);
             this.iTalk_ThemeContainer1.ResumeLayout(false);
-            this.iTalk_ContextMenuStrip1.ResumeLayout(false);
             this.iTalk_TabControl1.ResumeLayout(false);
+            this.iTalk_ContextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -264,16 +268,11 @@
 
         private iTalk.iTalk_ThemeContainer iTalk_ThemeContainer1;
         private iTalk.iTalk_ControlBox iTalk_ControlBox1;
-        private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
         private System.ComponentModel.BackgroundWorker GetApiData;
         private System.ComponentModel.BackgroundWorker Optimised_Only;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.ComponentModel.BackgroundWorker Optimised_All;
         private System.Windows.Forms.Timer ClearRam;
-        private System.Windows.Forms.ToolStripMenuItem checkUpdateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
         private iTalk.iTalk_TabControl iTalk_TabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -282,5 +281,10 @@
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
+        private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
