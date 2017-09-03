@@ -116,7 +116,7 @@ namespace Optimised
                 {
                     this.Hide();
                     Offline optimised = new Offline(); //Deschide calea catre noul Form.
-                    notifyIcon1.Visible = false; //Stinge Iconita din sistem Tray.
+                    notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
                     optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
                     this.Close();
                 }

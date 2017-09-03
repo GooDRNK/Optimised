@@ -19,9 +19,6 @@ namespace Optimised
             GClean.Interval = 5000;
             GClean.Start();   
         }
-
-       
-
         private void iTalk_Button_21_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -30,7 +27,6 @@ namespace Optimised
 
             this.Close();
         }
-
         private void GClean_Tick(object sender, EventArgs e)
         {
             Functii.FlushMemory();
@@ -48,10 +44,12 @@ namespace Optimised
             else if (count == 1)
             {
                 count = 0;
+                iTalk_Button_22.Text = "Go Register";
                 webBrowser1.Hide();
                 webBrowser1.Navigate("about:blank");
                 this.Refresh();
             } 
         }
+
     }
 }

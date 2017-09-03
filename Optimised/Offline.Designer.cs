@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
+            iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Offline));
             this.GClean = new System.Windows.Forms.Timer(this.components);
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_TabControl1 = new iTalk.iTalk_TabControl();
@@ -42,6 +45,7 @@
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.iTalk_GroupBox1 = new iTalk.iTalk_GroupBox();
+            this.iTalk_Button_22 = new iTalk.iTalk_Button_2();
             this.iTalk_Button_21 = new iTalk.iTalk_Button_2();
             this.iTalk_ChatBubble_R3 = new iTalk.iTalk_ChatBubble_R();
             this.iTalk_ChatBubble_L3 = new iTalk.iTalk_ChatBubble_L();
@@ -50,11 +54,17 @@
             this.iTalk_ChatBubble_R1 = new iTalk.iTalk_ChatBubble_R();
             this.iTalk_ChatBubble_L1 = new iTalk.iTalk_ChatBubble_L();
             this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
-            this.iTalk_Button_22 = new iTalk.iTalk_Button_2();
+            this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.iTalk_TabControl1.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.iTalk_GroupBox1.SuspendLayout();
+            this.iTalk_ContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // GClean
@@ -91,6 +101,7 @@
             this.iTalk_TabControl1.Controls.Add(this.tabPage6);
             this.iTalk_TabControl1.Controls.Add(this.tabPage8);
             this.iTalk_TabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.iTalk_TabControl1.Font = new System.Drawing.Font("Sitka Banner", 9F);
             this.iTalk_TabControl1.ItemSize = new System.Drawing.Size(44, 135);
             this.iTalk_TabControl1.Location = new System.Drawing.Point(0, 24);
             this.iTalk_TabControl1.Multiline = true;
@@ -210,6 +221,21 @@
             this.iTalk_GroupBox1.TabIndex = 2;
             this.iTalk_GroupBox1.Text = "Cloud Login Info";
             // 
+            // iTalk_Button_22
+            // 
+            this.iTalk_Button_22.BackColor = System.Drawing.Color.Transparent;
+            this.iTalk_Button_22.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.iTalk_Button_22.ForeColor = System.Drawing.Color.White;
+            this.iTalk_Button_22.Image = null;
+            this.iTalk_Button_22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iTalk_Button_22.Location = new System.Drawing.Point(8, 505);
+            this.iTalk_Button_22.Name = "iTalk_Button_22";
+            this.iTalk_Button_22.Size = new System.Drawing.Size(299, 32);
+            this.iTalk_Button_22.TabIndex = 6;
+            this.iTalk_Button_22.Text = "Go Register";
+            this.iTalk_Button_22.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.iTalk_Button_22.Click += new System.EventHandler(this.iTalk_Button_22_Click);
+            // 
             // iTalk_Button_21
             // 
             this.iTalk_Button_21.BackColor = System.Drawing.Color.Transparent;
@@ -231,7 +257,7 @@
             this.iTalk_ChatBubble_R3.BubbleColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(206)))), ((int)(((byte)(215)))));
             this.iTalk_ChatBubble_R3.DrawBubbleArrow = true;
             this.iTalk_ChatBubble_R3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.iTalk_ChatBubble_R3.Location = new System.Drawing.Point(67, 371);
+            this.iTalk_ChatBubble_R3.Location = new System.Drawing.Point(67, 375);
             this.iTalk_ChatBubble_R3.Name = "iTalk_ChatBubble_R3";
             this.iTalk_ChatBubble_R3.Size = new System.Drawing.Size(240, 86);
             this.iTalk_ChatBubble_R3.TabIndex = 5;
@@ -244,7 +270,7 @@
             this.iTalk_ChatBubble_L3.BubbleColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
             this.iTalk_ChatBubble_L3.DrawBubbleArrow = true;
             this.iTalk_ChatBubble_L3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.iTalk_ChatBubble_L3.Location = new System.Drawing.Point(8, 300);
+            this.iTalk_ChatBubble_L3.Location = new System.Drawing.Point(8, 304);
             this.iTalk_ChatBubble_L3.Name = "iTalk_ChatBubble_L3";
             this.iTalk_ChatBubble_L3.Size = new System.Drawing.Size(234, 65);
             this.iTalk_ChatBubble_L3.TabIndex = 4;
@@ -257,7 +283,7 @@
             this.iTalk_ChatBubble_R2.BubbleColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(206)))), ((int)(((byte)(215)))));
             this.iTalk_ChatBubble_R2.DrawBubbleArrow = true;
             this.iTalk_ChatBubble_R2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.iTalk_ChatBubble_R2.Location = new System.Drawing.Point(67, 194);
+            this.iTalk_ChatBubble_R2.Location = new System.Drawing.Point(67, 198);
             this.iTalk_ChatBubble_R2.Name = "iTalk_ChatBubble_R2";
             this.iTalk_ChatBubble_R2.Size = new System.Drawing.Size(240, 100);
             this.iTalk_ChatBubble_R2.TabIndex = 3;
@@ -272,7 +298,7 @@
             this.iTalk_ChatBubble_L2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.iTalk_ChatBubble_L2.Location = new System.Drawing.Point(8, 158);
             this.iTalk_ChatBubble_L2.Name = "iTalk_ChatBubble_L2";
-            this.iTalk_ChatBubble_L2.Size = new System.Drawing.Size(234, 30);
+            this.iTalk_ChatBubble_L2.Size = new System.Drawing.Size(234, 34);
             this.iTalk_ChatBubble_L2.TabIndex = 2;
             this.iTalk_ChatBubble_L2.Text = "Cum fac rost de un cont?";
             // 
@@ -311,20 +337,55 @@
             this.iTalk_ControlBox1.TabIndex = 0;
             this.iTalk_ControlBox1.Text = "iTalk_ControlBox1";
             // 
-            // iTalk_Button_22
+            // iTalk_ContextMenuStrip1
             // 
-            this.iTalk_Button_22.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_Button_22.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.iTalk_Button_22.ForeColor = System.Drawing.Color.White;
-            this.iTalk_Button_22.Image = null;
-            this.iTalk_Button_22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iTalk_Button_22.Location = new System.Drawing.Point(8, 505);
-            this.iTalk_Button_22.Name = "iTalk_Button_22";
-            this.iTalk_Button_22.Size = new System.Drawing.Size(299, 32);
-            this.iTalk_Button_22.TabIndex = 6;
-            this.iTalk_Button_22.Text = "Go Register";
-            this.iTalk_Button_22.TextAlignment = System.Drawing.StringAlignment.Center;
-            this.iTalk_Button_22.Click += new System.EventHandler(this.iTalk_Button_22_Click);
+            this.iTalk_ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showToolStripMenuItem,
+            this.updateToolStripMenuItem,
+            this.loginToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
+            controlRenderer1.ColorTable = msColorTable1;
+            controlRenderer1.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
+            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.iTalk_ContextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // showToolStripMenuItem
+            // 
+            this.showToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.showToolStripMenuItem.Text = "Show";
+        
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.updateToolStripMenuItem.Text = "Update";
+        
+            // 
+            // loginToolStripMenuItem
+            // 
+            this.loginToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loginToolStripMenuItem.Text = "Login";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // Offline
             // 
@@ -333,6 +394,7 @@
             this.ClientSize = new System.Drawing.Size(984, 611);
             this.Controls.Add(this.iTalk_ThemeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(126, 39);
             this.Name = "Offline";
             this.Text = "Optimised Offline";
@@ -342,6 +404,7 @@
             this.iTalk_TabControl1.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.iTalk_GroupBox1.ResumeLayout(false);
+            this.iTalk_ContextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -370,5 +433,11 @@
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Timer GClean;
         private iTalk.iTalk_Button_2 iTalk_Button_22;
+        private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }

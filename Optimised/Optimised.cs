@@ -87,6 +87,7 @@ namespace Optimised
             Path = 0x002,
         }
         #endregion
+
         private void GetApiData_DoWork(object sender, DoWorkEventArgs e)
         {
             while(true)
@@ -110,7 +111,6 @@ namespace Optimised
                 Thread.Sleep(1000);
             }
         }
-
         private void Optimised_Only_DoWork(object sender, DoWorkEventArgs e)
         {
             notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud exclusiv tie a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
@@ -278,7 +278,6 @@ namespace Optimised
             }
             notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud End", "Optimizarea trimisa din cloud exclusiv tie a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
         }
-
         private void Optimised_All_DoWork(object sender, DoWorkEventArgs e)
         {
             notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud pentru toti utilizatorii a inceput.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
@@ -470,7 +469,15 @@ namespace Optimised
         }
         private void showToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Normal; //Reaprinde Login-ul.
+            if (this.Visible == true)
+            {
+                this.Hide();
+            }
+            else if (this.Visible == false)
+            {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }
         }
         private void updateToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -478,13 +485,23 @@ namespace Optimised
         }
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal)
+
+            if (this.Visible == true)
             {
-                WindowState = FormWindowState.Minimized; //Ascunde Login-ul.
+                this.Hide();
             }
-            else
+            else if (this.Visible == false)
             {
-                WindowState = FormWindowState.Normal; //Reaprinde Login-ul.
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+        private void Optimised_Resize(object sender, EventArgs e)
+        {
+
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
             }
         }
     }
