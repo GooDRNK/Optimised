@@ -41,6 +41,8 @@
             this.goWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
+            this.iTalk_Label3 = new iTalk.iTalk_Label();
+            this.iTalk_Button_22 = new iTalk.iTalk_Button_2();
             this.iTalk_LinkLabel1 = new iTalk.iTalk_LinkLabel();
             this.iTalk_Label2 = new iTalk.iTalk_Label();
             this.iTalk_Toggle1 = new iTalk.iTalk_Toggle();
@@ -130,6 +132,8 @@
             // iTalk_ThemeContainer1
             // 
             this.iTalk_ThemeContainer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_Label3);
+            this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_Button_22);
             this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_LinkLabel1);
             this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_Label2);
             this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_Toggle1);
@@ -153,6 +157,33 @@
             this.iTalk_ThemeContainer1.TabIndex = 0;
             this.iTalk_ThemeContainer1.Text = "Optimised";
             // 
+            // iTalk_Label3
+            // 
+            this.iTalk_Label3.AutoSize = true;
+            this.iTalk_Label3.BackColor = System.Drawing.Color.Transparent;
+            this.iTalk_Label3.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.iTalk_Label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
+            this.iTalk_Label3.Location = new System.Drawing.Point(157, 251);
+            this.iTalk_Label3.Name = "iTalk_Label3";
+            this.iTalk_Label3.Size = new System.Drawing.Size(22, 19);
+            this.iTalk_Label3.TabIndex = 13;
+            this.iTalk_Label3.Text = "or";
+            // 
+            // iTalk_Button_22
+            // 
+            this.iTalk_Button_22.BackColor = System.Drawing.Color.Transparent;
+            this.iTalk_Button_22.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.iTalk_Button_22.ForeColor = System.Drawing.Color.White;
+            this.iTalk_Button_22.Image = null;
+            this.iTalk_Button_22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iTalk_Button_22.Location = new System.Drawing.Point(190, 240);
+            this.iTalk_Button_22.Name = "iTalk_Button_22";
+            this.iTalk_Button_22.Size = new System.Drawing.Size(135, 40);
+            this.iTalk_Button_22.TabIndex = 12;
+            this.iTalk_Button_22.Text = "Guest";
+            this.iTalk_Button_22.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.iTalk_Button_22.Click += new System.EventHandler(this.iTalk_Button_22_Click);
+            // 
             // iTalk_LinkLabel1
             // 
             this.iTalk_LinkLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(101)))), ((int)(((byte)(202)))));
@@ -161,7 +192,7 @@
             this.iTalk_LinkLabel1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.iTalk_LinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.iTalk_LinkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(225)))));
-            this.iTalk_LinkLabel1.Location = new System.Drawing.Point(162, 284);
+            this.iTalk_LinkLabel1.Location = new System.Drawing.Point(153, 284);
             this.iTalk_LinkLabel1.Name = "iTalk_LinkLabel1";
             this.iTalk_LinkLabel1.Size = new System.Drawing.Size(55, 19);
             this.iTalk_LinkLabel1.TabIndex = 11;
@@ -176,7 +207,7 @@
             this.iTalk_Label2.BackColor = System.Drawing.Color.Transparent;
             this.iTalk_Label2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.iTalk_Label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.iTalk_Label2.Location = new System.Drawing.Point(138, 284);
+            this.iTalk_Label2.Location = new System.Drawing.Point(129, 284);
             this.iTalk_Label2.Name = "iTalk_Label2";
             this.iTalk_Label2.Size = new System.Drawing.Size(22, 19);
             this.iTalk_Label2.TabIndex = 10;
@@ -212,7 +243,7 @@
             this.iTalk_Button_21.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iTalk_Button_21.Location = new System.Drawing.Point(12, 240);
             this.iTalk_Button_21.Name = "iTalk_Button_21";
-            this.iTalk_Button_21.Size = new System.Drawing.Size(313, 40);
+            this.iTalk_Button_21.Size = new System.Drawing.Size(135, 40);
             this.iTalk_Button_21.TabIndex = 7;
             this.iTalk_Button_21.Text = "Login";
             this.iTalk_Button_21.TextAlignment = System.Drawing.StringAlignment.Center;
@@ -319,6 +350,8 @@
         private System.Windows.Forms.ToolStripMenuItem registerToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem goWebToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
+        private iTalk.iTalk_Label iTalk_Label3;
+        private iTalk.iTalk_Button_2 iTalk_Button_22;
     }
 }
 

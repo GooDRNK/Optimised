@@ -34,12 +34,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Optimised));
             this.GetApiData = new System.ComponentModel.BackgroundWorker();
             this.Optimised_Only = new System.ComponentModel.BackgroundWorker();
+            this.Optimised_All = new System.ComponentModel.BackgroundWorker();
+            this.ClearRam = new System.Windows.Forms.Timer(this.components);
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
             this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
+            this.checkUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.Optimised_All = new System.ComponentModel.BackgroundWorker();
+            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.iTalk_ThemeContainer1.SuspendLayout();
+            this.iTalk_ContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // GetApiData
@@ -49,6 +55,14 @@
             // Optimised_Only
             // 
             this.Optimised_Only.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Optimised_Only_DoWork);
+            // 
+            // Optimised_All
+            // 
+            this.Optimised_All.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Optimised_All_DoWork);
+            // 
+            // ClearRam
+            // 
+            this.ClearRam.Tick += new System.EventHandler(this.ClearRam_Tick);
             // 
             // iTalk_ThemeContainer1
             // 
@@ -79,22 +93,50 @@
             // 
             // iTalk_ContextMenuStrip1
             // 
+            this.iTalk_ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkUpdateToolStripMenuItem,
+            this.logoutToolStripMenuItem,
+            this.exitToolStripMenuItem,
+            this.exitToolStripMenuItem1});
             this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
             controlRenderer1.ColorTable = msColorTable1;
             controlRenderer1.RoundedEdges = true;
             this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
-            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(113, 92);
+            // 
+            // checkUpdateToolStripMenuItem
+            // 
+            this.checkUpdateToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.checkUpdateToolStripMenuItem.Name = "checkUpdateToolStripMenuItem";
+            this.checkUpdateToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.checkUpdateToolStripMenuItem.Text = "Show";
+            // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.logoutToolStripMenuItem.Text = "Update";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Text = "Logout";
             // 
             // notifyIcon1
             // 
             this.notifyIcon1.ContextMenuStrip = this.iTalk_ContextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Text = "Optimised";
             this.notifyIcon1.Visible = true;
             // 
-            // Optimised_All
+            // exitToolStripMenuItem1
             // 
-            this.Optimised_All.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Optimised_All_DoWork);
+            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem1.Text = "Exit";
             // 
             // Optimised
             // 
@@ -112,6 +154,7 @@
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Optimised_FormClosing);
             this.iTalk_ThemeContainer1.ResumeLayout(false);
+            this.iTalk_ContextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -125,5 +168,10 @@
         private System.ComponentModel.BackgroundWorker Optimised_Only;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.ComponentModel.BackgroundWorker Optimised_All;
+        private System.Windows.Forms.Timer ClearRam;
+        private System.Windows.Forms.ToolStripMenuItem checkUpdateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
     }
 }

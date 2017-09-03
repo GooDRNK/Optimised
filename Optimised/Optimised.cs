@@ -34,6 +34,8 @@ namespace Optimised
                 {
                     InitializeComponent();
                     GetApiData.RunWorkerAsync();
+                    ClearRam.Interval = 5000;
+                    ClearRam.Start();
                     if(Program.tokens!=string.Empty) //Se verifica daca token-ul trimis din AutoLogin este null.
                     {
                         token = Program.tokens; //Se seteaza token-ul trimis din AutoLogin.
@@ -106,7 +108,6 @@ namespace Optimised
                     }
                 }
                 Thread.Sleep(1000);
-
             }
         }
 
@@ -445,6 +446,11 @@ namespace Optimised
             }
             notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud End", "Optimizarea trimisa din cloud pentru toti utilizatorii a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
 
+        }
+
+        private void ClearRam_Tick(object sender, EventArgs e)
+        {
+            GC.Collect();
         }
     }
 }

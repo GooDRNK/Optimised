@@ -112,6 +112,13 @@ namespace Optimised
                     }
            
                 }
+                private void iTalk_Button_22_Click(object sender, EventArgs e)
+                {
+                    Offline optimised = new Offline(); //Deschide calea catre noul Form.
+                    notifyIcon1.Visible = false; //Stinge Iconita din sistem Tray.
+                    optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
+                    this.Close();
+                }
         #endregion
         #region Sistem_Tray_Meniu
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -145,6 +152,7 @@ namespace Optimised
                 WindowState = FormWindowState.Normal; //Reaprinde Login-ul.
             }
         }
-#endregion
+        #endregion
+
     }
 }
