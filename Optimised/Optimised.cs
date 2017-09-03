@@ -450,7 +450,7 @@ namespace Optimised
 
         private void ClearRam_Tick(object sender, EventArgs e)
         {
-            GC.Collect();
+            Functii.FlushMemory();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Optimised
                 public Login()
                 {
                     InitializeComponent();
-                    clearGC.Interval = 10000; //Seteaza intervalul pentru timerul clearGC.
+                    clearGC.Interval = 5000; //Seteaza intervalul pentru timerul clearGC.
                     clearGC.Start(); //Porneste timerul clearGC.
                     if (Program.error!=string.Empty) //Verifica daca sunt erori din AutoLogin.ini
                     {
@@ -52,7 +52,7 @@ namespace Optimised
                 //clearGC_Timer Start
                 private void clearGC_Tick(object sender, EventArgs e)
                 {
-                    GC.Collect(); //Colecteaza tot ramul utilizat si il sterge.
+                    Functii.FlushMemory(); //Colecteaza tot ramul utilizat si il sterge.
                 }
                 //clearGC_Timer End
                 #endregion
@@ -114,6 +114,7 @@ namespace Optimised
                 }
                 private void iTalk_Button_22_Click(object sender, EventArgs e)
                 {
+                    this.Hide();
                     Offline optimised = new Offline(); //Deschide calea catre noul Form.
                     notifyIcon1.Visible = false; //Stinge Iconita din sistem Tray.
                     optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
