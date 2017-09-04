@@ -65,7 +65,7 @@ namespace Optimised
         #region Logout
         private void Optimised_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola +"/" +token); //Cere informatii despre Login la API.
+           string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola +"/" +token); //Cere informatii despre Login la API.
         }
         #endregion
         #region DllImport All
@@ -456,8 +456,8 @@ namespace Optimised
         {
             string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
             this.Hide();
-            Login log = new Login();
             notifyIcon1.Dispose();
+            Login log = new Login();
             log.ShowDialog();
             this.Close();
         }

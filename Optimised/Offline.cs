@@ -24,12 +24,11 @@ namespace Optimised
             this.Hide();
             Login login = new Login();
             login.ShowDialog();
-
             this.Close();
         }
         private void GClean_Tick(object sender, EventArgs e)
         {
-            Functii.FlushMemory();
+          //  Functii.FlushMemory();
         }
         int count = 0;
         private void iTalk_Button_22_Click(object sender, EventArgs e)
@@ -51,5 +50,52 @@ namespace Optimised
             } 
         }
 
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //this.Hide();
+            //Login log = new Login();
+            //notifyIcon1.Dispose();
+            //log.ShowDialog();
+            //this.Close();
+        }
+
+        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+            {
+                this.Hide();
+            }
+            else if (this.Visible == false)
+            {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void Offline_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+               // this.Hide();
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           //Application.Exit();
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+            {
+                this.Hide();
+            }
+            else if (this.Visible == false)
+            {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
     }
 }
