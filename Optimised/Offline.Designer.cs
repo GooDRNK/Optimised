@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            iTalk.ControlRenderer controlRenderer2 = new iTalk.ControlRenderer();
-            iTalk.MSColorTable msColorTable2 = new iTalk.MSColorTable();
+            iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
+            iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Offline));
             this.GClean = new System.Windows.Forms.Timer(this.components);
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
@@ -55,7 +55,6 @@
             this.iTalk_ChatBubble_L1 = new iTalk.iTalk_ChatBubble_L();
             this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
             this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
-            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,7 +84,7 @@
             this.iTalk_ThemeContainer1.Sizable = false;
             this.iTalk_ThemeContainer1.Size = new System.Drawing.Size(984, 611);
             this.iTalk_ThemeContainer1.SmartBounds = false;
-            this.iTalk_ThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
+            this.iTalk_ThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.iTalk_ThemeContainer1.TabIndex = 0;
             this.iTalk_ThemeContainer1.Text = "Optimised Offline";
             // 
@@ -340,44 +339,38 @@
             // iTalk_ContextMenuStrip1
             // 
             this.iTalk_ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showToolStripMenuItem,
             this.updateToolStripMenuItem,
             this.loginToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
-            controlRenderer2.ColorTable = msColorTable2;
-            controlRenderer2.RoundedEdges = true;
-            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer2;
-            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(113, 92);
-            // 
-            // showToolStripMenuItem
-            // 
-            this.showToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.showToolStripMenuItem.Text = "Show";
-            this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
+            controlRenderer1.ColorTable = msColorTable1;
+            controlRenderer1.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
+            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(153, 92);
             // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.updateToolStripMenuItem.Image = global::Optimised.Properties.Resources.wrench_plus_icon_32;
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.updateToolStripMenuItem.Text = "Update";
             // 
             // loginToolStripMenuItem
             // 
             this.loginToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.loginToolStripMenuItem.Image = global::Optimised.Properties.Resources.user_icon_32;
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loginToolStripMenuItem.Text = "Login";
             this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.exitToolStripMenuItem.Image = global::Optimised.Properties.Resources.on_off_icon_32;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -438,7 +431,6 @@
         private System.Windows.Forms.Timer GClean;
         private iTalk.iTalk_Button_2 iTalk_Button_22;
         private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;

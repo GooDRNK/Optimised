@@ -240,6 +240,7 @@
             // showToolStripMenuItem1
             // 
             this.showToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.showToolStripMenuItem1.Image = global::Optimised.Properties.Resources.home_icon_32;
             this.showToolStripMenuItem1.Name = "showToolStripMenuItem1";
             this.showToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.showToolStripMenuItem1.Text = "Show";
@@ -248,6 +249,7 @@
             // updateToolStripMenuItem1
             // 
             this.updateToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.updateToolStripMenuItem1.Image = global::Optimised.Properties.Resources.wrench_plus_icon_32;
             this.updateToolStripMenuItem1.Name = "updateToolStripMenuItem1";
             this.updateToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.updateToolStripMenuItem1.Text = "Update";
@@ -256,6 +258,7 @@
             // logoutToolStripMenuItem1
             // 
             this.logoutToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.logoutToolStripMenuItem1.Image = global::Optimised.Properties.Resources.undo_icon_32;
             this.logoutToolStripMenuItem1.Name = "logoutToolStripMenuItem1";
             this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.logoutToolStripMenuItem1.Text = "Logout";
@@ -264,6 +267,7 @@
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.exitToolStripMenuItem1.Image = global::Optimised.Properties.Resources.on_off_icon_32;
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
             this.exitToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.exitToolStripMenuItem1.Text = "Exit";

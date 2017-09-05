@@ -446,12 +446,10 @@ namespace Optimised
             notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud End", "Optimizarea trimisa din cloud pentru toti utilizatorii a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
 
         }
-
         private void ClearRam_Tick(object sender, EventArgs e)
         {
             Functii.FlushMemory();
         }
-
         private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
@@ -464,7 +462,7 @@ namespace Optimised
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
-
+            Thread.Sleep(100);
             Application.Exit(); //Stinge Aplicatia.
         }
         private void showToolStripMenuItem1_Click(object sender, EventArgs e)

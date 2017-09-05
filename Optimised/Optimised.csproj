@@ -149,5 +149,11 @@
   <ItemGroup>
     <None Include="Resources\home_icon&amp;32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wrench_plus_icon&amp;32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undo_icon&amp;32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
