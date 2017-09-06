@@ -28,15 +28,7 @@ namespace Optimised
                 //Initializare Form Login Start
                 public Login()
                 {
-                    InitializeComponent();
-                    clearGC.Interval = 5000; //Seteaza intervalul pentru timerul clearGC.
-                    clearGC.Start(); //Porneste timerul clearGC.
-                    if (Program.error!=string.Empty) //Verifica daca sunt erori din AutoLogin.ini
-                    {
-                        notifyIcon1.ShowBalloonTip(2000, "Optimised Auto Login", Program.error.ToString(), ToolTipIcon.Info); //Trimite notificarea cu eroarea.
-                        Program.error = string.Empty; //Seteaza eroarea pe null dupa ce este afisata.
-                    }
-            
+                    InitializeComponent();      
                 }
                 //Initializare Form Login End
                 #endregion
@@ -90,9 +82,9 @@ namespace Optimised
                                     Parola_Login = password; //Salveaza Parola folosita.
                                     Email_Login = iTalk_TextBox_Big1.Text; //Salveaza Emailul folosit.
                                     Optimised optimised = new Optimised(); //Deschide calea catre noul Form.
-                                    notifyIcon1.Visible = false; //Stinge Iconita din sistem Tray.
-                                    optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
-                                    this.Close();
+                                    notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
+                                    optimised.Show(); //Porneste Form-ul cu aplicatia propriuzisa.
+                                    clearGC.Stop();
                                 }
                             }
                         }
@@ -104,21 +96,21 @@ namespace Optimised
                             Parola_Login = password; //Salveaza Parola folosita.
                             Email_Login = iTalk_TextBox_Big1.Text; //Salveaza Emailul folosit.
                             Optimised optimised = new Optimised(); //Deschide calea catre noul Form.
-                            notifyIcon1.Visible = false; //Stinge Iconita din sistem Tray.
-                            optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
-                            this.Close();
-                            
-                        }
+                            notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
+                            optimised.Show(); //Porneste Form-ul cu aplicatia propriuzisa.
+                            clearGC.Stop();
+
+                }
                     }
            
                 }
                 private void iTalk_Button_22_Click(object sender, EventArgs e)
                 {
-                    this.Hide();
-                    Offline optimised = new Offline(); //Deschide calea catre noul Form.
-                    notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
-                    optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
-                    this.Close();
+                 this.Hide();
+                Offline offlin = new Offline();
+                offlin.Show();
+                notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
+                clearGC.Stop();
                 }
         #endregion
         #region Sistem_Tray_Meniu
@@ -159,5 +151,16 @@ namespace Optimised
             }
         }
         #endregion
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            clearGC.Interval = 5000;
+            clearGC.Start();
+            if (Program.error != string.Empty) //Verifica daca sunt erori din AutoLogin.ini
+            {
+                notifyIcon1.ShowBalloonTip(2000, "Optimised Auto Login", Program.error.ToString(), ToolTipIcon.Info); //Trimite notificarea cu eroarea.
+                Program.error = string.Empty; //Seteaza eroarea pe null dupa ce este afisata.
+            }
+        }
     }
 }

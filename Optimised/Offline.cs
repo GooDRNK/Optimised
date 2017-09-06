@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,7 @@ namespace Optimised
         public Offline()
         {
             InitializeComponent();
-            Refresh();
-            GClean.Interval = 5000;
-            GClean.Start();   
+
         }
         private void iTalk_Button_21_Click(object sender, EventArgs e)
         {
@@ -54,45 +53,61 @@ namespace Optimised
 
         private void loginToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             notifyIcon1.Dispose();
             this.Hide();
             Login log = new Login();
-            log.ShowDialog();
-            this.Close();
+            log.Show();
+            GClean.Stop();
+ 
         }
 
         private void Offline_Resize(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Minimized)
+         
+            if (this.WindowState == FormWindowState.Minimized)
             {
-                
-            }
-            else if(WindowState == FormWindowState.Normal)
-            {
-                
+                this.Hide();
             }
 
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          Application.Exit();
+            var proc = Process.GetCurrentProcess().ProcessName;
+            notifyIcon1.Dispose();
+            foreach (var process in Process.GetProcessesByName(proc))
+            {
+                process.Kill();
+            }
         }
 
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Minimized)
+            if (this.Visible == true)
             {
-                WindowState = FormWindowState.Normal;
-                
-                
+                this.Hide();
             }
-            else if(WindowState == FormWindowState.Normal)
-            
+            else if (this.Visible == false)
             {
-                WindowState = FormWindowState.Minimized;
-                
-              
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void Offline_Load(object sender, EventArgs e)
+        {
+            GClean.Interval = 5000;
+            GClean.Start();
+        }
+
+        private void Offline_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            notifyIcon1.Dispose();
+            var proc = Process.GetCurrentProcess().ProcessName;
+            foreach (var process in Process.GetProcessesByName(proc))
+            {
+                process.Kill();
             }
         }
     }
