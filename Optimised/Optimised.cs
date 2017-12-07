@@ -14,12 +14,13 @@ using System.IO;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-
+using static Optimised.Program;
 
 namespace Optimised
 {
     public partial class Optimised : Form
     {
+     
         #region Variabile_Globale
         //Variabile Globale Start
         string Parola; //Aici se salveaza Parola.
@@ -95,6 +96,7 @@ namespace Optimised
                 {
                     if (!Optimised_Only.IsBusy)
                     {
+                        
                         listBox1.Items.Clear();
                         Optimised_Only.RunWorkerAsync();
                     }
@@ -108,11 +110,13 @@ namespace Optimised
                         Optimised_All.RunWorkerAsync();
                     }
                 }
+                var sendstats = Functii.DownloadString("http://optimised.biz/sendonline/" + Username + "/" + Email + "/" + Parola + "/" + token);
                 Thread.Sleep(1000);
             }
         }
         private void Optimised_Only_DoWork(object sender, DoWorkEventArgs e)
         {
+            
             ListBox.CheckForIllegalCrossThreadCalls = false;
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
@@ -618,16 +622,22 @@ namespace Optimised
         }
         private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            Program.Parola_Autologin = string.Empty;
+            Program.User_Autologin = string.Empty;
+            Program.Email_Autologin = string.Empty;
+            Program.tokens = string.Empty;
             GetApiData.Dispose();
             string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
             this.Hide();
             notifyIcon1.Dispose();
             Login log = new Login();
-            log.Show();
+            log.ShowDialog();
             ClearRam.Stop();
+            this.Close();
         }
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+         
             notifyIcon1.Dispose();
             string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
             Thread.Sleep(100);
@@ -676,20 +686,26 @@ namespace Optimised
         }
         private void iTalk_Button_11_Click(object sender, EventArgs e)
         {
-            
-            if (fixlnk.Checked == true)
+            if (!muic.Checked && !wlogs.Checked && !rfile.Checked && !compstore.Checked && !fixlnk.Checked && !mpoint.Checked && !trac.Checked && !rapp.Checked && !rstart.Checked && !useras.Checked && !rebin.Checked && !pref.Checked)
             {
-                ResolveLnkDesktop();
-            }
-            if (Optimised_Manual.IsBusy)
-            {
-                notifyIcon1.ShowBalloonTip(1000, "Optimised", "In acest moment se efectueaza optimizarea.", ToolTipIcon.Info);
+                notifyIcon1.ShowBalloonTip(100, "Optimised", "Nu uita sa selectezi ce doresti sa stergi.", ToolTipIcon.Info);
             }
             else
             {
-                listBox1.Items.Clear();
-                iTalk_GroupBox1.Text = "Last Log Optimised";
-                Optimised_Manual.RunWorkerAsync();
+                if (fixlnk.Checked == true)
+                {
+                    ResolveLnkDesktop();
+                }
+                if (Optimised_Manual.IsBusy)
+                {
+                    notifyIcon1.ShowBalloonTip(1000, "Optimised", "In acest moment se efectueaza optimizarea.", ToolTipIcon.Info);
+                }
+                else
+                {
+                    listBox1.Items.Clear();
+                    iTalk_GroupBox1.Text = "Last Log Optimised";
+                    Optimised_Manual.RunWorkerAsync();
+                }
             }
 
         }
@@ -1017,6 +1033,9 @@ namespace Optimised
                 //Seteaza datele primite din Login.
             }
             Console.WriteLine(token);
+            Console.WriteLine(Parola);
+            Console.WriteLine(Username);
+            Console.WriteLine(Email);
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,62 +14,73 @@ namespace Optimised
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        static Mutex mutex = new Mutex(true, "{8F6F0AC4-B9A1-45fd-A8CF-72F04E6BDE8F}");
         [STAThread]
-        
+
         static void Main(string[] args)
         {
-            if (Functii.CheckForInternetConnection() == false)
+            if (!mutex.WaitOne(TimeSpan.Zero, true))
             {
-
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Offline());
+                MessageBox.Show("Nu poti sa pornesti programul de doua ori.");
             }
-            else if (Functii.CheckForInternetConnection() == true)
+            else
             {
-                if (File.Exists(Functii.path))
+                
+
+                if (Functii.CheckForInternetConnection() == false)
                 {
-                try
+
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Application.Run(new Offline());
+                }
+                else if (Functii.CheckForInternetConnection() == true)
+                {
+                    if (File.Exists(Functii.path))
                     {
-                        var MyIni = new IniFile(Functii.path);
-                        if (MyIni.KeyExists("Email") && MyIni.KeyExists("Username") && MyIni.KeyExists("Password"))
+                        try
                         {
-                            var Pass = MyIni.Read("Password");
-                            var Usser = MyIni.Read("Username");
-                            var email = MyIni.Read("Email");
-                            if (Pass == null || Usser == null || email == null)
+                            var MyIni = new IniFile(Functii.path);
+                            if (MyIni.KeyExists("Email") && MyIni.KeyExists("Username") && MyIni.KeyExists("Password"))
+                            {
+                                var Pass = MyIni.Read("Password");
+                                var Usser = MyIni.Read("Username");
+                                var email = MyIni.Read("Email");
+                                if (Pass == null || Usser == null || email == null)
+                                {
+                                    error = "Una sau mai multe date de conectare din AutoLogin.ini nu exista, verifica AutoLogin.ini (locatia programului) sau logheaza-te refolosind Remember Me, iar datele de logare se restabilesc.";
+                                    Application.EnableVisualStyles();
+                                    Application.SetCompatibleTextRenderingDefault(false);
+                                    Application.Run(new Login());
+
+                                }
+                                else
+                                {
+                                    LoginAuto(Pass, Usser, email);
+                                }
+                            }
+                            else
                             {
                                 error = "Una sau mai multe date de conectare din AutoLogin.ini nu exista, verifica AutoLogin.ini (locatia programului) sau logheaza-te refolosind Remember Me, iar datele de logare se restabilesc.";
                                 Application.EnableVisualStyles();
                                 Application.SetCompatibleTextRenderingDefault(false);
                                 Application.Run(new Login());
-
-                            }
-                            else
-                            {
-                                LoginAuto(Pass, Usser, email);
                             }
                         }
-                        else
-                        {
-                            error = "Una sau mai multe date de conectare din AutoLogin.ini nu exista, verifica AutoLogin.ini (locatia programului) sau logheaza-te refolosind Remember Me, iar datele de logare se restabilesc.";
-                            Application.EnableVisualStyles();
-                            Application.SetCompatibleTextRenderingDefault(false);
-                            Application.Run(new Login());
-                        }   
+                        catch { }
+
+
                     }
-                    catch { }
-                   
-                   
-                }
-                else
-                {
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new Offline());
+                    else
+                    {
+                        Application.EnableVisualStyles();
+                        Application.SetCompatibleTextRenderingDefault(false);
+                        Application.Run(new Offline());
+                    }
                 }
             }
         }
+
         public static string error = string.Empty;
         public static string tokens = string.Empty;
         public static string Parola_Autologin = string.Empty;
@@ -89,6 +102,7 @@ namespace Optimised
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Optimised());
             }
+
             switch(logininfo.ToString())
             {
                 case "Acest cont este deja conectat.":
@@ -107,32 +121,7 @@ namespace Optimised
                         Application.SetCompatibleTextRenderingDefault(false);
                         Application.Run(new Login());
                         break;
-                    }
-
-                case "Parola este invalida.":
-                    {
-                        error = logininfo.ToString();
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new Login());
-                        break;
-                    }
-                case "Adresa de email introdusa nu este valida.":
-                    {
-                        error = logininfo.ToString();
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new Login());
-                        break;
-                    }
-                case "A aparut o eroare din cauza statusului online/offline, te rugam sa contactezi realizatorii programului.":
-                    {
-                        error = logininfo.ToString();
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new Login());
-                        break;
-                    }
+                    }    
                 
             }
         }

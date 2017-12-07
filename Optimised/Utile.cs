@@ -42,27 +42,30 @@ namespace Optimised
             return reply.ToString();
         }
         //Download String End
-        public static string GetHashSha1(string input)
+        public static string CalculateMD5Hash(string input)
+
         {
-            return ComputeHash(input, new SHA1Managed());
-        }
-        public static string ComputeHash(string input, HashAlgorithm hashProvider)
-        {
-            if (input == null)
+
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < hash.Length; i++)
+
             {
-                throw new ArgumentNullException("input");
+
+                sb.Append(hash[i].ToString("X2"));
+
             }
 
-            if (hashProvider == null)
-            {
-                throw new ArgumentNullException("hashProvider");
-            }
+            return sb.ToString();
 
-            var inputBytes = Encoding.UTF8.GetBytes(input);
-            var hashBytes = hashProvider.ComputeHash(inputBytes);
-            var hash = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
-
-            return hash;
         }
         public static bool CheckForInternetConnection()
         {

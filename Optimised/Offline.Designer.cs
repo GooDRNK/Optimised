@@ -29,13 +29,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
-            iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
+            iTalk.ControlRenderer controlRenderer2 = new iTalk.ControlRenderer();
+            iTalk.MSColorTable msColorTable2 = new iTalk.MSColorTable();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Offline));
             this.GClean = new System.Windows.Forms.Timer(this.components);
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_TabControl1 = new iTalk.iTalk_TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.fixlnk = new iTalk.iTalk_CheckBox();
+            this.iTalk_GroupBox2 = new iTalk.iTalk_GroupBox();
+            this.iTalk_Button_12 = new iTalk.iTalk_Button_1();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.iTalk_Button_11 = new iTalk.iTalk_Button_1();
+            this.mpoint = new iTalk.iTalk_CheckBox();
+            this.rebin = new iTalk.iTalk_CheckBox();
+            this.compstore = new iTalk.iTalk_CheckBox();
+            this.useras = new iTalk.iTalk_CheckBox();
+            this.trac = new iTalk.iTalk_CheckBox();
+            this.pref = new iTalk.iTalk_CheckBox();
+            this.temp = new iTalk.iTalk_CheckBox();
+            this.rapp = new iTalk.iTalk_CheckBox();
+            this.rstart = new iTalk.iTalk_CheckBox();
+            this.wlogs = new iTalk.iTalk_CheckBox();
+            this.rfile = new iTalk.iTalk_CheckBox();
+            this.muic = new iTalk.iTalk_CheckBox();
+            this.iTalk_ProgressBar1 = new iTalk.iTalk_ProgressBar();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -59,8 +77,11 @@
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.Optimised_Manual = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.iTalk_TabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.iTalk_GroupBox2.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.iTalk_GroupBox1.SuspendLayout();
             this.iTalk_ContextMenuStrip1.SuspendLayout();
@@ -113,12 +134,241 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.tabPage1.Controls.Add(this.fixlnk);
+            this.tabPage1.Controls.Add(this.iTalk_GroupBox2);
+            this.tabPage1.Controls.Add(this.iTalk_Button_11);
+            this.tabPage1.Controls.Add(this.mpoint);
+            this.tabPage1.Controls.Add(this.rebin);
+            this.tabPage1.Controls.Add(this.compstore);
+            this.tabPage1.Controls.Add(this.useras);
+            this.tabPage1.Controls.Add(this.trac);
+            this.tabPage1.Controls.Add(this.pref);
+            this.tabPage1.Controls.Add(this.temp);
+            this.tabPage1.Controls.Add(this.rapp);
+            this.tabPage1.Controls.Add(this.rstart);
+            this.tabPage1.Controls.Add(this.wlogs);
+            this.tabPage1.Controls.Add(this.rfile);
+            this.tabPage1.Controls.Add(this.muic);
+            this.tabPage1.Controls.Add(this.iTalk_ProgressBar1);
             this.tabPage1.Location = new System.Drawing.Point(139, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(841, 557);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Optimised";
+            // 
+            // fixlnk
+            // 
+            this.fixlnk.BackColor = System.Drawing.Color.Transparent;
+            this.fixlnk.Checked = false;
+            this.fixlnk.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.fixlnk.Location = new System.Drawing.Point(478, 472);
+            this.fixlnk.Name = "fixlnk";
+            this.fixlnk.Size = new System.Drawing.Size(110, 15);
+            this.fixlnk.TabIndex = 33;
+            this.fixlnk.Text = "Fix Shortcut";
+            // 
+            // iTalk_GroupBox2
+            // 
+            this.iTalk_GroupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.iTalk_GroupBox2.Controls.Add(this.iTalk_Button_12);
+            this.iTalk_GroupBox2.Controls.Add(this.listBox1);
+            this.iTalk_GroupBox2.Font = new System.Drawing.Font("Sitka Banner", 10F);
+            this.iTalk_GroupBox2.Location = new System.Drawing.Point(404, 19);
+            this.iTalk_GroupBox2.MinimumSize = new System.Drawing.Size(136, 50);
+            this.iTalk_GroupBox2.Name = "iTalk_GroupBox2";
+            this.iTalk_GroupBox2.Padding = new System.Windows.Forms.Padding(5, 28, 5, 5);
+            this.iTalk_GroupBox2.Size = new System.Drawing.Size(433, 447);
+            this.iTalk_GroupBox2.TabIndex = 32;
+            this.iTalk_GroupBox2.Text = "Last Log Optimised";
+            // 
+            // iTalk_Button_12
+            // 
+            this.iTalk_Button_12.BackColor = System.Drawing.Color.Transparent;
+            this.iTalk_Button_12.Font = new System.Drawing.Font("Sitka Banner", 13.5F);
+            this.iTalk_Button_12.Image = null;
+            this.iTalk_Button_12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iTalk_Button_12.Location = new System.Drawing.Point(382, 14);
+            this.iTalk_Button_12.Name = "iTalk_Button_12";
+            this.iTalk_Button_12.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.iTalk_Button_12.Size = new System.Drawing.Size(39, 17);
+            this.iTalk_Button_12.TabIndex = 18;
+            this.iTalk_Button_12.Text = "Save";
+            this.iTalk_Button_12.TextAlignment = System.Drawing.StringAlignment.Far;
+            this.iTalk_Button_12.Click += new System.EventHandler(this.iTalk_Button_12_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(12, 32);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(409, 404);
+            this.listBox1.TabIndex = 0;
+            // 
+            // iTalk_Button_11
+            // 
+            this.iTalk_Button_11.BackColor = System.Drawing.Color.Transparent;
+            this.iTalk_Button_11.Font = new System.Drawing.Font("Sitka Banner", 14F);
+            this.iTalk_Button_11.Image = global::Optimised.Properties.Resources.wrench_plus_icon_32;
+            this.iTalk_Button_11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iTalk_Button_11.Location = new System.Drawing.Point(123, 418);
+            this.iTalk_Button_11.Name = "iTalk_Button_11";
+            this.iTalk_Button_11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.iTalk_Button_11.Size = new System.Drawing.Size(166, 40);
+            this.iTalk_Button_11.TabIndex = 31;
+            this.iTalk_Button_11.Text = "Run Optimised";
+            this.iTalk_Button_11.TextAlignment = System.Drawing.StringAlignment.Far;
+            this.iTalk_Button_11.Click += new System.EventHandler(this.iTalk_Button_11_Click);
+            // 
+            // mpoint
+            // 
+            this.mpoint.BackColor = System.Drawing.Color.Transparent;
+            this.mpoint.Checked = false;
+            this.mpoint.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.mpoint.Location = new System.Drawing.Point(717, 472);
+            this.mpoint.Name = "mpoint";
+            this.mpoint.Size = new System.Drawing.Size(108, 15);
+            this.mpoint.TabIndex = 30;
+            this.mpoint.Text = "MountPoints";
+            // 
+            // rebin
+            // 
+            this.rebin.BackColor = System.Drawing.Color.Transparent;
+            this.rebin.Checked = false;
+            this.rebin.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.rebin.Location = new System.Drawing.Point(104, 523);
+            this.rebin.Name = "rebin";
+            this.rebin.Size = new System.Drawing.Size(131, 15);
+            this.rebin.TabIndex = 29;
+            this.rebin.Text = "Empty Recycle Bin";
+            // 
+            // compstore
+            // 
+            this.compstore.BackColor = System.Drawing.Color.Transparent;
+            this.compstore.Checked = false;
+            this.compstore.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.compstore.Location = new System.Drawing.Point(341, 472);
+            this.compstore.Name = "compstore";
+            this.compstore.Size = new System.Drawing.Size(131, 15);
+            this.compstore.TabIndex = 28;
+            this.compstore.Text = "Compatibility Store";
+            // 
+            // useras
+            // 
+            this.useras.BackColor = System.Drawing.Color.Transparent;
+            this.useras.Checked = false;
+            this.useras.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.useras.Location = new System.Drawing.Point(241, 523);
+            this.useras.Name = "useras";
+            this.useras.Size = new System.Drawing.Size(94, 15);
+            this.useras.TabIndex = 27;
+            this.useras.Text = "UserAssist";
+            // 
+            // trac
+            // 
+            this.trac.BackColor = System.Drawing.Color.Transparent;
+            this.trac.Checked = false;
+            this.trac.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.trac.Location = new System.Drawing.Point(588, 523);
+            this.trac.Name = "trac";
+            this.trac.Size = new System.Drawing.Size(87, 15);
+            this.trac.TabIndex = 26;
+            this.trac.Text = "Tracing";
+            // 
+            // pref
+            // 
+            this.pref.BackColor = System.Drawing.Color.Transparent;
+            this.pref.Checked = false;
+            this.pref.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.pref.Location = new System.Drawing.Point(15, 523);
+            this.pref.Name = "pref";
+            this.pref.Size = new System.Drawing.Size(82, 15);
+            this.pref.TabIndex = 25;
+            this.pref.Text = "Prefetch";
+            // 
+            // temp
+            // 
+            this.temp.BackColor = System.Drawing.Color.Transparent;
+            this.temp.Checked = false;
+            this.temp.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.temp.Location = new System.Drawing.Point(588, 472);
+            this.temp.Name = "temp";
+            this.temp.Size = new System.Drawing.Size(123, 15);
+            this.temp.TabIndex = 24;
+            this.temp.Text = "Temporary Files";
+            // 
+            // rapp
+            // 
+            this.rapp.BackColor = System.Drawing.Color.Transparent;
+            this.rapp.Checked = false;
+            this.rapp.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.rapp.Location = new System.Drawing.Point(478, 523);
+            this.rapp.Name = "rapp";
+            this.rapp.Size = new System.Drawing.Size(104, 15);
+            this.rapp.TabIndex = 23;
+            this.rapp.Text = "Recent Apps";
+            // 
+            // rstart
+            // 
+            this.rstart.BackColor = System.Drawing.Color.Transparent;
+            this.rstart.Checked = false;
+            this.rstart.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.rstart.Location = new System.Drawing.Point(341, 523);
+            this.rstart.Name = "rstart";
+            this.rstart.Size = new System.Drawing.Size(110, 15);
+            this.rstart.TabIndex = 22;
+            this.rstart.Text = "Run At Startup";
+            // 
+            // wlogs
+            // 
+            this.wlogs.BackColor = System.Drawing.Color.Transparent;
+            this.wlogs.Checked = false;
+            this.wlogs.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.wlogs.Location = new System.Drawing.Point(104, 472);
+            this.wlogs.Name = "wlogs";
+            this.wlogs.Size = new System.Drawing.Size(116, 15);
+            this.wlogs.TabIndex = 21;
+            this.wlogs.Text = "Windows Logs";
+            // 
+            // rfile
+            // 
+            this.rfile.BackColor = System.Drawing.Color.Transparent;
+            this.rfile.Checked = false;
+            this.rfile.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.rfile.Location = new System.Drawing.Point(241, 472);
+            this.rfile.Name = "rfile";
+            this.rfile.Size = new System.Drawing.Size(96, 15);
+            this.rfile.TabIndex = 20;
+            this.rfile.Text = "Recent Files";
+            // 
+            // muic
+            // 
+            this.muic.BackColor = System.Drawing.Color.Transparent;
+            this.muic.Checked = false;
+            this.muic.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.muic.Location = new System.Drawing.Point(15, 472);
+            this.muic.Name = "muic";
+            this.muic.Size = new System.Drawing.Size(96, 15);
+            this.muic.TabIndex = 19;
+            this.muic.Text = "MUI Cache";
+            // 
+            // iTalk_ProgressBar1
+            // 
+            this.iTalk_ProgressBar1.Font = new System.Drawing.Font("Segoe Print", 50.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iTalk_ProgressBar1.ForeColor = System.Drawing.Color.Transparent;
+            this.iTalk_ProgressBar1.Location = new System.Drawing.Point(3, 19);
+            this.iTalk_ProgressBar1.Maximum = ((long)(100));
+            this.iTalk_ProgressBar1.MinimumSize = new System.Drawing.Size(100, 100);
+            this.iTalk_ProgressBar1.Name = "iTalk_ProgressBar1";
+            this.iTalk_ProgressBar1.ProgressColor1 = System.Drawing.Color.SteelBlue;
+            this.iTalk_ProgressBar1.ProgressColor2 = System.Drawing.Color.Aqua;
+            this.iTalk_ProgressBar1.ProgressShape = iTalk.iTalk_ProgressBar._ProgressShape.Round;
+            this.iTalk_ProgressBar1.Size = new System.Drawing.Size(406, 406);
+            this.iTalk_ProgressBar1.TabIndex = 18;
+            this.iTalk_ProgressBar1.Text = "iTalk_ProgressBar1";
+            this.iTalk_ProgressBar1.Value = ((long)(0));
             // 
             // tabPage2
             // 
@@ -343,9 +593,9 @@
             this.loginToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
-            controlRenderer1.ColorTable = msColorTable1;
-            controlRenderer1.RoundedEdges = true;
-            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
+            controlRenderer2.ColorTable = msColorTable2;
+            controlRenderer2.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer2;
             this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(113, 70);
             // 
             // updateToolStripMenuItem
@@ -382,6 +632,12 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             // 
+            // Optimised_Manual
+            // 
+            this.Optimised_Manual.WorkerReportsProgress = true;
+            this.Optimised_Manual.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Optimised_Manual_DoWork);
+            this.Optimised_Manual.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Optimised_Manual_ProgressChanged);
+            // 
             // Offline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,6 +657,8 @@
             this.Resize += new System.EventHandler(this.Offline_Resize);
             this.iTalk_ThemeContainer1.ResumeLayout(false);
             this.iTalk_TabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.iTalk_GroupBox2.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.iTalk_GroupBox1.ResumeLayout(false);
             this.iTalk_ContextMenuStrip1.ResumeLayout(false);
@@ -437,5 +695,24 @@
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private iTalk.iTalk_CheckBox fixlnk;
+        private iTalk.iTalk_GroupBox iTalk_GroupBox2;
+        private iTalk.iTalk_Button_1 iTalk_Button_12;
+        private System.Windows.Forms.ListBox listBox1;
+        private iTalk.iTalk_Button_1 iTalk_Button_11;
+        private iTalk.iTalk_CheckBox mpoint;
+        private iTalk.iTalk_CheckBox rebin;
+        private iTalk.iTalk_CheckBox compstore;
+        private iTalk.iTalk_CheckBox useras;
+        private iTalk.iTalk_CheckBox trac;
+        private iTalk.iTalk_CheckBox pref;
+        private iTalk.iTalk_CheckBox temp;
+        private iTalk.iTalk_CheckBox rapp;
+        private iTalk.iTalk_CheckBox rstart;
+        private iTalk.iTalk_CheckBox wlogs;
+        private iTalk.iTalk_CheckBox rfile;
+        private iTalk.iTalk_CheckBox muic;
+        private iTalk.iTalk_ProgressBar iTalk_ProgressBar1;
+        internal System.ComponentModel.BackgroundWorker Optimised_Manual;
     }
 }

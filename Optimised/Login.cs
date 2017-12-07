@@ -11,11 +11,13 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using System.Security.Cryptography;
+using static Optimised.Program;
 
 namespace Optimised
 {
     public partial class Login : Form
     {
+ 
         #region Variabile Globale
         //Variabile Globale Star
         public static string token; //Aici este stocat token-ul pentru verificarea login-ului din aplicatie.
@@ -51,11 +53,12 @@ namespace Optimised
         #region Sistem_Login
                 private void iTalk_Button_21_Click(object sender, EventArgs e)
                 {
-                    string password = Functii.GetHashSha1(iTalk_TextBox_Big3.Text).ToLower(); //Cripteaza parola.
-                    string logininfo=Functii.DownloadString("http://optimised.biz/loginapp/" + iTalk_TextBox_Big2.Text + "/"+iTalk_TextBox_Big1.Text+"/"+password); //Cere informatii despre Login la API.
+                    string password = Functii.CalculateMD5Hash(iTalk_TextBox_Big3.Text).ToLower(); //Cripteaza parola.
+        
+                    string logininfo = Functii.DownloadString("http://optimised.biz/loginapp/" + iTalk_TextBox_Big2.Text + "/"+iTalk_TextBox_Big1.Text+"/"+password); //Cere informatii despre Login la API.
                     if(logininfo.ToString().Length != 60 ) //Verifica daca a returnat token sau nu.
                     {
-                        notifyIcon1.ShowBalloonTip(1000, "Optimised Login", logininfo.ToString(), ToolTipIcon.Info); //Trimite messajul primit de la API.
+                        notifyIcon1.ShowBalloonTip(1000, "Optimised Login",logininfo.ToString(), ToolTipIcon.Info); //Trimite messajul primit de la API.
                     }
                     else 
                     { 
@@ -83,7 +86,7 @@ namespace Optimised
                                     Email_Login = iTalk_TextBox_Big1.Text; //Salveaza Emailul folosit.
                                     Optimised optimised = new Optimised(); //Deschide calea catre noul Form.
                                     notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
-                                    optimised.Show(); //Porneste Form-ul cu aplicatia propriuzisa.
+                                    optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
                                     clearGC.Stop();
                                 }
                             }
@@ -97,7 +100,7 @@ namespace Optimised
                             Email_Login = iTalk_TextBox_Big1.Text; //Salveaza Emailul folosit.
                             Optimised optimised = new Optimised(); //Deschide calea catre noul Form.
                             notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
-                            optimised.Show(); //Porneste Form-ul cu aplicatia propriuzisa.
+                            optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
                             clearGC.Stop();
 
                 }
@@ -106,12 +109,15 @@ namespace Optimised
                 }
                 private void iTalk_Button_22_Click(object sender, EventArgs e)
                 {
-                 this.Hide();
+                this.Hide();
                 Offline offlin = new Offline();
-                offlin.Show();
+                //offlin.Show();  
                 notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
                 clearGC.Stop();
-                }
+                offlin.ShowDialog();
+                this.Close();
+
+        }
         #endregion
         #region Sistem_Tray_Meniu
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
