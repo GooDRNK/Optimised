@@ -15,6 +15,7 @@ using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using static Optimised.Program;
+using Microsoft.Win32.TaskScheduler;
 
 namespace Optimised
 {
@@ -1026,16 +1027,95 @@ namespace Optimised
             }
             else //Daca nu sa folosit AutoLogin sare aici.
             {
+                
                 //Seteaza datele primite din Login.
                 Parola = Login.Parola_Login;
                 Username = Login.User_Login;
                 Email = Login.Email_Login;
                 //Seteaza datele primite din Login.
             }
-            Console.WriteLine(token);
-            Console.WriteLine(Parola);
-            Console.WriteLine(Username);
-            Console.WriteLine(Email);
+            if (File.Exists(Functii.path))
+            {
+                iTalk_CheckBox2.Checked = true;
+                var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
+                var FileLog = MyIni.Read("SaveLogs");
+                var StartWindows = MyIni.Read("StarWin");
+                if (FileLog == "Da")
+                {
+                    iTalk_CheckBox1.Checked = true;
+                }
+                else
+                {
+                    iTalk_CheckBox1.Checked = false;
+                }
+                if (StartWindows == "Da")
+                {
+                    iTalk_CheckBox1.Checked = true;
+                }
+                else { iTalk_CheckBox1.Checked = false; }
+            }
+        }
+
+        private void iTalk_CheckBox1_CheckedChanged(object sender)
+        {
+            if (iTalk_CheckBox1.Checked == true)
+            {
+                var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
+
+                MyIni.Write("StarWin", "Da");
+                using (TaskService ts = new TaskService())
+                {
+                    try
+                    {
+                        TaskDefinition td = ts.NewTask();
+                        td.RegistrationInfo.Description = "Start Optimised";
+                        // Run Task whether user logged on or not
+                        td.Principal.UserId = string.Concat(Environment.UserDomainName, "\\", Environment.UserName);
+                        td.Principal.RunLevel = TaskRunLevel.Highest;
+                        td.Triggers.Add(new LogonTrigger() { Enabled = true });
+                        td.Actions.Add(new ExecAction(AppDomain.CurrentDomain.BaseDirectory + @"Optimised.exe", null, null));
+                        ts.RootFolder.RegisterTaskDefinition("Optimised", td);
+                    }
+                    catch { }
+                }
+            }
+            else
+            {
+                try
+                {
+                    var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
+
+                    MyIni.Write("StarWin", "Nu");
+                    TaskService ts = new TaskService();
+                    TaskDefinition td = ts.NewTask();
+                    ts.RootFolder.DeleteTask("Optimised", true);
+                }
+                catch { }
+            }
+        }
+
+        private void iTalk_CheckBox2_CheckedChanged(object sender)
+        {
+            if(!iTalk_CheckBox2.Checked)
+            {
+                iTalk_CheckBox2.Enabled = false;
+                iTalk_CheckBox1.Enabled = false;
+                iTalk_CheckBox1.Checked = false;
+                if (File.Exists(Functii.path)) //Daca fisierul AutoLogin.ini exista il sterge.
+                {
+                    File.Delete(Functii.path); //Sterge fisierul AutoLogin.ini.
+                }
+            }
+        }
+
+        private void iTalk_HeaderLabel45_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/GooDRNK/Optimised");
+        }
+
+        private void iTalk_HeaderLabel46_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://liceulteoreticioncantacuzino.ro/");
         }
     }
 }

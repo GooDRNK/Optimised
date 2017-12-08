@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Microsoft.Win32.TaskScheduler;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -106,6 +107,25 @@ namespace Optimised
         {
             GClean.Interval = 5000;
             GClean.Start();
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Config.ini"))
+            {
+                var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
+                var FileLog = MyIni.Read("SaveLogs");
+                var StartWindows = MyIni.Read("StarWin");
+                if (FileLog == "Da")
+                {
+                    iTalk_CheckBox1.Checked = true;
+                }
+                else
+                {
+                    iTalk_CheckBox1.Checked = false;
+                }
+                if (StartWindows == "Da")
+                {
+                    iTalk_CheckBox1.Checked = true;
+                }
+                else { iTalk_CheckBox1.Checked = false; }
+            }
         }
 
         private void Offline_FormClosing(object sender, FormClosingEventArgs e)
@@ -463,6 +483,54 @@ namespace Optimised
             {
                 notifyIcon1.ShowBalloonTip(1000, "Optimised", "Nu ai loguri de salvat.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.     
             }
+        }
+
+        private void iTalk_CheckBox1_CheckedChanged(object sender)
+        {
+            if (iTalk_CheckBox1.Checked == true)
+            {
+                var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"Config.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
+
+                MyIni.Write("StarWin", "Da");
+                using (TaskService ts = new TaskService())
+                {
+                    try
+                    {
+                        TaskDefinition td = ts.NewTask();
+                        td.RegistrationInfo.Description = "Start Optimised";
+                        // Run Task whether user logged on or not
+                        td.Principal.UserId = string.Concat(Environment.UserDomainName, "\\", Environment.UserName);
+                        td.Principal.RunLevel = TaskRunLevel.Highest;
+                        td.Triggers.Add(new LogonTrigger() { Enabled = true });
+                        td.Actions.Add(new ExecAction(AppDomain.CurrentDomain.BaseDirectory + @"Optimised.exe", null, null));
+                        ts.RootFolder.RegisterTaskDefinition("Optimised", td);
+                    }
+                    catch { }
+                }
+            }
+            else
+            {
+                try
+                {
+                    var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"Config.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
+
+                    MyIni.Write("StarWin", "Nu");
+                    TaskService ts = new TaskService();
+                    TaskDefinition td = ts.NewTask();
+                    ts.RootFolder.DeleteTask("Optimised", true);
+                }
+                catch { }
+            }
+        }
+
+        private void iTalk_HeaderLabel45_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/GooDRNK/Optimised");
+        }
+
+        private void iTalk_HeaderLabel46_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://liceulteoreticioncantacuzino.ro/");
         }
     }
 }
