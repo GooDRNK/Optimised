@@ -20,7 +20,7 @@ using Microsoft.Win32.TaskScheduler;
 namespace Optimised
 {
     public partial class Optimised : Form
-    {
+    { 
      
         #region Variabile_Globale
         //Variabile Globale Start
