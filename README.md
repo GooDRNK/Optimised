@@ -1,4 +1,5 @@
 # Optimised
+# Click pe imaginea de mai jos pentru o prezentare video.
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/aM54IiYaNtg/0.jpg)](https://www.youtube.com/watch?v=aM54IiYaNtg)
 # Aici se poate vedea dashboard-ul pentru conturile de admini ce au acces la subconturile realizate de ei.
 ![alt text](https://i.imgur.com/Uf76fss.png)
