@@ -46,7 +46,7 @@ namespace Optimised
                 count++;
                 webBrowser1.Show();
                 iTalk_Button_22.Text = "End Register";
-                webBrowser1.Navigate("http://optimised.biz/register");
+                webBrowser1.Navigate("http://"+webip+"/register");
             }
             else if (count == 1)
             {

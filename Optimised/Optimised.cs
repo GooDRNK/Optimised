@@ -20,8 +20,8 @@ using Microsoft.Win32.TaskScheduler;
 namespace Optimised
 {
     public partial class Optimised : Form
-    { 
-     
+    {
+        string webip = "192.168.0.135";
         #region Variabile_Globale
         //Variabile Globale Start
         string Parola; //Aici se salveaza Parola.
@@ -42,7 +42,7 @@ namespace Optimised
         private void Optimised_FormClosing(object sender, FormClosingEventArgs e)
         {
             notifyIcon1.Dispose();
-            string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
+            string logout = Functii.DownloadString("http://"+webip+"/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
             var proc = Process.GetCurrentProcess().ProcessName;
             foreach (var process in Process.GetProcessesByName(proc))
             {
@@ -92,7 +92,7 @@ namespace Optimised
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             while (true)
             {
-                var start_opt_only =  Functii.DownloadString("http://optimised.biz/getoptonly/"+Username+"/"+Email+"/"+Parola+"/"+token+"/1");
+                var start_opt_only =  Functii.DownloadString("http://"+webip+"/getoptonly/"+Username+"/"+Email+"/"+Parola+"/"+token+"/1");
                 if(start_opt_only == "1")
                 {
                     if (!Optimised_Only.IsBusy)
@@ -102,7 +102,7 @@ namespace Optimised
                         Optimised_Only.RunWorkerAsync();
                     }
                 }
-                var start_opt_all = Functii.DownloadString("http://optimised.biz/getoptall/" + Username + "/" + Email + "/" + Parola + "/" + token + "/1");
+                var start_opt_all = Functii.DownloadString("http://"+webip+"/getoptall/" + Username + "/" + Email + "/" + Parola + "/" + token + "/1");
                 if (start_opt_all == "1")
                 {
                     if (!Optimised_All.IsBusy)
@@ -111,7 +111,7 @@ namespace Optimised
                         Optimised_All.RunWorkerAsync();
                     }
                 }
-                var sendstats = Functii.DownloadString("http://optimised.biz/sendonline/" + Username + "/" + Email + "/" + Parola + "/" + token);
+                var sendstats = Functii.DownloadString("http://"+webip+"/sendonline/" + Username + "/" + Email + "/" + Parola + "/" + token);
                 Thread.Sleep(1000);
             }
         }
@@ -122,7 +122,7 @@ namespace Optimised
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
             notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud exclusiv tie a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
-            var optiunile = Functii.DownloadString("http://optimised.biz/getoptonly/" + Username + "/" + Email + "/" + Parola + "/" + token);
+            var optiunile = Functii.DownloadString("http://"+webip+"/getoptonly/" + Username + "/" + Email + "/" + Parola + "/" + token);
             dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(optiunile);
             if (obj["muic"] == 1)
             {
@@ -371,7 +371,7 @@ namespace Optimised
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
             notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud pentru toti utilizatorii a inceput.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
-            var optiunile = Functii.DownloadString("http://optimised.biz/getoptall/" + Username + "/" + Email + "/" + Parola + "/" + token);
+            var optiunile = Functii.DownloadString("http://"+webip+"/getoptall/" + Username + "/" + Email + "/" + Parola + "/" + token);
             dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(optiunile);
             if (obj["muic"] == 1)
             {
@@ -628,7 +628,7 @@ namespace Optimised
             Program.Email_Autologin = string.Empty;
             Program.tokens = string.Empty;
             GetApiData.Dispose();
-            string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
+            string logout = Functii.DownloadString("http://"+webip+"/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
             this.Hide();
             notifyIcon1.Dispose();
             Login log = new Login();
@@ -640,7 +640,7 @@ namespace Optimised
         {
          
             notifyIcon1.Dispose();
-            string logout = Functii.DownloadString("http://optimised.biz/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
+            string logout = Functii.DownloadString("http://"+webip+"/logoutapp/" + Username + "/" + Email + "/" + Parola + "/" + token); //Cere informatii despre Login la API.
             Thread.Sleep(100);
             var proc = Process.GetCurrentProcess().ProcessName;
             foreach (var process in Process.GetProcessesByName(proc))
@@ -957,7 +957,7 @@ namespace Optimised
                 }
                 catch { }//Delete Regedit
             }
-            var optiunile = Functii.DownloadString("http://optimised.biz/getoptonly/" + Username + "/" + Email + "/" + Parola + "/" + token);
+            var optiunile = Functii.DownloadString("http://"+webip+"/getoptonly/" + Username + "/" + Email + "/" + Parola + "/" + token);
             notifyIcon1.ShowBalloonTip(1000, "Optimised", "Optimizarea a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
         }
         private void Optimised_Manual_ProgressChanged(object sender, ProgressChangedEventArgs e)

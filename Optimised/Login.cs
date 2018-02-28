@@ -38,7 +38,7 @@ namespace Optimised
                 //Href Register Start
                 private void iTalk_LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
                 {  
-                    Process.Start("http://optimised.biz/register"); //Te trimite in pagina de inregistrare pe site.
+                    Process.Start("http://"+webip+"/register"); //Te trimite in pagina de inregistrare pe site.
                 }
                 //Href Register End
                 #endregion
@@ -55,7 +55,7 @@ namespace Optimised
                 {
                     string password = Functii.CalculateMD5Hash(iTalk_TextBox_Big3.Text).ToLower(); //Cripteaza parola.
         
-                    string logininfo = Functii.DownloadString("http://optimised.biz/loginapp/" + iTalk_TextBox_Big2.Text + "/"+iTalk_TextBox_Big1.Text+"/"+password); //Cere informatii despre Login la API.
+                    string logininfo = Functii.DownloadString("http://"+webip+"/loginapp/" + iTalk_TextBox_Big2.Text + "/"+iTalk_TextBox_Big1.Text+"/"+password); //Cere informatii despre Login la API.
                     if(logininfo.ToString().Length != 60 ) //Verifica daca a returnat token sau nu.
                     {
                         notifyIcon1.ShowBalloonTip(1000, "Optimised Login",logininfo.ToString(), ToolTipIcon.Info); //Trimite messajul primit de la API.
@@ -132,12 +132,12 @@ namespace Optimised
 
         private void goWebToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("http://optimised.biz"); //Intra pe site.
+            Process.Start("http://"+webip+""); //Intra pe site.
         }
 
         private void registerToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Process.Start("http:///optimised.biz/register"); //Intra in sectiunea de Register.
+            Process.Start("http:///"+webip+"/register"); //Intra in sectiunea de Register.
         }
 
         private void loginToolStripMenuItem1_Click(object sender, EventArgs e)

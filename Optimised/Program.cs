@@ -91,7 +91,7 @@ namespace Optimised
         {
 
           
-            logininfo = Functii.DownloadString("http://optimised.biz/loginapp/" + user.ToString() + "/" + email.ToString() + "/" + pass.ToString());
+            logininfo = Functii.DownloadString("http://"+webip+"/loginapp/" + user.ToString() + "/" + email.ToString() + "/" + pass.ToString());
             if(logininfo.ToString().Length == 60)
             {
                 Parola_Autologin = pass;

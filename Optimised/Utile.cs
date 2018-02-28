@@ -73,7 +73,7 @@ namespace Optimised
             {
                 using (var client = new WebClient())
                 {
-                    using (var stream = client.OpenRead("http://optimised.biz"))
+                    using (var stream = client.OpenRead("http://"+webip+""))
                     {
                         return true;
                     }
