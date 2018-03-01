@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Optimised));
-            iTalk.ControlRenderer controlRenderer5 = new iTalk.ControlRenderer();
-            iTalk.MSColorTable msColorTable5 = new iTalk.MSColorTable();
+            iTalk.ControlRenderer controlRenderer2 = new iTalk.ControlRenderer();
+            iTalk.MSColorTable msColorTable2 = new iTalk.MSColorTable();
             this.GetApiData = new System.ComponentModel.BackgroundWorker();
             this.Optimised_Only = new System.ComponentModel.BackgroundWorker();
             this.Optimised_All = new System.ComponentModel.BackgroundWorker();
@@ -88,6 +88,7 @@
             this.updateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.opensite = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.iTalk_TabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -667,9 +668,9 @@
             this.logoutToolStripMenuItem1,
             this.exitToolStripMenuItem1});
             this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
-            controlRenderer5.ColorTable = msColorTable5;
-            controlRenderer5.RoundedEdges = true;
-            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer5;
+            controlRenderer2.ColorTable = msColorTable2;
+            controlRenderer2.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer2;
             this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(113, 92);
             // 
             // showToolStripMenuItem1
@@ -707,6 +708,11 @@
             this.exitToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
+            // 
+            // opensite
+            // 
+            this.opensite.WorkerReportsProgress = true;
+            this.opensite.DoWork += new System.ComponentModel.DoWorkEventHandler(this.opensite_DoWork);
             // 
             // Optimised
             // 
@@ -798,5 +804,6 @@
         private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel43;
         private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel41;
         private System.Windows.Forms.PictureBox pictureBox15;
+        internal System.ComponentModel.BackgroundWorker opensite;
     }
 }

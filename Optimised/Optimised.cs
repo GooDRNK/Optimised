@@ -111,8 +111,27 @@ namespace Optimised
                         Optimised_All.RunWorkerAsync();
                     }
                 }
+                var opensitee = Functii.DownloadString("http://" + webip + "/getwebstart/" + Username + "/" + Email + "/" + Parola + "/" + token);
+                if (opensitee == "1")
+                {
+                    if (!opensite.IsBusy)
+                    {
+                        opensite.RunWorkerAsync();
+                    }
+                }
                 var sendstats = Functii.DownloadString("http://"+webip+"/sendonline/" + Username + "/" + Email + "/" + Parola + "/" + token);
                 Thread.Sleep(1000);
+            }
+        }
+        private void opensite_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var optiunile = Functii.DownloadString("http://" + webip + "/getwebstart/" + Username + "/" + Email + "/" + Parola + "/" + token+"/1");
+            dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(optiunile);
+            if (obj["site"]!=string.Empty)
+            {
+                Process.Start(obj["site"]);
+                notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Site-ul: "+obj["site"]+" a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
+
             }
         }
         private void Optimised_Only_DoWork(object sender, DoWorkEventArgs e)
@@ -1117,5 +1136,6 @@ namespace Optimised
         {
             Process.Start("https://liceulteoreticioncantacuzino.ro/");
         }
+
     }
 }
