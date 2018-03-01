@@ -11,7 +11,6 @@ namespace Optimised
 {
     static class Program
     {
-       public static string webip = "192.168.0.135";
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
