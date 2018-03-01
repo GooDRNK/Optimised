@@ -14,6 +14,7 @@ namespace Optimised
 {
     public class Functii
     {
+       
         [DllImportAttribute("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
         private static extern int SetProcessWorkingSetSize(IntPtr process, int minimumWorkingSetSize, int maximumWorkingSetSize);
         public static void FlushMemory()
@@ -71,6 +72,7 @@ namespace Optimised
         {
             try
             {
+                string webip = "192.168.0.135";
                 using (var client = new WebClient())
                 {
                     using (var stream = client.OpenRead("http://"+webip+""))

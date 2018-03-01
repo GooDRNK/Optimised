@@ -18,7 +18,7 @@ namespace Optimised
 {
     public partial class Offline : Form
     {
-        
+        string webip = "192.168.0.135";
         public static RegistryKey regKey; //Registri key
         public static string windows = Path.GetPathRoot(Environment.SystemDirectory);
         public Offline()
