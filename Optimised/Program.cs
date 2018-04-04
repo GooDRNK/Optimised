@@ -1,35 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Optimised;
 namespace Optimised
 {
     static class Program
     {
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         static Mutex mutex = new Mutex(true, "{8F6F0AC4-B9A1-45fd-A8CF-72F04E6BDE8F}");
         [STAThread]
 
+
         static void Main(string[] args)
         {
             if (!mutex.WaitOne(TimeSpan.Zero, true))
-            {
-                MessageBox.Show("Nu poti sa pornesti programul de doua ori.");
+            {        
             }
             else
             {
-                
-
                 if (Functii.CheckForInternetConnection() == false)
                 {
-
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new Offline());
@@ -89,10 +90,18 @@ namespace Optimised
         static string logininfo;
         static void LoginAuto(string pass, string user, string email)
         {
-
           
-            logininfo = Functii.DownloadString("http://"+webip+"/loginapp/" + user.ToString() + "/" + email.ToString() + "/" + pass.ToString());
-            if(logininfo.ToString().Length == 60)
+            try
+            {
+                logininfo = Functii.DownloadString("http://" + Functii.webip + "/loginapp/" + user.ToString() + "/" + email.ToString() + "/" + pass.ToString());
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            if (logininfo.ToString().Length == 60)
             {
                 Parola_Autologin = pass;
                 User_Autologin = user;
@@ -103,10 +112,12 @@ namespace Optimised
                 Application.Run(new Optimised());
             }
 
-            switch(logininfo.ToString())
+            switch (logininfo.ToString())
             {
-                case "Acest cont este deja conectat.":
+               
+                default:
                     {
+
                         error = logininfo.ToString();
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
@@ -114,15 +125,6 @@ namespace Optimised
                         break;
                     }
 
-                case "Datele introduse sunt incorecte":
-                    {
-                        error = logininfo.ToString();
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new Login());
-                        break;
-                    }    
-                
             }
         }
 

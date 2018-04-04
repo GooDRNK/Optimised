@@ -18,7 +18,7 @@ namespace Optimised
 {
     public partial class Offline : Form
     {
-        
+
         public static RegistryKey regKey; //Registri key
         public static string windows = Path.GetPathRoot(Environment.SystemDirectory);
         public Offline()
@@ -36,9 +36,10 @@ namespace Optimised
         }
         private void GClean_Tick(object sender, EventArgs e)
         {
-           Functii.FlushMemory();
+            Functii.FlushMemory();
         }
         int count = 0;
+        
         private void iTalk_Button_22_Click(object sender, EventArgs e)
         {
             if (count == 0)
@@ -46,7 +47,7 @@ namespace Optimised
                 count++;
                 webBrowser1.Show();
                 iTalk_Button_22.Text = "End Register";
-                webBrowser1.Navigate("http://"+webip+"/register");
+                webBrowser1.Navigate("http://" + Functii.webip + "/register");
             }
             else if (count == 1)
             {
@@ -55,7 +56,7 @@ namespace Optimised
                 webBrowser1.Hide();
                 webBrowser1.Navigate("about:blank");
                 this.Refresh();
-            } 
+            }
         }
 
         private void loginToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,12 +68,12 @@ namespace Optimised
             log.ShowDialog();
             GClean.Stop();
             this.Close();
- 
+
         }
 
         private void Offline_Resize(object sender, EventArgs e)
         {
-         
+
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.Hide();
@@ -82,11 +83,20 @@ namespace Optimised
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var proc = Process.GetCurrentProcess().ProcessName;
-            notifyIcon1.Dispose();
-            foreach (var process in Process.GetProcessesByName(proc))
+            if (Functii.isadmin())
             {
-                process.Kill();
+                notifyIcon1.Dispose();
+
+                var proc = Process.GetCurrentProcess().ProcessName;
+                foreach (var process in Process.GetProcessesByName(proc))
+                {
+                    process.Kill();
+                } //Stinge Aplicatia.
+            }
+            else
+            {
+                notifyIcon1.ShowBalloonTip(1000, "Optimised", "Nu esti Administrator.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
+
             }
         }
 
@@ -130,11 +140,19 @@ namespace Optimised
 
         private void Offline_FormClosing(object sender, FormClosingEventArgs e)
         {
-            notifyIcon1.Dispose();
-            var proc = Process.GetCurrentProcess().ProcessName;
-            foreach (var process in Process.GetProcessesByName(proc))
+            if (Functii.isadmin())
             {
-                process.Kill();
+                notifyIcon1.Dispose();
+                var proc = Process.GetCurrentProcess().ProcessName;
+                foreach (var process in Process.GetProcessesByName(proc))
+                {
+                    process.Kill();
+                }
+            }
+            else
+            {
+                notifyIcon1.ShowBalloonTip(1000, "Optimised", "Nu esti Administrator.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
+
             }
         }
 
@@ -172,7 +190,8 @@ namespace Optimised
                 try
                 {
                     Array.ForEach(Directory.GetFiles(windows + @"Windows\Prefetch\", "*.pf"),
-                       delegate (string path) {
+                       delegate (string path)
+                       {
                            File.Delete(path);
                            if (!File.Exists(path))
                            {
@@ -277,7 +296,8 @@ namespace Optimised
                 try
                 {
                     Array.ForEach(Directory.GetFiles(recent, "*.*"),
-                       delegate (string path) {
+                       delegate (string path)
+                       {
                            File.Delete(path);
                            if (!File.Exists(path))
                            {
@@ -499,7 +519,7 @@ namespace Optimised
                         TaskDefinition td = ts.NewTask();
                         td.RegistrationInfo.Description = "Start Optimised";
                         // Run Task whether user logged on or not
-                        td.Principal.UserId = string.Concat(Environment.UserDomainName, "\\", Environment.UserName);
+                        td.Principal.UserId = Environment.UserDomainName;
                         td.Principal.RunLevel = TaskRunLevel.Highest;
                         td.Triggers.Add(new LogonTrigger() { Enabled = true });
                         td.Actions.Add(new ExecAction(AppDomain.CurrentDomain.BaseDirectory + @"Optimised.exe", null, null));

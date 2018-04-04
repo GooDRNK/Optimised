@@ -9,11 +9,21 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Net;
 using System.Security.Cryptography;
+using System.Security.Principal;
+using Microsoft.Win32;
+using System.Collections.Specialized;
 
 namespace Optimised
 {
     public class Functii
     {
+        public static string webip = "optimised.biz";
+        public static bool isadmin()
+        {
+            WindowsIdentity da = WindowsIdentity.GetCurrent();
+            WindowsPrincipal pr = new WindowsPrincipal(da);
+            return pr.IsInRole(WindowsBuiltInRole.Administrator);
+        }
         [DllImportAttribute("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
         private static extern int SetProcessWorkingSetSize(IntPtr process, int minimumWorkingSetSize, int maximumWorkingSetSize);
         public static void FlushMemory()
@@ -26,20 +36,21 @@ namespace Optimised
             }
         }
         public static string path = AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini";
-        public static string reply = string.Empty;
         //Download String Start
-         public static string DownloadString(string address)
+        public static string DownloadString(string address)
         {
             try
             {
-
+                string reply = string.Empty;
                 WebClient client = new WebClient();
                 reply = client.DownloadString(address);
                 return reply.ToString();
 
             }
-            catch { }
-            return reply.ToString();
+            catch 
+            {
+                return null;
+            }
         }
         //Download String End
         public static string CalculateMD5Hash(string input)
@@ -84,6 +95,7 @@ namespace Optimised
                 return false;
             }
         }
+         
     }
     public class IniFile
     {
