@@ -19,9 +19,7 @@ namespace Optimised
       
         #region Variabile_Globale
         //Variabile Globale Start
-        string Parola; //Aici se salveaza Parola.
-        string Username; //Aici se salveaza Utilizatorul.
-        string Email; //Aici se salveaza Emailul.
+        string Key; //Aici se salveaza Parola.
         string token; //Aici se salveaza token-ul.
         public static RegistryKey regKey; //Registri key
         public static string windows = Path.GetPathRoot(Environment.SystemDirectory);
@@ -31,7 +29,8 @@ namespace Optimised
         public Optimised()
         {
             InitializeComponent();
-            
+            timer1.Interval = 1000;
+            timer1.Start();
         }
         #endregion
         #region Logout
@@ -96,7 +95,7 @@ namespace Optimised
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             while (true)
             {
-              var start_opt_only = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Username + "/" + Email + "/" + Parola + "/" + token + "/0");
+                var start_opt_only = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token + "/0");
                     
                if (start_opt_only == "1")
                {
@@ -108,7 +107,7 @@ namespace Optimised
                    }
                }
 
-               var start_opt_all = Functii.DownloadString("http://" + Functii.webip + "/getoptall/" + Username + "/" + Email + "/" + Parola + "/" + token + "/0");
+               var start_opt_all = Functii.DownloadString("http://" + Functii.webip + "/getoptall/" + Key + "/" + token + "/0");
                 
                 if (start_opt_all == "1")
                {
@@ -118,7 +117,7 @@ namespace Optimised
                        Optimised_All.RunWorkerAsync();
                    }
                }
-               var opensitee = Functii.DownloadString("http://" + Functii.webip + "/getwebstart/" + Username + "/" + Email + "/" + Parola + "/" + token + "/0/");
+               var opensitee = Functii.DownloadString("http://" + Functii.webip + "/getwebstart/" + Key + "/" + token + "/0/");
                if (opensitee == "1")
                {
                    if (!opensite.IsBusy)
@@ -126,7 +125,7 @@ namespace Optimised
                        opensite.RunWorkerAsync();
                    }
                }
-               var optionsist = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Username + "/" + Email + "/" + Parola + "/" + token + "/0");
+               var optionsist = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Key + "/" + token + "/0");
                if (optionsist == "1")
                {
                    if (!optionstart.IsBusy)
@@ -134,13 +133,13 @@ namespace Optimised
                        optionstart.RunWorkerAsync();
                    }
                }
-               var sendstats = Functii.DownloadString("http://" + Functii.webip + "/sendonline/" + Username + "/" + Email + "/" + Parola + "/" + token);
+               var sendstats = Functii.DownloadString("http://" + Functii.webip + "/sendonline/" + Key + "/" + token);
                 Thread.Sleep(1000);
             }
         }
         private void optionstart_DoWork(object sender, DoWorkEventArgs e)
         {
-            var opensitee = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Username + "/" + Email + "/" + Parola + "/" + token + "/1");
+            var opensitee = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Key + "/" + token + "/1");
             if (opensitee != string.Empty)
             {
                 switch (opensitee)
@@ -167,7 +166,7 @@ namespace Optimised
 
         private void opensite_DoWork(object sender, DoWorkEventArgs e)
         {
-            string opensite = Functii.DownloadString("http://" + Functii.webip + "/getwebstart/" + Username + "/" + Email + "/" + Parola + "/" + token + "/1");
+            string opensite = Functii.DownloadString("http://" + Functii.webip + "/getwebstart/" + Key + "/" + token + "/1");
             if (opensite != string.Empty)
             {
                 Process.Start(opensite);
@@ -181,7 +180,7 @@ namespace Optimised
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
             notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud exclusiv tie a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
-            var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Username + "/" + Email + "/" + Parola + "/" + token+"/1");
+            var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token+"/1");
             dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(optiunile);
             if (obj["muic"] == 1)
             {
@@ -434,7 +433,7 @@ namespace Optimised
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
             notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud pentru toti utilizatorii a inceput.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
-            var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptall/" + Username + "/" + Email + "/" + Parola + "/" + token+"/1");
+            var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptall/" + Key + "/" + token+"/1");
             dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(optiunile);
             if (obj["muic"] == 1)
             {
@@ -686,100 +685,7 @@ namespace Optimised
         {
             Functii.FlushMemory();
         }
-        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (Functii.isadmin())
-            {
-            Program.Parola_Autologin = string.Empty;
-            Program.User_Autologin = string.Empty;
-            Program.Email_Autologin = string.Empty;
-            Program.tokens = string.Empty;
-            GetApiData.Dispose();
-            this.Hide();
-            notifyIcon1.Dispose();
-            Login log = new Login();
-            log.ShowDialog();
-            ClearRam.Stop();
-            this.Close();
-            }
-            else
-            {
-                try
-                {
-                    notifyIcon1.ShowBalloonTip(1000, "Optimised", "Nu esti Administrator.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
-
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Notificarea este goala.");
-                    throw;
-                }
-            }
-        }
-        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (Functii.isadmin())
-            {
-                notifyIcon1.Dispose();
-
-                var proc = Process.GetCurrentProcess().ProcessName;
-                foreach (var process in Process.GetProcessesByName(proc))
-                {
-                    process.Kill();
-                } //Stinge Aplicatia.
-            }
-            else
-            {
-                try
-                {
-                    notifyIcon1.ShowBalloonTip(1000, "Optimised", "Nu esti Administrator.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
-
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Notificarea este goala.");
-                    throw;
-                }
-            }
-        }
-        private void showToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (this.Visible == true)
-            {
-                this.Hide();
-            }
-            else if (this.Visible == false)
-            {
-                this.Show();
-                this.WindowState = FormWindowState.Normal;
-            }
-        }
-        private void updateToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Normal; //Reaprinde Login-ul.
-        }
-        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
-        {
-
-            if (this.Visible == true)
-            {
-                this.Hide();
-            }
-            else if (this.Visible == false)
-            {
-                this.Show();
-                this.WindowState = FormWindowState.Normal;
-            }
-        }
-        private void Optimised_Resize(object sender, EventArgs e)
-        {
-
-            if (this.WindowState == FormWindowState.Minimized && iTalk_ThemeContainer1.Visible==true)
-            {
-                this.Hide();
-            }
-        }
-
+   
         private void iTalk_Button_11_Click(object sender, EventArgs e)
         {
             if (!muic.Checked && !wlogs.Checked && !rfile.Checked && !compstore.Checked && !fixlnk.Checked && !mpoint.Checked && !trac.Checked && !rapp.Checked && !rstart.Checked && !useras.Checked && !rebin.Checked && !pref.Checked)
@@ -1054,7 +960,7 @@ namespace Optimised
                 }
                 catch { }//Delete Regedit
             }
-            var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Username + "/" + Email + "/" + Parola + "/" + token);
+            var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token);
             notifyIcon1.ShowBalloonTip(1000, "Optimised", "Optimizarea a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
         }
         private void Optimised_Manual_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -1104,68 +1010,8 @@ namespace Optimised
         private void Optimised_Load(object sender, EventArgs e)
         {
 
-            ClearRam.Interval = 5000;
-            ClearRam.Start();
-            timer1.Start();
-            GetApiData.RunWorkerAsync();
-            if (Program.tokens != string.Empty) //Se verifica daca token-ul trimis din AutoLogin este null.
+            try
             {
-                token = Program.tokens; //Se seteaza token-ul trimis din AutoLogin.
-            }
-            else //Daca nu sa folosit AutoLogin trece aici.
-            {
-                token = Login.token; //Se seteaza token-ul trimis din Login.
-            }
-            if (Program.Email_Autologin != string.Empty && Program.Parola_Autologin != string.Empty && Program.User_Autologin != string.Empty) //Daca datele trimise din AutoLogin nu sunt nule sare aici.
-            {
-                //Seteaza datele primite din AutoLogin.
-                Parola = Program.Parola_Autologin;
-                Username = Program.User_Autologin;
-                Email = Program.Email_Autologin;
-                //Seteaza datele primite din AutoLogin.
-            }
-            else //Daca nu sa folosit AutoLogin sare aici.
-            {
-
-                //Seteaza datele primite din Login.
-                Parola = Login.Parola_Login;
-                Username = Login.User_Login;
-                Email = Login.Email_Login;
-                //Seteaza datele primite din Login.
-            }
-            if (File.Exists(Functii.path))
-            {
-                iTalk_CheckBox2.Checked = true;
-                var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
-                var FileLog = MyIni.Read("SaveLogs");
-                var StartWindows = MyIni.Read("StarWin");
-                if (FileLog == "Da")
-                {
-                    iTalk_CheckBox1.Checked = true;
-                }
-                else
-                {
-                    iTalk_CheckBox1.Checked = false;
-                }
-                if (StartWindows == "Da")
-                {
-                    iTalk_CheckBox1.Checked = true;
-                }
-                else { iTalk_CheckBox1.Checked = false; }
-            }
-            if(iTalk_CheckBox1.Checked !=true)
-            {
-                iTalk_CheckBox1.Checked = true;
-            }
-        }
-
-        private void iTalk_CheckBox1_CheckedChanged(object sender)
-        {
-            if (iTalk_CheckBox1.Checked == true)
-            {
-                var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
-
-                MyIni.Write("StarWin", "Da");
                 using (TaskService ts = new TaskService())
                 {
                     try
@@ -1181,34 +1027,40 @@ namespace Optimised
                     catch { }
                 }
             }
-            else
+            catch (Exception)
             {
-                try
-                {
-                    var MyIni = new IniFile(AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini"); //Deschide calea de scriere in fisierul AutoLogin.ini.
 
-                    MyIni.Write("StarWin", "Nu");
-                    TaskService ts = new TaskService();
-                    TaskDefinition td = ts.NewTask();
-                    ts.RootFolder.DeleteTask("Optimised", true);
-                }
-                catch { }
+                throw;
+            }
+            ClearRam.Interval = 5000;
+            ClearRam.Start();
+            timer1.Start();
+            GetApiData.RunWorkerAsync();
+            if (Program.tokens != string.Empty) //Se verifica daca token-ul trimis din AutoLogin este null.
+            {
+                token = Program.tokens; //Se seteaza token-ul trimis din AutoLogin.
+            }
+            else //Daca nu sa folosit AutoLogin trece aici.
+            {
+                token = Login.token; //Se seteaza token-ul trimis din Login.
+            }
+            if (Program.Key != string.Empty) //Daca datele trimise din AutoLogin nu sunt nule sare aici.
+            {
+                //Seteaza datele primite din AutoLogin.
+                Key = Program.Key;
+                
+                //Seteaza datele primite din AutoLogin.
+            }
+            else //Daca nu sa folosit AutoLogin sare aici.
+            {
+
+                //Seteaza datele primite din Login.
+                Key = Login.Key;
+                
+                //Seteaza datele primite din Login.
             }
         }
 
-        private void iTalk_CheckBox2_CheckedChanged(object sender)
-        {
-            if (!iTalk_CheckBox2.Checked)
-            {
-                iTalk_CheckBox2.Enabled = false;
-                iTalk_CheckBox1.Enabled = false;
-                iTalk_CheckBox1.Checked = false;
-                if (File.Exists(Functii.path)) //Daca fisierul AutoLogin.ini exista il sterge.
-                {
-                    File.Delete(Functii.path); //Sterge fisierul AutoLogin.ini.
-                }
-            }
-        }
 
         private void iTalk_HeaderLabel45_Click(object sender, EventArgs e)
         {
@@ -1219,11 +1071,10 @@ namespace Optimised
         {
             Process.Start("https://liceulteoreticioncantacuzino.ro/");
         }
-        public struct Procese
-        {
-            public int ID { get; set; }
-            public string ProcessName { get; set; }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

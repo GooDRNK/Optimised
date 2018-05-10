@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Optimised));
-            iTalk.ControlRenderer controlRenderer6 = new iTalk.ControlRenderer();
-            iTalk.MSColorTable msColorTable6 = new iTalk.MSColorTable();
+            iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
+            iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
             this.GetApiData = new System.ComponentModel.BackgroundWorker();
             this.Optimised_Only = new System.ComponentModel.BackgroundWorker();
             this.Optimised_All = new System.ComponentModel.BackgroundWorker();
@@ -65,11 +65,6 @@
             this.rfile = new iTalk.iTalk_CheckBox();
             this.muic = new iTalk.iTalk_CheckBox();
             this.iTalk_ProgressBar1 = new iTalk.iTalk_ProgressBar();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.iTalk_CheckBox2 = new iTalk.iTalk_CheckBox();
-            this.iTalk_CheckBox1 = new iTalk.iTalk_CheckBox();
-            this.iTalk_HeaderLabel2 = new iTalk.iTalk_HeaderLabel();
-            this.iTalk_HeaderLabel1 = new iTalk.iTalk_HeaderLabel();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.iTalk_Separator1 = new iTalk.iTalk_Separator();
             this.iTalk_HeaderLabel40 = new iTalk.iTalk_HeaderLabel();
@@ -86,19 +81,12 @@
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
-            this.showToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.logoutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.iTalk_TabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.iTalk_GroupBox1.SuspendLayout();
-            this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            this.iTalk_ContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // GetApiData
@@ -157,10 +145,13 @@
             this.optionstart.WorkerReportsProgress = true;
             this.optionstart.DoWork += new System.ComponentModel.DoWorkEventHandler(this.optionstart_DoWork);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // iTalk_ThemeContainer1
             // 
             this.iTalk_ThemeContainer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
-            this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_ControlBox1);
             this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_TabControl1);
             this.iTalk_ThemeContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iTalk_ThemeContainer1.Font = new System.Drawing.Font("Segoe UI", 8F);
@@ -179,7 +170,6 @@
             // 
             this.iTalk_TabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.iTalk_TabControl1.Controls.Add(this.tabPage1);
-            this.iTalk_TabControl1.Controls.Add(this.tabPage5);
             this.iTalk_TabControl1.Controls.Add(this.tabPage6);
             this.iTalk_TabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.iTalk_TabControl1.Font = new System.Drawing.Font("Sitka Banner", 9F);
@@ -431,68 +421,6 @@
             this.iTalk_ProgressBar1.Text = "iTalk_ProgressBar1";
             this.iTalk_ProgressBar1.Value = ((long)(0));
             // 
-            // tabPage5
-            // 
-            this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
-            this.tabPage5.Controls.Add(this.iTalk_CheckBox2);
-            this.tabPage5.Controls.Add(this.iTalk_CheckBox1);
-            this.tabPage5.Controls.Add(this.iTalk_HeaderLabel2);
-            this.tabPage5.Controls.Add(this.iTalk_HeaderLabel1);
-            this.tabPage5.Location = new System.Drawing.Point(139, 4);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(841, 557);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Setting";
-            // 
-            // iTalk_CheckBox2
-            // 
-            this.iTalk_CheckBox2.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_CheckBox2.Checked = false;
-            this.iTalk_CheckBox2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.iTalk_CheckBox2.Location = new System.Drawing.Point(190, 28);
-            this.iTalk_CheckBox2.Name = "iTalk_CheckBox2";
-            this.iTalk_CheckBox2.Size = new System.Drawing.Size(81, 15);
-            this.iTalk_CheckBox2.TabIndex = 6;
-            this.iTalk_CheckBox2.Text = "ON/OFF";
-            this.iTalk_CheckBox2.CheckedChanged += new iTalk.iTalk_CheckBox.CheckedChangedEventHandler(this.iTalk_CheckBox2_CheckedChanged);
-            // 
-            // iTalk_CheckBox1
-            // 
-            this.iTalk_CheckBox1.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_CheckBox1.Checked = false;
-            this.iTalk_CheckBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.iTalk_CheckBox1.Location = new System.Drawing.Point(98, 58);
-            this.iTalk_CheckBox1.Name = "iTalk_CheckBox1";
-            this.iTalk_CheckBox1.Size = new System.Drawing.Size(120, 15);
-            this.iTalk_CheckBox1.TabIndex = 5;
-            this.iTalk_CheckBox1.Text = "ON/OFF";
-            this.iTalk_CheckBox1.CheckedChanged += new iTalk.iTalk_CheckBox.CheckedChangedEventHandler(this.iTalk_CheckBox1_CheckedChanged);
-            // 
-            // iTalk_HeaderLabel2
-            // 
-            this.iTalk_HeaderLabel2.AutoSize = true;
-            this.iTalk_HeaderLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_HeaderLabel2.Font = new System.Drawing.Font("Segoe UI", 15F);
-            this.iTalk_HeaderLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.iTalk_HeaderLabel2.Location = new System.Drawing.Point(6, 47);
-            this.iTalk_HeaderLabel2.Name = "iTalk_HeaderLabel2";
-            this.iTalk_HeaderLabel2.Size = new System.Drawing.Size(85, 28);
-            this.iTalk_HeaderLabel2.TabIndex = 4;
-            this.iTalk_HeaderLabel2.Text = "Startup :";
-            // 
-            // iTalk_HeaderLabel1
-            // 
-            this.iTalk_HeaderLabel1.AutoSize = true;
-            this.iTalk_HeaderLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_HeaderLabel1.Font = new System.Drawing.Font("Segoe UI", 15F);
-            this.iTalk_HeaderLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.iTalk_HeaderLabel1.Location = new System.Drawing.Point(6, 16);
-            this.iTalk_HeaderLabel1.Name = "iTalk_HeaderLabel1";
-            this.iTalk_HeaderLabel1.Size = new System.Drawing.Size(178, 28);
-            this.iTalk_HeaderLabel1.TabIndex = 1;
-            this.iTalk_HeaderLabel1.Text = "Auto Login sistem :";
-            // 
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
@@ -660,66 +588,14 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Optimised";
             this.notifyIcon1.Visible = true;
-            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             // 
             // iTalk_ContextMenuStrip1
             // 
-            this.iTalk_ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showToolStripMenuItem1,
-            this.updateToolStripMenuItem1,
-            this.logoutToolStripMenuItem1,
-            this.exitToolStripMenuItem1});
             this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
-            controlRenderer6.ColorTable = msColorTable6;
-            controlRenderer6.RoundedEdges = true;
-            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer6;
-            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(113, 92);
-            // 
-            // showToolStripMenuItem1
-            // 
-            this.showToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.showToolStripMenuItem1.Image = global::Optimised.Properties.Resources.home_icon_32;
-            this.showToolStripMenuItem1.Name = "showToolStripMenuItem1";
-            this.showToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
-            this.showToolStripMenuItem1.Text = "Show";
-            this.showToolStripMenuItem1.Click += new System.EventHandler(this.showToolStripMenuItem1_Click);
-            // 
-            // updateToolStripMenuItem1
-            // 
-            this.updateToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.updateToolStripMenuItem1.Image = global::Optimised.Properties.Resources.wrench_plus_icon_32;
-            this.updateToolStripMenuItem1.Name = "updateToolStripMenuItem1";
-            this.updateToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
-            this.updateToolStripMenuItem1.Text = "Update";
-            this.updateToolStripMenuItem1.Click += new System.EventHandler(this.updateToolStripMenuItem1_Click);
-            // 
-            // logoutToolStripMenuItem1
-            // 
-            this.logoutToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.logoutToolStripMenuItem1.Image = global::Optimised.Properties.Resources.undo_icon_32;
-            this.logoutToolStripMenuItem1.Name = "logoutToolStripMenuItem1";
-            this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
-            this.logoutToolStripMenuItem1.Text = "Logout";
-            this.logoutToolStripMenuItem1.Click += new System.EventHandler(this.logoutToolStripMenuItem1_Click);
-            // 
-            // exitToolStripMenuItem1
-            // 
-            this.exitToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.exitToolStripMenuItem1.Image = global::Optimised.Properties.Resources.on_off_icon_32;
-            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
-            this.exitToolStripMenuItem1.Text = "Exit";
-            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
-            // 
-            // iTalk_ControlBox1
-            // 
-            this.iTalk_ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iTalk_ControlBox1.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_ControlBox1.Location = new System.Drawing.Point(901, 3);
-            this.iTalk_ControlBox1.Name = "iTalk_ControlBox1";
-            this.iTalk_ControlBox1.Size = new System.Drawing.Size(77, 19);
-            this.iTalk_ControlBox1.TabIndex = 3;
-            this.iTalk_ControlBox1.Text = "iTalk_ControlBox1";
+            controlRenderer1.ColorTable = msColorTable1;
+            controlRenderer1.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
+            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // Optimised
             // 
@@ -732,24 +608,22 @@
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(126, 39);
             this.Name = "Optimised";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Optimised";
-            this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Optimised_FormClosing);
             this.Load += new System.EventHandler(this.Optimised_Load);
-            this.Resize += new System.EventHandler(this.Optimised_Resize);
+  
             this.iTalk_ThemeContainer1.ResumeLayout(false);
             this.iTalk_TabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.iTalk_GroupBox1.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            this.iTalk_ContextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -764,17 +638,12 @@
         private System.Windows.Forms.Timer ClearRam;
         private iTalk.iTalk_TabControl iTalk_TabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
         private iTalk.iTalk_ProgressBar iTalk_ProgressBar1;
         private iTalk.iTalk_Button_1 iTalk_Button_11;
         private iTalk.iTalk_CheckBox mpoint;
@@ -794,10 +663,6 @@
         private System.Windows.Forms.ListBox listBox1;
         internal System.ComponentModel.BackgroundWorker Optimised_Manual;
         private iTalk.iTalk_Button_1 iTalk_Button_12;
-        private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel1;
-        private iTalk.iTalk_CheckBox iTalk_CheckBox1;
-        private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel2;
-        private iTalk.iTalk_CheckBox iTalk_CheckBox2;
         private iTalk.iTalk_Separator iTalk_Separator1;
         private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel40;
         private iTalk.iTalk_Separator iTalk_Separator5;
@@ -814,6 +679,5 @@
         internal System.ComponentModel.BackgroundWorker opensite;
         internal System.ComponentModel.BackgroundWorker optionstart;
         private System.Windows.Forms.Timer timer1;
-        private iTalk.iTalk_ControlBox iTalk_ControlBox1;
     }
 }

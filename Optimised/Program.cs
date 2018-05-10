@@ -9,6 +9,8 @@ using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
+using Microsoft.Win32.TaskScheduler;
 using Optimised;
 namespace Optimised
 {
@@ -21,62 +23,67 @@ namespace Optimised
         static Mutex mutex = new Mutex(true, "{8F6F0AC4-B9A1-45fd-A8CF-72F04E6BDE8F}");
         [STAThread]
 
-
+ 
         static void Main(string[] args)
         {
-            if (!mutex.WaitOne(TimeSpan.Zero, true))
-            {        
+            RegistryKey regKeyAppRoot = Registry.CurrentUser.OpenSubKey(@"Software\Optimised", true);
+            RegistryKey regKeyAppRoot1;
+            if (regKeyAppRoot == null)
+            {
+                RegistryKey key =  Registry.CurrentUser.CreateSubKey(@"Software\Optimised");
+                key.SetValue("Key", "0");
+                regKeyAppRoot1 = Registry.CurrentUser.OpenSubKey(@"Software\Optimised", true);
+                regKeyAppRoot.Close();
+           
             }
             else
             {
-                if (Functii.CheckForInternetConnection() == false)
+                int c = 0;
+                foreach (string value in regKeyAppRoot.GetValueNames())
+                {
+                    c++;
+                  
+                }
+                if (c != 1)
+                {
+                    regKeyAppRoot.SetValue("Key", "0");
+                }
+                regKeyAppRoot1 = Registry.CurrentUser.OpenSubKey(@"Software\Optimised", true);
+                regKeyAppRoot.Close();
+            }
+         
+            if (!mutex.WaitOne(TimeSpan.Zero, true))
+            {        
+
+            }
+            else
+            {
+                if (!Functii.CheckForInternetConnection())
                 {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new Offline());
+                    Application.Run(new Login());
                 }
-                else if (Functii.CheckForInternetConnection() == true)
+                else if (Functii.CheckForInternetConnection())
                 {
-                    if (File.Exists(Functii.path))
+                   
+                    if (regKeyAppRoot1 != null)
                     {
                         try
                         {
-                            var MyIni = new IniFile(Functii.path);
-                            if (MyIni.KeyExists("Email") && MyIni.KeyExists("Username") && MyIni.KeyExists("Password"))
+                           
+                            if (regKeyAppRoot1.GetValue("Key")!=null && regKeyAppRoot1.GetValue("Key").ToString().Length == 30)
                             {
-                                var Pass = MyIni.Read("Password");
-                                var Usser = MyIni.Read("Username");
-                                var email = MyIni.Read("Email");
-                                if (Pass == null || Usser == null || email == null)
-                                {
-                                    error = "Una sau mai multe date de conectare din AutoLogin.ini nu exista, verifica AutoLogin.ini (locatia programului) sau logheaza-te refolosind Remember Me, iar datele de logare se restabilesc.";
-                                    Application.EnableVisualStyles();
-                                    Application.SetCompatibleTextRenderingDefault(false);
-                                    Application.Run(new Login());
-
-                                }
-                                else
-                                {
-                                    LoginAuto(Pass, Usser, email);
-                                }
+                                  LoginAuto(regKeyAppRoot1.GetValue("Key").ToString());
                             }
                             else
                             {
-                                error = "Una sau mai multe date de conectare din AutoLogin.ini nu exista, verifica AutoLogin.ini (locatia programului) sau logheaza-te refolosind Remember Me, iar datele de logare se restabilesc.";
                                 Application.EnableVisualStyles();
                                 Application.SetCompatibleTextRenderingDefault(false);
                                 Application.Run(new Login());
                             }
                         }
                         catch { }
-
-
-                    }
-                    else
-                    {
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new Offline());
                     }
                 }
             }
@@ -84,17 +91,15 @@ namespace Optimised
 
         public static string error = string.Empty;
         public static string tokens = string.Empty;
-        public static string Parola_Autologin = string.Empty;
-        public static string User_Autologin = string.Empty;
-        public static string Email_Autologin = string.Empty;
+        public static string Key = string.Empty;
         static string logininfo;
-        static void LoginAuto(string pass, string user, string email)
+        static void LoginAuto(string key)
         {
-          
+            
             try
             {
-                logininfo = Functii.DownloadString("http://" + Functii.webip + "/loginapp/" + user.ToString() + "/" + email.ToString() + "/" + pass.ToString());
-
+                logininfo = Functii.DownloadString("http://" + Functii.webip + "/loginapp/" + key.ToString());
+                Console.WriteLine(logininfo);
             }
             catch (Exception)
             {
@@ -103,31 +108,19 @@ namespace Optimised
             }
             if (logininfo.ToString().Length == 60)
             {
-                Parola_Autologin = pass;
-                User_Autologin = user;
-                Email_Autologin = email;
+                Key = key;
                 tokens = logininfo.ToString();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Optimised());
             }
-
-            switch (logininfo.ToString())
+            else
             {
-               
-                default:
-                    {
-
                         error = logininfo.ToString();
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
                         Application.Run(new Login());
-                        break;
-                    }
-
             }
         }
-
-
     }
 }
