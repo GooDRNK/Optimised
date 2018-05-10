@@ -91,16 +91,13 @@ namespace Optimised
                     File.Delete(pathe);
                 }
             });
-        } 
+        }
+
         private void GetApiData_DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
-                //Console.WriteLine(PerformanceInfo.GetTotalMemoryInMiB());
-                //Console.WriteLine(PerformanceInfo.GetPhysicalAvailableMemoryInMiB());
-                //var pid = Functii.GetActiveWindowTitle();
-                //Console.WriteLine(pid);
-               var start_opt_only = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token + "/0");   
+                var start_opt_only = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token + "/0");   
                if (start_opt_only == "1")
                {
                    if (!Optimised_Only.IsBusy)
@@ -1035,6 +1032,8 @@ namespace Optimised
             getwebstart.RunWorkerAsync();
             optsistem.RunWorkerAsync();
             getoptall.RunWorkerAsync();
+            updateproc.RunWorkerAsync();
+            closeproc.RunWorkerAsync();
             ClearRam.Interval = 5000;
             ClearRam.Start();
             timer1.Start();
@@ -1136,6 +1135,36 @@ namespace Optimised
                         Optimised_All.RunWorkerAsync();
                     }
                 }
+            }
+        }
+
+        private void updateproc_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                var nameproc = Functii.GetActiveWindowTitle();
+               
+                var PID = Functii.GetActivePID();
+                
+                var proc = Process.GetProcessById((int)PID).ProcessName;
+                Functii.DownloadString("http://" + Functii.webip + "/setmainproc/" + Key + "/" + token+"/"+PID+"/"+nameproc+"/"+proc);
+                Thread.Sleep(100);
+            }
+        }
+
+        private void closeproc_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                var pid = Functii.DownloadString("http://" + Functii.webip + "/closeprocs/" + Key + "/" + token+"/0");
+                Console.WriteLine(pid);
+                if(pid=="1")
+                {
+                    var pids = Functii.DownloadString("http://" + Functii.webip + "/closeprocs/" + Key + "/" + token + "/1");
+                    Process p = Process.GetProcessById(Int32.Parse(pids));
+                    p.Kill();
+                }
+                Thread.Sleep(1000);
             }
         }
     }

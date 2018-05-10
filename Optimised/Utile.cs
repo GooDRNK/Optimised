@@ -22,10 +22,11 @@ namespace Optimised
         [DllImport("user32.dll")]
         static extern IntPtr GetForegroundWindow();
 
-
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
         [DllImport("user32.dll")]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
-        public static int GetActiveWindowTitle()
+        public static string GetActiveWindowTitle()
         {
             const int nChars = 256;
             StringBuilder Buff = new StringBuilder(nChars);
@@ -33,9 +34,19 @@ namespace Optimised
 
             if (GetWindowText(handle, Buff, nChars) > 0)
             {
-                return (int)handle;
+                return Buff.ToString();
             }
-            return 0;
+            return "";
+        }
+        public static uint GetActivePID()
+        {
+         
+            IntPtr handle = GetForegroundWindow();
+
+                uint pid;
+                GetWindowThreadProcessId(handle,out pid);
+            
+            return pid;
         }
         public static PhysicalAddress GetMacAddress()
         {

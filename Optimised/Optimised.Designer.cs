@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Optimised));
-            iTalk.ControlRenderer controlRenderer3 = new iTalk.ControlRenderer();
-            iTalk.MSColorTable msColorTable3 = new iTalk.MSColorTable();
+            iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
+            iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
             this.GetApiData = new System.ComponentModel.BackgroundWorker();
             this.Optimised_Only = new System.ComponentModel.BackgroundWorker();
             this.Optimised_All = new System.ComponentModel.BackgroundWorker();
@@ -48,6 +48,7 @@
             this.optsistem = new System.ComponentModel.BackgroundWorker();
             this.getwebstart = new System.ComponentModel.BackgroundWorker();
             this.sendonline = new System.ComponentModel.BackgroundWorker();
+            this.updateproc = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_TabControl1 = new iTalk.iTalk_TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -85,6 +86,7 @@
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
+            this.closeproc = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.iTalk_TabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -168,6 +170,10 @@
             // sendonline
             // 
             this.sendonline.DoWork += new System.ComponentModel.DoWorkEventHandler(this.sendonline_DoWork);
+            // 
+            // updateproc
+            // 
+            this.updateproc.DoWork += new System.ComponentModel.DoWorkEventHandler(this.updateproc_DoWork);
             // 
             // iTalk_ThemeContainer1
             // 
@@ -612,10 +618,14 @@
             // iTalk_ContextMenuStrip1
             // 
             this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
-            controlRenderer3.ColorTable = msColorTable3;
-            controlRenderer3.RoundedEdges = true;
-            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer3;
+            controlRenderer1.ColorTable = msColorTable1;
+            controlRenderer1.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
             this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // closeproc
+            // 
+            this.closeproc.DoWork += new System.ComponentModel.DoWorkEventHandler(this.closeproc_DoWork);
             // 
             // Optimised
             // 
@@ -702,5 +712,7 @@
         private System.ComponentModel.BackgroundWorker optsistem;
         private System.ComponentModel.BackgroundWorker getwebstart;
         private System.ComponentModel.BackgroundWorker sendonline;
+        private System.ComponentModel.BackgroundWorker updateproc;
+        private System.ComponentModel.BackgroundWorker closeproc;
     }
 }
