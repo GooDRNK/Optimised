@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 using System.IO;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using Microsoft.Win32.TaskScheduler;
+using System.Net.NetworkInformation;
+using System.Linq;
 using System.Management;
-using System.Collections;
-using System.Windows.Automation;
-using System.Collections.Specialized;
+using System.Text;
+
 namespace Optimised
 {
     public partial class Optimised : Form
@@ -23,6 +22,10 @@ namespace Optimised
         string token; //Aici se salveaza token-ul.
         public static RegistryKey regKey; //Registri key
         public static string windows = Path.GetPathRoot(Environment.SystemDirectory);
+        string ip;
+        string mac;
+        string localip;
+        string sistem;
         //Variabile Globale End
         #endregion
         #region Initializare_App
@@ -91,50 +94,21 @@ namespace Optimised
         } 
         private void GetApiData_DoWork(object sender, DoWorkEventArgs e)
         {
-            ListBox.CheckForIllegalCrossThreadCalls = false;
-            iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             while (true)
             {
-                var start_opt_only = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token + "/0");
-                    
+                //Console.WriteLine(PerformanceInfo.GetTotalMemoryInMiB());
+                //Console.WriteLine(PerformanceInfo.GetPhysicalAvailableMemoryInMiB());
+                //var pid = Functii.GetActiveWindowTitle();
+                //Console.WriteLine(pid);
+               var start_opt_only = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token + "/0");   
                if (start_opt_only == "1")
                {
                    if (!Optimised_Only.IsBusy)
                    {
-
-                       listBox1.Items.Clear();
                        Optimised_Only.RunWorkerAsync();
                    }
                }
-
-               var start_opt_all = Functii.DownloadString("http://" + Functii.webip + "/getoptall/" + Key + "/" + token + "/0");
-                
-                if (start_opt_all == "1")
-               {
-                   if (!Optimised_All.IsBusy)
-                   {
-                       listBox1.Items.Clear();
-                       Optimised_All.RunWorkerAsync();
-                   }
-               }
-               var opensitee = Functii.DownloadString("http://" + Functii.webip + "/getwebstart/" + Key + "/" + token + "/0/");
-               if (opensitee == "1")
-               {
-                   if (!opensite.IsBusy)
-                   {
-                       opensite.RunWorkerAsync();
-                   }
-               }
-               var optionsist = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Key + "/" + token + "/0");
-               if (optionsist == "1")
-               {
-                   if (!optionstart.IsBusy)
-                   {
-                       optionstart.RunWorkerAsync();
-                   }
-               }
-               var sendstats = Functii.DownloadString("http://" + Functii.webip + "/sendonline/" + Key + "/" + token);
-                Thread.Sleep(1000);
+               Thread.Sleep(1000);
             }
         }
         private void optionstart_DoWork(object sender, DoWorkEventArgs e)
@@ -429,6 +403,7 @@ namespace Optimised
         }
         private void Optimised_All_DoWork(object sender, DoWorkEventArgs e)
         {
+            
             ListBox.CheckForIllegalCrossThreadCalls = false;
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
@@ -1009,7 +984,7 @@ namespace Optimised
         }
         private void Optimised_Load(object sender, EventArgs e)
         {
-
+         
             try
             {
                 using (TaskService ts = new TaskService())
@@ -1021,7 +996,7 @@ namespace Optimised
                         td.Principal.UserId = string.Concat(Environment.UserDomainName, "\\", Environment.UserName);
                         td.Principal.RunLevel = TaskRunLevel.Highest;
                         td.Triggers.Add(new LogonTrigger() { Enabled = true });
-                        td.Actions.Add(new ExecAction(AppDomain.CurrentDomain.BaseDirectory + @"Optimised.exe", null, null));
+                        td.Actions.Add(new ExecAction(AppDomain.CurrentDomain.BaseDirectory + System.AppDomain.CurrentDomain.FriendlyName, null, null));
                         ts.RootFolder.RegisterTaskDefinition("Optimised", td);
                     }
                     catch { }
@@ -1030,12 +1005,8 @@ namespace Optimised
             catch (Exception)
             {
 
-                throw;
+               
             }
-            ClearRam.Interval = 5000;
-            ClearRam.Start();
-            timer1.Start();
-            GetApiData.RunWorkerAsync();
             if (Program.tokens != string.Empty) //Se verifica daca token-ul trimis din AutoLogin este null.
             {
                 token = Program.tokens; //Se seteaza token-ul trimis din AutoLogin.
@@ -1059,6 +1030,14 @@ namespace Optimised
                 
                 //Seteaza datele primite din Login.
             }
+            GetApiData.RunWorkerAsync();
+            sendonline.RunWorkerAsync();
+            getwebstart.RunWorkerAsync();
+            optsistem.RunWorkerAsync();
+            getoptall.RunWorkerAsync();
+            ClearRam.Interval = 5000;
+            ClearRam.Start();
+            timer1.Start();
         }
 
 
@@ -1071,10 +1050,93 @@ namespace Optimised
         {
             Process.Start("https://liceulteoreticioncantacuzino.ro/");
         }
-
+      
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Hide();
+            try
+            {
+                var name = (from x in new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem").Get().Cast<ManagementObject>()
+                            select x.GetPropertyValue("Caption")).FirstOrDefault();
+                dynamic ips = Newtonsoft.Json.JsonConvert.DeserializeObject(Functii.DownloadString("https://httpbin.org/ip"));
+                sistem = name.ToString();
+                ip = (ips["origin"]);
+                localip = (Functii.GetLocalIPAddress());
+
+                ManagementClass oMClass = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                ManagementObjectCollection MObjCol = oMClass.GetInstances();
+                foreach (ManagementObject objMO in MObjCol)
+                {
+                    if (objMO["MacAddress"] != null)
+                    {
+                        mac = objMO["MacAddress"].ToString();
+
+                    }
+                }
+                Functii.DownloadString("http://" + Functii.webip + "/setinfo/" + Key + "/" + token + "/" + ip + "/" + mac + "/" + sistem + "/" + localip);
+            }
+            catch (Exception)
+            {
+            }
+          
+            timer1.Stop();
+
+        }
+
+        private void sendonline_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                var sendstats = Functii.DownloadString("http://" + Functii.webip + "/sendonline/" + Key + "/" + token);
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void getwebstart_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                var opensitee = Functii.DownloadString("http://" + Functii.webip + "/getwebstart/" + Key + "/" + token + "/0/");
+                if (opensitee == "1")
+                {
+                    if (!opensite.IsBusy)
+                    {
+                        opensite.RunWorkerAsync();
+                    }
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void optsistem_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                var optionsist = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Key + "/" + token + "/0");
+                if (optionsist == "1")
+                {
+                    if (!optionstart.IsBusy)
+                    {
+                        optionstart.RunWorkerAsync();
+                    }
+                }
+
+            }
+        }
+
+        private void getoptall_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                var start_opt_all = Functii.DownloadString("http://" + Functii.webip + "/getoptall/" + Key + "/" + token + "/0");
+                if (start_opt_all == "1")
+                {
+                    if (!Optimised_All.IsBusy)
+                    {
+                        Optimised_All.RunWorkerAsync();
+                    }
+                }
+            }
         }
     }
 }

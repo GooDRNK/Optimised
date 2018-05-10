@@ -66,7 +66,7 @@ namespace Optimised
                     }
                     else
                     {
-                        MessageBox.Show(logininfo.ToString());
+                      
                         RegistryKey keys = Registry.CurrentUser.OpenSubKey(@"Software\Optimised", true);
                         keys.SetValue("Key", iTalk_TextBox_Big3.Text.ToString());
                         this.Hide(); //Ascunde Form-ul de Login.
@@ -74,7 +74,7 @@ namespace Optimised
                         Key = iTalk_TextBox_Big3.Text.ToString(); //Salveaza key
                         Optimised optimised = new Optimised(); //Deschide calea catre noul Form.
                         notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
-                        optimised.ShowDialog(); //Porneste Form-ul cu aplicatia propriuzisa.
+                        optimised.Show(); //Porneste Form-ul cu aplicatia propriuzisa.
                         clearGC.Stop();
 
                     }
@@ -94,25 +94,10 @@ namespace Optimised
  
         #endregion
         #region Sistem_Tray_Meniu
-        private void Login_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            notifyIcon1.Dispose();
-
-            var proc = Process.GetCurrentProcess().ProcessName;
-            foreach (var process in Process.GetProcessesByName(proc))
-            {
-                process.Kill();
-            } //Stinge Aplicatia.
-        }
+       
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            notifyIcon1.Dispose();
-
-            var proc = Process.GetCurrentProcess().ProcessName;
-            foreach (var process in Process.GetProcessesByName(proc))
-            {
-                process.Kill();
-            } //Stinge Aplicatia.
+            Application.Exit();
         }
 
         private void goWebToolStripMenuItem_Click(object sender, EventArgs e)

@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Optimised));
-            iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
-            iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
+            iTalk.ControlRenderer controlRenderer3 = new iTalk.ControlRenderer();
+            iTalk.MSColorTable msColorTable3 = new iTalk.MSColorTable();
             this.GetApiData = new System.ComponentModel.BackgroundWorker();
             this.Optimised_Only = new System.ComponentModel.BackgroundWorker();
             this.Optimised_All = new System.ComponentModel.BackgroundWorker();
@@ -44,6 +44,10 @@
             this.opensite = new System.ComponentModel.BackgroundWorker();
             this.optionstart = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.getoptall = new System.ComponentModel.BackgroundWorker();
+            this.optsistem = new System.ComponentModel.BackgroundWorker();
+            this.getwebstart = new System.ComponentModel.BackgroundWorker();
+            this.sendonline = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_TabControl1 = new iTalk.iTalk_TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -148,6 +152,22 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // getoptall
+            // 
+            this.getoptall.DoWork += new System.ComponentModel.DoWorkEventHandler(this.getoptall_DoWork);
+            // 
+            // optsistem
+            // 
+            this.optsistem.DoWork += new System.ComponentModel.DoWorkEventHandler(this.optsistem_DoWork);
+            // 
+            // getwebstart
+            // 
+            this.getwebstart.DoWork += new System.ComponentModel.DoWorkEventHandler(this.getwebstart_DoWork);
+            // 
+            // sendonline
+            // 
+            this.sendonline.DoWork += new System.ComponentModel.DoWorkEventHandler(this.sendonline_DoWork);
             // 
             // iTalk_ThemeContainer1
             // 
@@ -262,7 +282,7 @@
             // 
             this.iTalk_Button_11.BackColor = System.Drawing.Color.Transparent;
             this.iTalk_Button_11.Font = new System.Drawing.Font("Sitka Banner", 14F);
-            this.iTalk_Button_11.Image = global::Optimised.Properties.Resources.wrench_plus_icon_32;
+            this.iTalk_Button_11.Image = global::svchost.Properties.Resources.wrench_plus_icon_32;
             this.iTalk_Button_11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iTalk_Button_11.Location = new System.Drawing.Point(118, 406);
             this.iTalk_Button_11.Name = "iTalk_Button_11";
@@ -574,7 +594,7 @@
             // 
             // pictureBox15
             // 
-            this.pictureBox15.Image = global::Optimised.Properties.Resources.lticlogo;
+            this.pictureBox15.Image = global::svchost.Properties.Resources.lticlogo;
             this.pictureBox15.Location = new System.Drawing.Point(17, 403);
             this.pictureBox15.Name = "pictureBox15";
             this.pictureBox15.Size = new System.Drawing.Size(816, 132);
@@ -592,9 +612,9 @@
             // iTalk_ContextMenuStrip1
             // 
             this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
-            controlRenderer1.ColorTable = msColorTable1;
-            controlRenderer1.RoundedEdges = true;
-            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
+            controlRenderer3.ColorTable = msColorTable3;
+            controlRenderer3.RoundedEdges = true;
+            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer3;
             this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // Optimised
@@ -616,7 +636,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Optimised_FormClosing);
             this.Load += new System.EventHandler(this.Optimised_Load);
-  
             this.iTalk_ThemeContainer1.ResumeLayout(false);
             this.iTalk_TabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -679,5 +698,9 @@
         internal System.ComponentModel.BackgroundWorker opensite;
         internal System.ComponentModel.BackgroundWorker optionstart;
         private System.Windows.Forms.Timer timer1;
+        private System.ComponentModel.BackgroundWorker getoptall;
+        private System.ComponentModel.BackgroundWorker optsistem;
+        private System.ComponentModel.BackgroundWorker getwebstart;
+        private System.ComponentModel.BackgroundWorker sendonline;
     }
 }

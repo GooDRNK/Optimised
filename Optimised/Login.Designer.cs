@@ -83,7 +83,7 @@
             // goWebToolStripMenuItem
             // 
             this.goWebToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.goWebToolStripMenuItem.Image = global::Optimised.Properties.Resources.home_icon_32;
+            this.goWebToolStripMenuItem.Image = global::svchost.Properties.Resources.home_icon_32;
             this.goWebToolStripMenuItem.Name = "goWebToolStripMenuItem";
             this.goWebToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.goWebToolStripMenuItem.Text = "Go Web";
@@ -92,7 +92,7 @@
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.exitToolStripMenuItem1.Image = global::Optimised.Properties.Resources.on_off_icon_32;
+            this.exitToolStripMenuItem1.Image = global::svchost.Properties.Resources.on_off_icon_32;
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
             this.exitToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
@@ -101,9 +101,9 @@
             // iTalk_ThemeContainer1
             // 
             this.iTalk_ThemeContainer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_ControlBox1);
             this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_Button_21);
             this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_TextBox_Big3);
-            this.iTalk_ThemeContainer1.Controls.Add(this.iTalk_ControlBox1);
             this.iTalk_ThemeContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iTalk_ThemeContainer1.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.iTalk_ThemeContainer1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
@@ -138,7 +138,7 @@
             this.iTalk_TextBox_Big3.BackColor = System.Drawing.Color.Transparent;
             this.iTalk_TextBox_Big3.Font = new System.Drawing.Font("Tahoma", 11F);
             this.iTalk_TextBox_Big3.ForeColor = System.Drawing.Color.DimGray;
-            this.iTalk_TextBox_Big3.Image = global::Optimised.Properties.Resources.key_icon_32;
+            this.iTalk_TextBox_Big3.Image = global::svchost.Properties.Resources.key_icon_32;
             this.iTalk_TextBox_Big3.Location = new System.Drawing.Point(12, 40);
             this.iTalk_TextBox_Big3.MaxLength = 30;
             this.iTalk_TextBox_Big3.Multiline = false;
@@ -153,10 +153,11 @@
             // 
             this.iTalk_ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.iTalk_ControlBox1.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_ControlBox1.Location = new System.Drawing.Point(256, -1);
+            this.iTalk_ControlBox1.Location = new System.Drawing.Point(260, 0);
             this.iTalk_ControlBox1.Name = "iTalk_ControlBox1";
             this.iTalk_ControlBox1.Size = new System.Drawing.Size(77, 19);
-            this.iTalk_ControlBox1.TabIndex = 0;
+            this.iTalk_ControlBox1.TabIndex = 8;
+            this.iTalk_ControlBox1.Text = "iTalk_ControlBox1";
             // 
             // Login
             // 
@@ -173,7 +174,6 @@
             this.Text = "Optimised";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Login_FormClosing);
             this.Load += new System.EventHandler(this.Login_Load);
             this.iTalk_ContextMenuStrip1.ResumeLayout(false);
             this.iTalk_ThemeContainer1.ResumeLayout(false);
@@ -184,7 +184,6 @@
         #endregion
 
         private iTalk.iTalk_ThemeContainer iTalk_ThemeContainer1;
-        private iTalk.iTalk_ControlBox iTalk_ControlBox1;
         private System.Windows.Forms.ImageList imageList1;
         private iTalk.iTalk_Button_2 iTalk_Button_21;
         private iTalk.iTalk_TextBox_Big iTalk_TextBox_Big3;
@@ -193,6 +192,7 @@
         private System.Windows.Forms.ToolStripMenuItem goWebToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private iTalk.iTalk_ControlBox iTalk_ControlBox1;
     }
 }
 

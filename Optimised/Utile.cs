@@ -12,11 +12,56 @@ using System.Security.Cryptography;
 using System.Security.Principal;
 using Microsoft.Win32;
 using System.Collections.Specialized;
+using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 namespace Optimised
 {
     public class Functii
     {
+        [DllImport("user32.dll")]
+        static extern IntPtr GetForegroundWindow();
+
+
+        [DllImport("user32.dll")]
+        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+        public static int GetActiveWindowTitle()
+        {
+            const int nChars = 256;
+            StringBuilder Buff = new StringBuilder(nChars);
+            IntPtr handle = GetForegroundWindow();
+
+            if (GetWindowText(handle, Buff, nChars) > 0)
+            {
+                return (int)handle;
+            }
+            return 0;
+        }
+        public static PhysicalAddress GetMacAddress()
+        {
+            foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+            {
+               
+                if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet &&
+                    nic.OperationalStatus == OperationalStatus.Up)
+                {
+                    return nic.GetPhysicalAddress();
+                }
+            }
+            return null;
+        }
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception();
+        }
         public static string webip = "optimised.biz";
         public static bool isadmin()
         {
@@ -35,7 +80,7 @@ namespace Optimised
                 SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
             }
         }
-        public static string path = AppDomain.CurrentDomain.BaseDirectory + @"AutoLogin.ini";
+
         //Download String Start
         public static string DownloadString(string address)
         {

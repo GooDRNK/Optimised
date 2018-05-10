@@ -58,13 +58,8 @@ namespace Optimised
             }
             else
             {
-                if (!Functii.CheckForInternetConnection())
-                {
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new Login());
-                }
-                else if (Functii.CheckForInternetConnection())
+                while (!Functii.CheckForInternetConnection()) { }
+               if (Functii.CheckForInternetConnection())
                 {
                    
                     if (regKeyAppRoot1 != null)
@@ -99,7 +94,7 @@ namespace Optimised
             try
             {
                 logininfo = Functii.DownloadString("http://" + Functii.webip + "/loginapp/" + key.ToString());
-                Console.WriteLine(logininfo);
+                
             }
             catch (Exception)
             {
