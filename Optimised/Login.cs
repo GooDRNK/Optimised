@@ -22,17 +22,37 @@ namespace Optimised
         //Variabile Globale Star
         public static string token; //Aici este stocat token-ul pentru verificarea login-ului din aplicatie.
         public static string Key; //Aici se salveaza Parola introdusa.
-        //Variabile Globale End
+                                  //Variabile Globale End
         #endregion
         #region Initializare_Form
-        //Initializare Form Login Start
+        //Initializare Form Login Start 
+        private void Login_Load(object sender, EventArgs e)
+        {
+            clearGC.Interval = 5000; //Setez intervalul pentru timerul ClearGC ce imi elibereaza memoria folosita de aplicatie.
+            clearGC.Start(); //Pornesc timerul.
+            if (Program.error != string.Empty) //Verifica daca sunt erori din AutoLogin.ini
+            {
+                try
+                {
+                    notifyIcon1.ShowBalloonTip(2000, "Optimised Auto Login", Program.error.ToString(), ToolTipIcon.Info); //Trimite notificarea cu eroarea.
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Raspunsul este gol");
+                    throw;
+                }
+
+
+                 Program.error = string.Empty; //Seteaza eroarea pe null dupa ce este afisata.
+            }
+        }
         public Login()
         {
             InitializeComponent();
         }
         //Initializare Form Login End
         #endregion
-       
         #region clearGC_Timer_Wipe_Ram
         //clearGC_Timer Start
         private void clearGC_Tick(object sender, EventArgs e)
@@ -67,15 +87,15 @@ namespace Optimised
                     else
                     {
                       
-                        RegistryKey keys = Registry.CurrentUser.OpenSubKey(@"Software\Optimised", true);
-                        keys.SetValue("Key", iTalk_TextBox_Big3.Text.ToString());
+                        RegistryKey keys = Registry.CurrentUser.OpenSubKey(@"Software\Optimised", true); //Se deschide calea catre regedit.
+                        keys.SetValue("Key", iTalk_TextBox_Big3.Text.ToString()); //Se seteaza codul introdus pentru login in regedit.
                         this.Hide(); //Ascunde Form-ul de Login.
                         token = logininfo.ToString(); //Salveaza token-ul primit.
                         Key = iTalk_TextBox_Big3.Text.ToString(); //Salveaza key
                         Optimised optimised = new Optimised(); //Deschide calea catre noul Form.
                         notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.
                         optimised.Show(); //Porneste Form-ul cu aplicatia propriuzisa.
-                        clearGC.Stop();
+                        clearGC.Stop(); //Opreste timerul pentru optimizarea programului.
 
                     }
                 }
@@ -97,7 +117,7 @@ namespace Optimised
        
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Application.Exit(); //Inchide aplicatia.
         }
 
         private void goWebToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,27 +147,5 @@ namespace Optimised
             }
         }
         #endregion
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-            clearGC.Interval = 5000;
-            clearGC.Start();
-            if (Program.error != string.Empty) //Verifica daca sunt erori din AutoLogin.ini
-            {
-                try
-                {
-                    notifyIcon1.ShowBalloonTip(2000, "Optimised Auto Login", Program.error.ToString(), ToolTipIcon.Info); //Trimite notificarea cu eroarea.
-
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Raspunsul este gol");
-                    throw;
-                }
-
-
-                 Program.error = string.Empty; //Seteaza eroarea pe null dupa ce este afisata.
-            }
-        }
     }
 }
