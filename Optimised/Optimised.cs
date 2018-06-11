@@ -39,21 +39,15 @@ namespace Optimised
         #region Logout
         private void Optimised_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Functii.isadmin())
-            {
+          
                 notifyIcon1.Dispose();
              var proc = Process.GetCurrentProcess().ProcessName;
             foreach (var process in Process.GetProcessesByName(proc))
             {
                 process.Kill();
             }
-            }
-            else
-            {
-                notifyIcon1.ShowBalloonTip(1000, "Optimised", "Nu esti Administrator.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
-
-            }
-}
+           
+        }
         #endregion
         #region DllImport All
         [DllImport("shell32.dll")]
@@ -97,12 +91,12 @@ namespace Optimised
         {
             while (true)
             {
-                var start_opt_only = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token + "/0");   
+                var start_opt_only = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token + "/0");   //API pentru optimizarea personala.
                if (start_opt_only == "1")
                {
                    if (!Optimised_Only.IsBusy)
                    {
-                       Optimised_Only.RunWorkerAsync();
+                       Optimised_Only.RunWorkerAsync(); //Porneste noul task rulat in background pentru a optimiza cerintele trimise din cloud.
                    }
                }
                Thread.Sleep(1000);
@@ -110,7 +104,7 @@ namespace Optimised
         }
         private void optionstart_DoWork(object sender, DoWorkEventArgs e)
         {
-            var opensitee = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Key + "/" + token + "/1");
+            var opensitee = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Key + "/" + token + "/1"); //API Restart/Shutdown
             if (opensitee != string.Empty)
             {
                 switch (opensitee)
@@ -140,7 +134,7 @@ namespace Optimised
             string opensite = Functii.DownloadString("http://" + Functii.webip + "/getwebstart/" + Key + "/" + token + "/1");
             if (opensite != string.Empty)
             {
-                Process.Start(opensite);
+                Process.Start(opensite); //Porneste site-ul trimis din cloud.
                 notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Site-ul: " + opensite + " a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.           
             }
         }
@@ -655,7 +649,7 @@ namespace Optimised
         }
         private void ClearRam_Tick(object sender, EventArgs e)
         {
-            Functii.FlushMemory();
+            Functii.FlushMemory(); //Elibereaza memoria din program.
         }
    
         private void iTalk_Button_11_Click(object sender, EventArgs e)
@@ -958,14 +952,14 @@ namespace Optimised
                     if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                     {
                         string path = fbd.SelectedPath + @"\Optimised_Log.txt";
-                        using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate)) //check a property on your own: FileMode...
+                        using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
                         {
                             using (TextWriter tw = new StreamWriter(fs))
                                 if (listBox1.Items.Count > 0)
                                 {
                                     foreach (object _item in listBox1.Items)
                                     {
-                                        tw.WriteLine(_item); //write to file
+                                        tw.WriteLine(_item); //scrie in fisier
 
                                     }
                                 }
