@@ -246,7 +246,7 @@ namespace Optimised
                 }
             });
         }
-        private void optionstart_DoWork(object sender, DoWorkEventArgs e)
+        private void Optionstart_DoWork(object sender, DoWorkEventArgs e)
         {
             dynamic data = e.Argument;
                 switch (data.action.ToString())
@@ -272,7 +272,7 @@ namespace Optimised
                 }
             
         }
-        private void opensite_DoWork(object sender, DoWorkEventArgs e)
+        private void Opensite_DoWork(object sender, DoWorkEventArgs e)
         {
             dynamic data = e.Argument;
             if (data.url != null)
@@ -761,7 +761,7 @@ namespace Optimised
             }
             SendInfo.Stop();
         }
-        private void sendonline_DoWork(object sender, DoWorkEventArgs e)
+        private void Sendonline_DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
@@ -769,7 +769,7 @@ namespace Optimised
                 Thread.Sleep(10000);
             }
         }
-        private void closeproc_DoWork(object sender, DoWorkEventArgs e)
+        private void Closeproc_DoWork(object sender, DoWorkEventArgs e)
         {
             dynamic data = Newtonsoft.Json.JsonConvert.DeserializeObject(e.Argument.ToString());
             Process p = Process.GetProcessById(Int32.Parse((string)(data.pid)));
@@ -794,7 +794,7 @@ namespace Optimised
                 Thread.Sleep(5000);
             }
         }
-        private void reportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Report f = Application.OpenForms.OfType<Report>().FirstOrDefault();
             if (f == null)

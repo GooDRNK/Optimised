@@ -89,12 +89,12 @@
             // OpenWebsite
             // 
             this.OpenWebsite.WorkerReportsProgress = true;
-            this.OpenWebsite.DoWork += new System.ComponentModel.DoWorkEventHandler(this.opensite_DoWork);
+            this.OpenWebsite.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Opensite_DoWork);
             // 
             // optionstart
             // 
             this.optionstart.WorkerReportsProgress = true;
-            this.optionstart.DoWork += new System.ComponentModel.DoWorkEventHandler(this.optionstart_DoWork);
+            this.optionstart.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Optionstart_DoWork);
             // 
             // SendInfo
             // 
@@ -102,7 +102,7 @@
             // 
             // Online
             // 
-            this.Online.DoWork += new System.ComponentModel.DoWorkEventHandler(this.sendonline_DoWork);
+            this.Online.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Sendonline_DoWork);
             // 
             // UpdateProces
             // 
@@ -110,7 +110,7 @@
             // 
             // CloseProces
             // 
-            this.CloseProces.DoWork += new System.ComponentModel.DoWorkEventHandler(this.closeproc_DoWork);
+            this.CloseProces.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Closeproc_DoWork);
             // 
             // iTalk_ThemeContainer1
             // 
@@ -151,7 +151,7 @@
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             this.reportToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.reportToolStripMenuItem.Text = "Report";
-            this.reportToolStripMenuItem.Click += new System.EventHandler(this.reportToolStripMenuItem_Click);
+            this.reportToolStripMenuItem.Click += new System.EventHandler(this.ReportToolStripMenuItem_Click);
             // 
             // Optimised
             // 
