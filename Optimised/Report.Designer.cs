@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Report));
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_HeaderLabel2 = new iTalk.iTalk_HeaderLabel();
             this.iTalk_HeaderLabel1 = new iTalk.iTalk_HeaderLabel();
@@ -103,7 +104,6 @@
             this.nume.TabIndex = 6;
             this.nume.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.nume.UseSystemPasswordChar = false;
-            this.nume.UseWaitCursor = true;
             // 
             // iTalk_Button_21
             // 
@@ -177,6 +177,7 @@
             this.ClientSize = new System.Drawing.Size(322, 424);
             this.Controls.Add(this.iTalk_ThemeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(126, 39);
             this.Name = "Report";

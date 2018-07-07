@@ -39,9 +39,9 @@
             this.goWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
+            this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
             this.iTalk_Button_21 = new iTalk.iTalk_Button_2();
             this.iTalk_TextBox_Big3 = new iTalk.iTalk_TextBox_Big();
-            this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
             this.iTalk_ContextMenuStrip1.SuspendLayout();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.SuspendLayout();
@@ -118,6 +118,16 @@
             this.iTalk_ThemeContainer1.TabIndex = 0;
             this.iTalk_ThemeContainer1.Text = "Optimised";
             // 
+            // iTalk_ControlBox1
+            // 
+            this.iTalk_ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.iTalk_ControlBox1.BackColor = System.Drawing.Color.Transparent;
+            this.iTalk_ControlBox1.Location = new System.Drawing.Point(256, -1);
+            this.iTalk_ControlBox1.Name = "iTalk_ControlBox1";
+            this.iTalk_ControlBox1.Size = new System.Drawing.Size(77, 19);
+            this.iTalk_ControlBox1.TabIndex = 8;
+            this.iTalk_ControlBox1.Text = "iTalk_ControlBox1";
+            // 
             // iTalk_Button_21
             // 
             this.iTalk_Button_21.BackColor = System.Drawing.Color.Transparent;
@@ -148,16 +158,6 @@
             this.iTalk_TextBox_Big3.TabIndex = 6;
             this.iTalk_TextBox_Big3.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.iTalk_TextBox_Big3.UseSystemPasswordChar = true;
-            // 
-            // iTalk_ControlBox1
-            // 
-            this.iTalk_ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.iTalk_ControlBox1.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_ControlBox1.Location = new System.Drawing.Point(260, 0);
-            this.iTalk_ControlBox1.Name = "iTalk_ControlBox1";
-            this.iTalk_ControlBox1.Size = new System.Drawing.Size(77, 19);
-            this.iTalk_ControlBox1.TabIndex = 8;
-            this.iTalk_ControlBox1.Text = "iTalk_ControlBox1";
             // 
             // Login
             // 
