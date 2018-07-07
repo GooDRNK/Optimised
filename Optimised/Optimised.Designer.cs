@@ -44,10 +44,10 @@
             this.SendInfo = new System.Windows.Forms.Timer(this.components);
             this.Online = new System.ComponentModel.BackgroundWorker();
             this.UpdateProces = new System.ComponentModel.BackgroundWorker();
+            this.CloseProces = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.Notificare = new System.Windows.Forms.NotifyIcon(this.components);
             this.TrayMeniu = new iTalk.iTalk_ContextMenuStrip();
-            this.CloseProces = new System.ComponentModel.BackgroundWorker();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TrayMeniu.SuspendLayout();
             this.SuspendLayout();
@@ -108,6 +108,10 @@
             // 
             this.UpdateProces.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateProces_DoWork);
             // 
+            // CloseProces
+            // 
+            this.CloseProces.DoWork += new System.ComponentModel.DoWorkEventHandler(this.closeproc_DoWork);
+            // 
             // iTalk_ThemeContainer1
             // 
             this.iTalk_ThemeContainer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
@@ -118,7 +122,7 @@
             this.iTalk_ThemeContainer1.Name = "iTalk_ThemeContainer1";
             this.iTalk_ThemeContainer1.Padding = new System.Windows.Forms.Padding(3, 28, 3, 28);
             this.iTalk_ThemeContainer1.Sizable = false;
-            this.iTalk_ThemeContainer1.Size = new System.Drawing.Size(129, 102);
+            this.iTalk_ThemeContainer1.Size = new System.Drawing.Size(126, 39);
             this.iTalk_ThemeContainer1.SmartBounds = false;
             this.iTalk_ThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.iTalk_ThemeContainer1.TabIndex = 0;
@@ -141,10 +145,6 @@
             this.TrayMeniu.Renderer = controlRenderer1;
             this.TrayMeniu.Size = new System.Drawing.Size(110, 26);
             // 
-            // CloseProces
-            // 
-            this.CloseProces.DoWork += new System.ComponentModel.DoWorkEventHandler(this.closeproc_DoWork);
-            // 
             // reportToolStripMenuItem
             // 
             this.reportToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -157,7 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(129, 102);
+            this.ClientSize = new System.Drawing.Size(126, 39);
             this.Controls.Add(this.iTalk_ThemeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

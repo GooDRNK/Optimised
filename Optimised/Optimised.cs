@@ -17,7 +17,6 @@ namespace Optimised
 {
     public partial class Optimised : Form
     {
-      
         #region Variabile_Globale
         //Variabile Globale Start
         string Key; //Aici se salveaza Parola.
@@ -801,7 +800,6 @@ namespace Optimised
                 Thread.Sleep(5000);
             }
         }
-        #endregion
         private void reportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Report f = Application.OpenForms.OfType<Report>().FirstOrDefault();
@@ -810,6 +808,7 @@ namespace Optimised
             Report rep = new Report(token, Key, id,email);
                 rep.Show();
             }
-        }
+        } 
+        #endregion
     }
 }
