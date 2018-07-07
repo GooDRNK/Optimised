@@ -11,3 +11,5 @@
 ![alt text](https://i.imgur.com/FCDmAQ7.png)
 # Optimised User Delete
 ![alt text](https://i.imgur.com/fI7bSj6.png)
+# Optimised Report System
+![alt text](https://i.imgur.com/6IllWqE.png)
