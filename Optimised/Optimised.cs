@@ -293,8 +293,7 @@ namespace Optimised
         {
             ListBox.CheckForIllegalCrossThreadCalls = false;
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
-            iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
-            Notificare.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud exclusiv tie a pornit.", ToolTipIcon.Info);
+           Notificare.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud exclusiv tie a pornit.", ToolTipIcon.Info);
             dynamic obj = (dynamic)e.Argument;
             if (obj["muic"] == 1)
             {
@@ -305,7 +304,7 @@ namespace Optimised
                     foreach (string value in regKey.GetValueNames())
                     {
                         regKey.DeleteValue(value, true);
-                        listBox1.Items.Add("MUI Cache: " + value);
+                        
                     }
                     regKey.Close();
                 }
@@ -314,11 +313,7 @@ namespace Optimised
 
                 }
             }
-            for (int i = 0; i <= 10; i++)
-            {
-                Optimised_Only.ReportProgress(i);
-                Thread.Sleep(100);
-            }
+
             if (obj["pref"] == 1)
             {
                 try
@@ -329,17 +324,13 @@ namespace Optimised
                            File.Delete(path);
                            if (!File.Exists(path))
                            {
-                               listBox1.Items.Add("Prefetch: " + path);
+                              
                            }
                        });
                 }
                 catch { }//Delete Prefetch
             }
-            for (int j = 10; j <= 20; j++)
-            {
-                Optimised_Only.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["rapp"] == 1)
             {
                 try
@@ -349,18 +340,14 @@ namespace Optimised
                     foreach (string value in regKeyAppRoot.GetSubKeyNames())
                     {
                         regKeyAppRoot.DeleteSubKeyTree(value, true);
-                        listBox1.Items.Add("Recent Apps: " + value);
+                       
                     }
                     regKeyAppRoot.Close();
 
                 }
                 catch { }//Delete Regedit 
             }
-            for (int j = 20; j <= 30; j++)
-            {
-                Optimised_Only.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["temp"] == 1)
             {
                 string pat = Path.GetTempPath();
@@ -372,7 +359,7 @@ namespace Optimised
                         file.Delete();
                         if (!File.Exists(file.FullName))
                         {
-                            listBox1.Items.Add("Temp File: " + file.FullName);
+                            
                         }
                     }
                     catch { }
@@ -384,17 +371,13 @@ namespace Optimised
                         dir.Delete(true);
                         if (!Directory.Exists(dir.FullName))
                         {
-                            listBox1.Items.Add("Temp Dir: " + dir.FullName);
+                           
                         }
                     }
                     catch { }
                 }
             }
-            for (int j = 30; j <= 40; j++)
-            {
-                Optimised_Only.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["trac"] == 1)
             {
                 try
@@ -403,18 +386,14 @@ namespace Optimised
                     foreach (string value in regKeyAppRoot.GetSubKeyNames())
                     {
                         regKeyAppRoot.DeleteSubKeyTree(value, true);
-                        listBox1.Items.Add("Tracing: " + value);
+                        
                     }
                     regKeyAppRoot.Close();
                 }
                 catch
                 { }//Delete Regedit
             }
-            for (int j = 40; j <= 50; j++)
-            {
-                Optimised_Only.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["rebin"] == 1)
             {
                 try { uint result = SHEmptyRecycleBin(IntPtr.Zero, null, RecycleFlags.SHERB_NOCONFIRMATION); } catch { }
@@ -430,18 +409,14 @@ namespace Optimised
                            File.Delete(path);
                            if (!File.Exists(path))
                            {
-                               listBox1.Items.Add("Recent Files: " + path);
+                             
                            }
                        });
                 }
                 catch { }//Delete Recent files
                 try { SHAddToRecentDocs(ShellAddToRecentDocsFlags.Pidl, (IntPtr)(0)); } catch { }
             }
-            for (int j = 50; j <= 60; j++)
-            {
-                Optimised_Only.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["wlogs"] == 1)
             {
                 foreach (var eventLog in EventLog.GetEventLogs())
@@ -454,11 +429,7 @@ namespace Optimised
                     catch { }
                 }
             }
-            for (int j = 60; j <= 70; j++)
-            {
-                Optimised_Only.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["mpoint"] == 1)
             {
                 try
@@ -468,16 +439,12 @@ namespace Optimised
                     foreach (string values in regKeyAppRoot.GetSubKeyNames())
                     {
                         regKeyAppRoot.DeleteSubKeyTree(values, true);
-                        listBox1.Items.Add("MountPoints: " + values);
+                        
                     }
                 }
                 catch { }//Delete Regedit
             }
-            for (int j = 70; j <= 80; j++)
-            {
-                Optimised_Only.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+ 
             if (obj["rstart"] == 1)
             {
                 try
@@ -487,7 +454,7 @@ namespace Optimised
                     foreach (string value in regKey.GetValueNames())
                     {
                         regKey.DeleteValue(value, true);
-                        listBox1.Items.Add("Run At Startup: " + value);
+                       
                     }
                     regKey.Close();
                 }
@@ -496,11 +463,7 @@ namespace Optimised
 
                 }
             }
-            for (int j = 80; j <= 90; j++)
-            {
-                Optimised_Only.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["useras"] == 1)
             {
                 try
@@ -512,7 +475,7 @@ namespace Optimised
                         foreach (string cont in regKey.GetValueNames())
                         {
                             regKey.DeleteValue(cont, true);
-                            listBox1.Items.Add("UserAssist: " + Rot13.Transform(cont));
+                            
                         }
                     }
                     regKey.Close();
@@ -521,11 +484,7 @@ namespace Optimised
                 {
                 }
             }
-            for (int j = 90; j <= 100; j++)
-            {
-                Optimised_Only.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["compstore"] == 1)
             {
                 try
@@ -534,7 +493,7 @@ namespace Optimised
                     foreach (string values in regKeyAppRoot.GetValueNames())
                     {
                         regKeyAppRoot.DeleteValue(values, true);
-                        listBox1.Items.Add("Compatibility Store: " + values);
+                        
                     }
                 }
                 catch { }//Delete Regedit
@@ -546,7 +505,6 @@ namespace Optimised
         {        
             ListBox.CheckForIllegalCrossThreadCalls = false;
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
-            iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
             Notificare.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud pentru toti utilizatorii a inceput.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
             dynamic obj = (dynamic)e.Argument;
             if (obj["muic"] == 1)
@@ -558,7 +516,7 @@ namespace Optimised
                     foreach (string value in regKey.GetValueNames())
                     {
                         regKey.DeleteValue(value, true);
-                        listBox1.Items.Add("MUI Cache: " + value);
+                       
                     }
                     regKey.Close();
                 }
@@ -567,11 +525,7 @@ namespace Optimised
 
                 }
             }
-            for (int i = 0; i <= 10; i++)
-            {
-                Optimised_All.ReportProgress(i);
-                Thread.Sleep(100);
-            }
+
             if (obj["pref"] == 1)
             {
                 try
@@ -582,17 +536,13 @@ namespace Optimised
                            File.Delete(path);
                            if (!File.Exists(path))
                            {
-                               listBox1.Items.Add("Prefetch: " + path);
+                              
                            }
                        });
                 }
                 catch { }//Delete Prefetch
             }
-            for (int j = 10; j <= 20; j++)
-            {
-                Optimised_All.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["rapp"] == 1)
             {
                 try
@@ -602,18 +552,14 @@ namespace Optimised
                     foreach (string value in regKeyAppRoot.GetSubKeyNames())
                     {
                         regKeyAppRoot.DeleteSubKeyTree(value, true);
-                        listBox1.Items.Add("Recent Apps: " + value);
+                       
                     }
                     regKeyAppRoot.Close();
 
                 }
                 catch { }//Delete Regedit 
             }
-            for (int j = 20; j <= 30; j++)
-            {
-                Optimised_All.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["temp"] == 1)
             {
                 string pat = Path.GetTempPath();
@@ -625,7 +571,7 @@ namespace Optimised
                         file.Delete();
                         if (!File.Exists(file.FullName))
                         {
-                            listBox1.Items.Add("Temp File: " + file.FullName);
+                           
                         }
                     }
                     catch { }
@@ -637,17 +583,13 @@ namespace Optimised
                         dir.Delete(true);
                         if (!Directory.Exists(dir.FullName))
                         {
-                            listBox1.Items.Add("Temp Dir: " + dir.FullName);
+                            
                         }
                     }
                     catch { }
                 }
             }
-            for (int j = 30; j <= 40; j++)
-            {
-                Optimised_All.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["trac"] == 1)
             {
                 try
@@ -656,18 +598,14 @@ namespace Optimised
                     foreach (string value in regKeyAppRoot.GetSubKeyNames())
                     {
                         regKeyAppRoot.DeleteSubKeyTree(value, true);
-                        listBox1.Items.Add("Tracing: " + value);
+                        
                     }
                     regKeyAppRoot.Close();
                 }
                 catch
                 { }//Delete Regedit
             }
-            for (int j = 40; j <= 50; j++)
-            {
-                Optimised_All.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["rebin"] == 1)
             {
                 try { uint result = SHEmptyRecycleBin(IntPtr.Zero, null, RecycleFlags.SHERB_NOCONFIRMATION); } catch { }
@@ -683,18 +621,14 @@ namespace Optimised
                            File.Delete(path);
                            if (!File.Exists(path))
                            {
-                               listBox1.Items.Add("Recent Files: " + path);
+                               
                            }
                        });
                 }
                 catch { }//Delete Recent files
                 try { SHAddToRecentDocs(ShellAddToRecentDocsFlags.Pidl, (IntPtr)(0)); } catch { }
             }
-            for (int j = 50; j <= 60; j++)
-            {
-                Optimised_All.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+
             if (obj["wlogs"] == 1)
             {
                 foreach (var eventLog in EventLog.GetEventLogs())
@@ -707,11 +641,7 @@ namespace Optimised
                     catch { }
                 }
             }
-            for (int j = 60; j <= 70; j++)
-            {
-                Optimised_All.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+ 
             if (obj["mpoint"] == 1)
             {
                 try
@@ -721,16 +651,12 @@ namespace Optimised
                     foreach (string values in regKeyAppRoot.GetSubKeyNames())
                     {
                         regKeyAppRoot.DeleteSubKeyTree(values, true);
-                        listBox1.Items.Add("MountPoints: " + values);
+                        
                     }
                 }
                 catch { }//Delete Regedit
             }
-            for (int j = 70; j <= 80; j++)
-            {
-                Optimised_All.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+           
             if (obj["rstart"] == 1)
             {
                 try
@@ -740,7 +666,7 @@ namespace Optimised
                     foreach (string value in regKey.GetValueNames())
                     {
                         regKey.DeleteValue(value, true);
-                        listBox1.Items.Add("Run At Startup: " + value);
+                       
                     }
                     regKey.Close();
                 }
@@ -749,11 +675,7 @@ namespace Optimised
 
                 }
             }
-            for (int j = 80; j <= 90; j++)
-            {
-                Optimised_All.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+        
             if (obj["useras"] == 1)
             {
                 try
@@ -765,7 +687,7 @@ namespace Optimised
                         foreach (string cont in regKey.GetValueNames())
                         {
                             regKey.DeleteValue(cont, true);
-                            listBox1.Items.Add("UserAssist: " + Rot13.Transform(cont));
+                            
                         }
                     }
                     regKey.Close();
@@ -774,11 +696,7 @@ namespace Optimised
                 {
                 }
             }
-            for (int j = 90; j <= 100; j++)
-            {
-                Optimised_All.ReportProgress(j);
-                Thread.Sleep(100);
-            }
+       
             if (obj["compstore"] == 1)
             {
                 try
@@ -787,7 +705,7 @@ namespace Optimised
                     foreach (string values in regKeyAppRoot.GetValueNames())
                     {
                         regKeyAppRoot.DeleteValue(values, true);
-                        listBox1.Items.Add("Compatibility Store: " + values);
+                        
                     }
                 }
                 catch { }//Delete Regedit
@@ -799,328 +717,6 @@ namespace Optimised
         {
             Functii.FlushMemory(); //Elibereaza memoria din program.
         }
-        private void iTalk_Button_11_Click(object sender, EventArgs e)
-        {
-            if (!muic.Checked && !wlogs.Checked && !rfile.Checked && !compstore.Checked && !fixlnk.Checked && !mpoint.Checked && !trac.Checked && !rapp.Checked && !rstart.Checked && !useras.Checked && !rebin.Checked && !pref.Checked)
-            {
-                Notificare.ShowBalloonTip(100, "Optimised", "Nu uita sa selectezi ce doresti sa stergi.", ToolTipIcon.Info);
-            }
-            else
-            {
-                if (fixlnk.Checked == true)
-                {
-                    ResolveLnkDesktop();
-                }
-                if (Optimised_Manual.IsBusy)
-                {
-                    Notificare.ShowBalloonTip(1000, "Optimised", "In acest moment se efectueaza optimizarea.", ToolTipIcon.Info);
-                }
-                else
-                {
-                    listBox1.Items.Clear();
-                    iTalk_GroupBox1.Text = "Last Log Optimised";
-                    Optimised_Manual.RunWorkerAsync();
-                }
-            }
-
-        }
-        private void Optimised_Manual_DoWork(object sender, DoWorkEventArgs e)
-        {
-            ListBox.CheckForIllegalCrossThreadCalls = false;
-            iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
-            Notificare.ShowBalloonTip(1000, "Optimised", "Optimizarea a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.     
-            iTalk_GroupBox1.Text = "Last Log Optimised - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
-            if (muic.Checked == true)
-            {
-                try
-                {
-
-                    regKey = Registry.CurrentUser.OpenSubKey(@"Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache", true);
-                    foreach (string value in regKey.GetValueNames())
-                    {
-                        regKey.DeleteValue(value, true);
-                        listBox1.Items.Add("MUI Cache: " + value);
-                    }
-                    regKey.Close();
-                }
-                catch
-                {
-
-                }
-            }
-            for (int i = 0; i <= 10; i++)
-            {
-                Optimised_Manual.ReportProgress(i);
-                Thread.Sleep(100);
-            }
-            if (pref.Checked == true)
-            {
-                try
-                {
-                    Array.ForEach(Directory.GetFiles(windows + @"Windows\Prefetch\", "*.pf"),
-                       delegate (string path)
-                       {
-                           File.Delete(path);
-                           if (!File.Exists(path))
-                           {
-                               listBox1.Items.Add("Prefetch: " + path);
-                           }
-                       });
-                }
-                catch { }//Delete Prefetch
-            }
-            for (int j = 10; j <= 20; j++)
-            {
-                Optimised_Manual.ReportProgress(j);
-                Thread.Sleep(100);
-            }
-            if (rapp.Checked == true)
-            {
-                try
-                {
-
-                    RegistryKey regKeyAppRoot = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Search\RecentApps", true);
-                    foreach (string value in regKeyAppRoot.GetSubKeyNames())
-                    {
-                        regKeyAppRoot.DeleteSubKeyTree(value, true);
-                        listBox1.Items.Add("Recent Apps: " + value);
-                    }
-                    regKeyAppRoot.Close();
-
-                }
-                catch { }//Delete Regedit 
-            }
-            for (int j = 20; j <= 30; j++)
-            {
-                Optimised_Manual.ReportProgress(j);
-                Thread.Sleep(100);
-            }
-            if (temp.Checked == true)
-            {
-                string pat = Path.GetTempPath();
-                System.IO.DirectoryInfo di = new DirectoryInfo(pat.ToString());
-                foreach (FileInfo file in di.GetFiles())
-                {
-                    try
-                    {
-                        file.Delete();
-                        if (!File.Exists(file.FullName))
-                        {
-                            listBox1.Items.Add("Temp File: " + file.FullName);
-                        }
-                    }
-                    catch { }
-                }
-                foreach (DirectoryInfo dir in di.GetDirectories())
-                {
-                    try
-                    {
-                        dir.Delete(true);
-                        if (!Directory.Exists(dir.FullName))
-                        {
-                            listBox1.Items.Add("Temp Dir: " + dir.FullName);
-                        }
-                    }
-                    catch { }
-                }
-            }
-            for (int j = 30; j <= 40; j++)
-            {
-                Optimised_Manual.ReportProgress(j);
-                Thread.Sleep(100);
-            }
-            if (trac.Checked == true)
-            {
-                try
-                {
-                    RegistryKey regKeyAppRoot = Registry.LocalMachine.OpenSubKey(@"Software\WOW6432Node\Microsoft\Tracing", true);
-                    foreach (string value in regKeyAppRoot.GetSubKeyNames())
-                    {
-                        regKeyAppRoot.DeleteSubKeyTree(value, true);
-                        listBox1.Items.Add("Tracing: " + value);
-                    }
-                    regKeyAppRoot.Close();
-                }
-                catch
-                { }//Delete Regedit
-            }
-            for (int j = 40; j <= 50; j++)
-            {
-                Optimised_Manual.ReportProgress(j);
-                Thread.Sleep(100);
-            }
-            if (rebin.Checked == true)
-            {
-                try { uint result = SHEmptyRecycleBin(IntPtr.Zero, null, RecycleFlags.SHERB_NOCONFIRMATION); } catch { }
-            }
-            for (int j = 50; j <= 60; j++)
-            {
-                Optimised_Manual.ReportProgress(j);
-                Thread.Sleep(100);
-            }
-            if (rfile.Checked == true)
-            {
-                String recent = Environment.ExpandEnvironmentVariables("%APPDATA%") + @"\Microsoft\Windows\Recente";
-                try
-                {
-                    Array.ForEach(Directory.GetFiles(recent, "*.*"),
-                       delegate (string path)
-                       {
-                           File.Delete(path);
-                           if (!File.Exists(path))
-                           {
-                               listBox1.Items.Add("Recent Files: " + path);
-                           }
-                       });
-                }
-                catch { }//Delete Recent files
-                try { SHAddToRecentDocs(ShellAddToRecentDocsFlags.Pidl, (IntPtr)(0)); } catch { }
-            }
-            for (int j = 60; j <= 70; j++)
-            {
-                Optimised_Manual.ReportProgress(j);
-                Thread.Sleep(100);
-            }
-            if (wlogs.Checked == true)
-            {
-                foreach (var eventLog in EventLog.GetEventLogs())
-                {
-                    try
-                    {
-                        eventLog.Clear();
-                        eventLog.Dispose();
-                    }
-                    catch { }
-                }
-            }
-            if (mpoint.Checked == true)
-            {
-                try
-                {
-
-                    RegistryKey regKeyAppRoot = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2", true);
-                    foreach (string values in regKeyAppRoot.GetSubKeyNames())
-                    {
-                        regKeyAppRoot.DeleteSubKeyTree(values, true);
-                        listBox1.Items.Add("MountPoints: " + values);
-                    }
-                }
-                catch { }//Delete Regedit
-            }
-            for (int j = 70; j <= 80; j++)
-            {
-                Optimised_Manual.ReportProgress(j);
-                Thread.Sleep(100);
-            }
-            if (rstart.Checked == true)
-            {
-                try
-                {
-
-                    regKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-                    foreach (string value in regKey.GetValueNames())
-                    {
-                        regKey.DeleteValue(value, true);
-                        listBox1.Items.Add("Run At Startup: " + value);
-                    }
-                    regKey.Close();
-                }
-                catch
-                {
-
-                }
-            }
-            for (int j = 80; j <= 90; j++)
-            {
-                Optimised_Manual.ReportProgress(j);
-                Thread.Sleep(100);
-            }
-            if (useras.Checked == true)
-            {
-                try
-                {
-                    regKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist", true);
-                    foreach (string value in regKey.GetSubKeyNames())
-                    {
-                        regKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\" + value.ToString() + @"\Count", true);
-                        foreach (string cont in regKey.GetValueNames())
-                        {
-                            regKey.DeleteValue(cont, true);
-                            listBox1.Items.Add("UserAssist: " + Rot13.Transform(cont));
-                        }
-                    }
-                    regKey.Close();
-                }
-                catch
-                {
-                }
-            }
-            for (int j = 90; j <= 100; j++)
-            {
-                Optimised_Manual.ReportProgress(j);
-                Thread.Sleep(100);
-            }
-            if (compstore.Checked == true)
-            {
-                try
-                {
-                    RegistryKey regKeyAppRoot = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Compatibility Assistant\Store", true);
-                    foreach (string values in regKeyAppRoot.GetValueNames())
-                    {
-                        regKeyAppRoot.DeleteValue(values, true);
-                        listBox1.Items.Add("Compatibility Store: " + values);
-                    }
-                }
-                catch { }//Delete Regedit
-            }
-            var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token);
-            Notificare.ShowBalloonTip(1000, "Optimised", "Optimizarea a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
-        }
-        private void Optimised_Manual_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            iTalk_ProgressBar1.Value = e.ProgressPercentage;
-        }
-        private void Optimised_Only_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            iTalk_ProgressBar1.Value = e.ProgressPercentage;
-        }
-        private void Optimised_All_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            iTalk_ProgressBar1.Value = e.ProgressPercentage;
-        }
-        private void iTalk_Button_12_Click(object sender, EventArgs e)
-        {
-            if (listBox1.Items.Count > 0)
-            {
-                using (var fbd = new FolderBrowserDialog())
-                {
-                    DialogResult result = fbd.ShowDialog();
-
-                    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                    {
-                        string path = fbd.SelectedPath + @"\Optimised_Log.txt";
-                        using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
-                        {
-                            using (TextWriter tw = new StreamWriter(fs))
-                                if (listBox1.Items.Count > 0)
-                                {
-                                    foreach (object _item in listBox1.Items)
-                                    {
-                                        tw.WriteLine(_item); //scrie in fisier
-
-                                    }
-                                }
-                        }
-                    }
-                }
-
-            }
-            else
-            {
-                Notificare.ShowBalloonTip(1000, "Optimised", "Nu ai loguri de salvat.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.     
-            }
-        }
-       
         private void SendInfo_Tick(object sender, EventArgs e)
         {
             dynamic ips=null;
@@ -1206,5 +802,14 @@ namespace Optimised
             }
         }
         #endregion
+        private void reportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Report f = Application.OpenForms.OfType<Report>().FirstOrDefault();
+            if (f == null)
+            { 
+            Report rep = new Report(token, Key, id,email);
+                rep.Show();
+            }
+        }
     }
 }
