@@ -73,7 +73,7 @@ namespace Optimised
             }
             throw new Exception();
         }
-        public static string webip = "optimised.biz";
+        public static string webip = "optimised.biz/api";
         public static bool isadmin()
         {
             WindowsIdentity da = WindowsIdentity.GetCurrent();
@@ -91,7 +91,11 @@ namespace Optimised
                 SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
             }
         }
-
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
         //Download String Start
         public static string DownloadString(string address)
         {
@@ -140,7 +144,7 @@ namespace Optimised
             {
                 using (var client = new WebClient())
                 {
-                    using (var stream = client.OpenRead("http://"+webip+""))
+                    using (var stream = client.OpenRead("http://optimised.biz"))
                     {
                         return true;
                     }

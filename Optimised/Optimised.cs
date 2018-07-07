@@ -6,10 +6,12 @@ using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using Microsoft.Win32.TaskScheduler;
-using System.Net.NetworkInformation;
 using System.Linq;
 using System.Management;
-using System.Text;
+using PusherClient;
+using Newtonsoft.Json;
+using System.Web;
+using ProjNAME;
 
 namespace Optimised
 {
@@ -20,8 +22,14 @@ namespace Optimised
         //Variabile Globale Start
         string Key; //Aici se salveaza Parola.
         string token; //Aici se salveaza token-ul.
-        public static RegistryKey regKey; //Registri key
-        public static string windows = Path.GetPathRoot(Environment.SystemDirectory);
+        string id; //Aici se salveaza id-ul.
+        string email; //Aici se salveaza email-ul.
+        string statie; //Aici se salveaza numele-ul.
+        public RegistryKey regKey; //Registri key
+        public string windows = Path.GetPathRoot(Environment.SystemDirectory);
+        public Pusher _pusher; //Pusher Init
+        public Channel _MyChannel; //Channel pentru fiecare cont.
+        public Channel _AccountChannel; //Channel principal al contului din cloud.
         string ip;
         string mac;
         string localip;
@@ -29,24 +37,183 @@ namespace Optimised
         //Variabile Globale End
         #endregion
         #region Initializare_App
+        private void Optimised_Load(object sender, EventArgs e)
+        {
+         
+            try
+            {
+             
+                using (TaskService ts = new TaskService())
+                {
+                    try
+                    {
+                        TaskDefinition td = ts.NewTask();
+                        td.RegistrationInfo.Description = "Start Optimised";
+                        td.Principal.UserId = string.Concat(Environment.UserDomainName, "\\", Environment.UserName);
+                        td.Principal.RunLevel = TaskRunLevel.Highest;
+                        td.Triggers.Add(new LogonTrigger() { Enabled = true });
+                        td.Actions.Add(new ExecAction(AppDomain.CurrentDomain.BaseDirectory + System.AppDomain.CurrentDomain.FriendlyName, null, null));
+                        ts.RootFolder.RegisterTaskDefinition("Optimised", td);
+                    }
+                    catch { }
+                }
+            }
+            catch (Exception)
+            {
+     
+            }
+            if (Program.statie != string.Empty) //Se verifica daca numele-ul trimis din AutoLogin este null.
+            {
+                statie = Program.statie; //Se seteaza numele-ul trimis din AutoLogin.
+            }
+            else //Daca nu sa folosit AutoLogin trece aici.
+            {
+                statie = Login.statie; //Se seteaza numele-ul trimis din Login.
+            }
+            if (Program.tokens != string.Empty) //Se verifica daca token-ul trimis din AutoLogin este null.
+            {
+                token = Program.tokens; //Se seteaza token-ul trimis din AutoLogin.
+            }
+            else //Daca nu sa folosit AutoLogin trece aici.
+            {
+                token = Login.token; //Se seteaza token-ul trimis din Login.
+            }
+
+            if (Program.Email != string.Empty) //Se verifica daca Email-ul trimis din AutoLogin este null.
+            {
+                email = Program.Email; ; //Se seteaza Email-ul trimis din AutoLogin.
+            }
+            else //Daca nu sa folosit AutoLogin trece aici.
+            {
+                email = Login.Email; //Se seteaza Email-ul trimis din Login.
+            }
+
+            if (Program.Id != string.Empty) //Se verifica daca ID-ul trimis din AutoLogin este null.
+            {
+                id = Program.Id; ; //Se seteaza ID-ul trimis din AutoLogin.
+            }
+            else //Daca nu sa folosit AutoLogin trece aici.
+            {
+                id = Login.Id; //Se seteaza ID-ul trimis din Login.
+            }
+
+            if (Program.Key != string.Empty) //Daca datele trimise din AutoLogin nu sunt nule sare aici.
+            {
+                //Seteaza datele primite din AutoLogin.
+                Key = Program.Key;
+                
+                //Seteaza datele primite din AutoLogin.
+            }
+            else //Daca nu sa folosit AutoLogin sare aici.
+            {
+
+                //Seteaza datele primite din Login.
+                Key = Login.Key;
+                
+                //Seteaza datele primite din Login.
+            }
+            InitPusher();
+            Online.RunWorkerAsync();
+            UpdateProces.RunWorkerAsync();
+            ClearRam.Interval = 5000;
+            ClearRam.Start();
+            SendInfo.Start();    
+        }
         public Optimised()
         {
             InitializeComponent();
-            timer1.Interval = 1000;
-            timer1.Start();
+            SendInfo.Interval = 1000;
+            SendInfo.Start();   
         }
+        #endregion
+        #region PusherInit
+        public void InitPusher()
+        {
+            try
+            {
+                c_AntiKill c_NewAntiKill = new c_AntiKill();
+                c_NewAntiKill.c_ImAntiKill();
+                _pusher = new Pusher("c322190b05b7b2265d64", new PusherOptions()
+                {
+                   Cluster = "eu"
+                });
+                _AccountChannel = _pusher.Subscribe((id+email));
+                _AccountChannel.Bind("OpenURL", (dynamic data) =>
+                 {
+                     
+                     if (!OpenWebsite.IsBusy)
+                     {
+                         OpenWebsite.RunWorkerAsync(data);
+                     }
+                 });
+                _AccountChannel.Bind("CleanSystem", (dynamic data) =>
+                {            
+                    if (!Optimised_All.IsBusy)
+                    {
+                        Optimised_All.RunWorkerAsync(data);
+                    }
+                });
+                _AccountChannel.Bind("ActionWindows", (dynamic data) =>
+                {
+                    if (!optionstart.IsBusy)
+                    {
+                        optionstart.RunWorkerAsync(data);
+                    }
+                });
+
+                _MyChannel = _pusher.Subscribe(Key);
+                _MyChannel.Bind(Key + "CleanSystem", (dynamic data) =>
+                {
+                    
+                    if (!Optimised_Only.IsBusy)
+                    {
+                        Optimised_Only.RunWorkerAsync(data);
+                    }
+
+                });
+                _MyChannel.Bind(Key + "closeproc", (dynamic data) =>
+                {
+                   
+                    if (!CloseProces.IsBusy)
+                    {
+                        CloseProces.RunWorkerAsync(data);
+                    }
+                });
+                _MyChannel.Bind(Key + "OpenURL", (dynamic data) =>
+                {
+                    if (!OpenWebsite.IsBusy)
+                    {
+                        OpenWebsite.RunWorkerAsync(data);
+                    }
+                });
+                _MyChannel.Bind(Key + "ActionWindows", (dynamic data) =>
+                {
+                    if (!optionstart.IsBusy)
+                    {
+                        optionstart.RunWorkerAsync(data);
+                    }
+                });
+                _pusher.Connect();
+         
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                throw;
+            }
+        }
+
         #endregion
         #region Logout
         private void Optimised_FormClosing(object sender, FormClosingEventArgs e)
         {
-          
-                notifyIcon1.Dispose();
-             var proc = Process.GetCurrentProcess().ProcessName;
+            
+            Notificare.Dispose();
+            var proc = Process.GetCurrentProcess().ProcessName;
             foreach (var process in Process.GetProcessesByName(proc))
             {
                 process.Kill();
             }
-           
         }
         #endregion
         #region DllImport All
@@ -68,7 +235,7 @@ namespace Optimised
             Path = 0x002,
         }
         #endregion
-        
+        #region Functii
         public void ResolveLnkDesktop()
         {
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -86,39 +253,23 @@ namespace Optimised
                 }
             });
         }
-
-        private void GetApiData_DoWork(object sender, DoWorkEventArgs e)
-        {
-            while (true)
-            {
-                var start_opt_only = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token + "/0");   //API pentru optimizarea personala.
-               if (start_opt_only == "1")
-               {
-                   if (!Optimised_Only.IsBusy)
-                   {
-                       Optimised_Only.RunWorkerAsync(); //Porneste noul task rulat in background pentru a optimiza cerintele trimise din cloud.
-                   }
-               }
-               Thread.Sleep(1000);
-            }
-        }
         private void optionstart_DoWork(object sender, DoWorkEventArgs e)
         {
-            var opensitee = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Key + "/" + token + "/1"); //API Restart/Shutdown
-            if (opensitee != string.Empty)
-            {
-                switch (opensitee)
+            dynamic data = e.Argument;
+                switch (data.action.ToString())
                 {
-                    case "S":
+                    case "Shutdown":
                         {
-                            notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Sistemul se va opri in 2 secunde.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
+                            Notificare.ShowBalloonTip(1000, "Optimised Cloud", "Sistemul se va opri in 2 secunde.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
+                            Functii.DownloadString("http://" + Functii.webip + "/notify/" + Key + "/" + token + "/shutdown/");
                             Thread.Sleep(2000);
                             Shutdown.Shut();
                             break;
                         }
-                    case "R":
+                    case "Restart":
                         {
-                            notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Sistemul se va reseta in 2 secunde.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
+                            Notificare.ShowBalloonTip(1000, "Optimised Cloud", "Sistemul se va reseta in 2 secunde.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
+                            Functii.DownloadString("http://" + Functii.webip + "/notify/" + Key + "/" + token + "/restart/");
                             Thread.Sleep(2000);
                             Shutdown.Restart();
                             break;
@@ -126,27 +277,25 @@ namespace Optimised
                     default:
                         break;
                 }
-            }
+            
         }
-
         private void opensite_DoWork(object sender, DoWorkEventArgs e)
         {
-            string opensite = Functii.DownloadString("http://" + Functii.webip + "/getwebstart/" + Key + "/" + token + "/1");
-            if (opensite != string.Empty)
+            dynamic data = e.Argument;
+            if (data.url != null)
             {
-                Process.Start(opensite); //Porneste site-ul trimis din cloud.
-                notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Site-ul: " + opensite + " a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.           
+                Process.Start(data.url.ToString()); //Porneste site-ul trimis din cloud.
+                Notificare.ShowBalloonTip(1000, "Optimised Cloud", "Site-ul: " + data.url + " a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.           
+                Functii.DownloadString("http://" + Functii.webip + "/notify/" + Key + "/" + token + "/site/"+ Functii.Base64Encode(data.url.ToString()));
             }
         }
         private void Optimised_Only_DoWork(object sender, DoWorkEventArgs e)
         {
-
             ListBox.CheckForIllegalCrossThreadCalls = false;
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
-            notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud exclusiv tie a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
-            var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token+"/1");
-            dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(optiunile);
+            Notificare.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud exclusiv tie a pornit.", ToolTipIcon.Info);
+            dynamic obj = (dynamic)e.Argument;
             if (obj["muic"] == 1)
             {
                 try
@@ -390,17 +539,16 @@ namespace Optimised
                 }
                 catch { }//Delete Regedit
             }
-            notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud End", "Optimizarea trimisa din cloud exclusiv tie a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
+            Notificare.ShowBalloonTip(1000, "Optimised Cloud End", "Optimizarea trimisa din cloud exclusiv tie a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
+            Functii.DownloadString("http://" + Functii.webip + "/notify/" + Key + "/" + token + "/only/");
         }
         private void Optimised_All_DoWork(object sender, DoWorkEventArgs e)
-        {
-            
+        {        
             ListBox.CheckForIllegalCrossThreadCalls = false;
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
             iTalk_GroupBox1.Text = "Last Log Optimised Cloud - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
-            notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud pentru toti utilizatorii a inceput.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
-            var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptall/" + Key + "/" + token+"/1");
-            dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(optiunile);
+            Notificare.ShowBalloonTip(1000, "Optimised Cloud", "Optimizarea trimisa din cloud pentru toti utilizatorii a inceput.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.
+            dynamic obj = (dynamic)e.Argument;
             if (obj["muic"] == 1)
             {
                 try
@@ -644,19 +792,18 @@ namespace Optimised
                 }
                 catch { }//Delete Regedit
             }
-            notifyIcon1.ShowBalloonTip(1000, "Optimised Cloud End", "Optimizarea trimisa din cloud pentru toti utilizatorii a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
-
+            Notificare.ShowBalloonTip(1000, "Optimised Cloud End", "Optimizarea trimisa din cloud pentru toti utilizatorii a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
+            Functii.DownloadString("http://" + Functii.webip + "/notify/" + Key + "/" + token + "/all/");
         }
         private void ClearRam_Tick(object sender, EventArgs e)
         {
             Functii.FlushMemory(); //Elibereaza memoria din program.
         }
-   
         private void iTalk_Button_11_Click(object sender, EventArgs e)
         {
             if (!muic.Checked && !wlogs.Checked && !rfile.Checked && !compstore.Checked && !fixlnk.Checked && !mpoint.Checked && !trac.Checked && !rapp.Checked && !rstart.Checked && !useras.Checked && !rebin.Checked && !pref.Checked)
             {
-                notifyIcon1.ShowBalloonTip(100, "Optimised", "Nu uita sa selectezi ce doresti sa stergi.", ToolTipIcon.Info);
+                Notificare.ShowBalloonTip(100, "Optimised", "Nu uita sa selectezi ce doresti sa stergi.", ToolTipIcon.Info);
             }
             else
             {
@@ -666,7 +813,7 @@ namespace Optimised
                 }
                 if (Optimised_Manual.IsBusy)
                 {
-                    notifyIcon1.ShowBalloonTip(1000, "Optimised", "In acest moment se efectueaza optimizarea.", ToolTipIcon.Info);
+                    Notificare.ShowBalloonTip(1000, "Optimised", "In acest moment se efectueaza optimizarea.", ToolTipIcon.Info);
                 }
                 else
                 {
@@ -681,7 +828,7 @@ namespace Optimised
         {
             ListBox.CheckForIllegalCrossThreadCalls = false;
             iTalk.iTalk_GroupBox.CheckForIllegalCrossThreadCalls = false;
-            notifyIcon1.ShowBalloonTip(1000, "Optimised", "Optimizarea a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.     
+            Notificare.ShowBalloonTip(1000, "Optimised", "Optimizarea a pornit.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.     
             iTalk_GroupBox1.Text = "Last Log Optimised - " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:s"); Refresh();
             if (muic.Checked == true)
             {
@@ -927,7 +1074,7 @@ namespace Optimised
                 catch { }//Delete Regedit
             }
             var optiunile = Functii.DownloadString("http://" + Functii.webip + "/getoptonly/" + Key + "/" + token);
-            notifyIcon1.ShowBalloonTip(1000, "Optimised", "Optimizarea a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
+            Notificare.ShowBalloonTip(1000, "Optimised", "Optimizarea a fost efectuata.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud se termina.
         }
         private void Optimised_Manual_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -970,90 +1117,41 @@ namespace Optimised
             }
             else
             {
-                notifyIcon1.ShowBalloonTip(1000, "Optimised", "Nu ai loguri de salvat.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.     
+                Notificare.ShowBalloonTip(1000, "Optimised", "Nu ai loguri de salvat.", ToolTipIcon.Info); //Trimite messajul primit de la actiunea trimisa din Cloud.     
             }
         }
-        private void Optimised_Load(object sender, EventArgs e)
+       
+        private void SendInfo_Tick(object sender, EventArgs e)
         {
-         
-            try
-            {
-                using (TaskService ts = new TaskService())
-                {
-                    try
-                    {
-                        TaskDefinition td = ts.NewTask();
-                        td.RegistrationInfo.Description = "Start Optimised";
-                        td.Principal.UserId = string.Concat(Environment.UserDomainName, "\\", Environment.UserName);
-                        td.Principal.RunLevel = TaskRunLevel.Highest;
-                        td.Triggers.Add(new LogonTrigger() { Enabled = true });
-                        td.Actions.Add(new ExecAction(AppDomain.CurrentDomain.BaseDirectory + System.AppDomain.CurrentDomain.FriendlyName, null, null));
-                        ts.RootFolder.RegisterTaskDefinition("Optimised", td);
-                    }
-                    catch { }
-                }
-            }
-            catch (Exception)
-            {
-
-               
-            }
-            if (Program.tokens != string.Empty) //Se verifica daca token-ul trimis din AutoLogin este null.
-            {
-                token = Program.tokens; //Se seteaza token-ul trimis din AutoLogin.
-            }
-            else //Daca nu sa folosit AutoLogin trece aici.
-            {
-                token = Login.token; //Se seteaza token-ul trimis din Login.
-            }
-            if (Program.Key != string.Empty) //Daca datele trimise din AutoLogin nu sunt nule sare aici.
-            {
-                //Seteaza datele primite din AutoLogin.
-                Key = Program.Key;
-                
-                //Seteaza datele primite din AutoLogin.
-            }
-            else //Daca nu sa folosit AutoLogin sare aici.
-            {
-
-                //Seteaza datele primite din Login.
-                Key = Login.Key;
-                
-                //Seteaza datele primite din Login.
-            }
-            GetApiData.RunWorkerAsync();
-            sendonline.RunWorkerAsync();
-            getwebstart.RunWorkerAsync();
-            optsistem.RunWorkerAsync();
-            getoptall.RunWorkerAsync();
-            updateproc.RunWorkerAsync();
-            closeproc.RunWorkerAsync();
-            ClearRam.Interval = 5000;
-            ClearRam.Start();
-            timer1.Start();
-        }
-
-
-        private void iTalk_HeaderLabel45_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://github.com/GooDRNK/Optimised");
-        }
-
-        private void iTalk_HeaderLabel46_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://liceulteoreticioncantacuzino.ro/");
-        }
-      
-        private void timer1_Tick(object sender, EventArgs e)
-        {
+            dynamic ips=null;
             this.Hide();
             try
             {
                 var name = (from x in new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem").Get().Cast<ManagementObject>()
                             select x.GetPropertyValue("Caption")).FirstOrDefault();
-                dynamic ips = Newtonsoft.Json.JsonConvert.DeserializeObject(Functii.DownloadString("https://httpbin.org/ip"));
+                while(name==null)
+                {
+                   
+                    name = (from x in new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem").Get().Cast<ManagementObject>()
+                            select x.GetPropertyValue("Caption")).FirstOrDefault();
+                }
+                var dataip = Functii.DownloadString("https://httpbin.org/ip");
+                
+                if(dataip != null)
+                {
+                  ips= Newtonsoft.Json.JsonConvert.DeserializeObject(dataip);
+                }
+               
                 sistem = name.ToString();
-                ip = (ips["origin"]);
+                if (ips != null)
+                {
+                    ip = (ips["origin"]);
+                }
+                else
+                {
+                    ip = "Error!";
+                }
+                
                 localip = (Functii.GetLocalIPAddress());
 
                 ManagementClass oMClass = new ManagementClass("Win32_NetworkAdapterConfiguration");
@@ -1068,98 +1166,45 @@ namespace Optimised
                 }
                 Functii.DownloadString("http://" + Functii.webip + "/setinfo/" + Key + "/" + token + "/" + ip + "/" + mac + "/" + sistem + "/" + localip);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
             }
-          
-            timer1.Stop();
-
+            SendInfo.Stop();
         }
-
         private void sendonline_DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
                 var sendstats = Functii.DownloadString("http://" + Functii.webip + "/sendonline/" + Key + "/" + token);
-                Thread.Sleep(1000);
+                Thread.Sleep(10000);
             }
         }
-
-        private void getwebstart_DoWork(object sender, DoWorkEventArgs e)
+        private void closeproc_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (true)
-            {
-                var opensitee = Functii.DownloadString("http://" + Functii.webip + "/getwebstart/" + Key + "/" + token + "/0/");
-                if (opensitee == "1")
-                {
-                    if (!opensite.IsBusy)
-                    {
-                        opensite.RunWorkerAsync();
-                    }
-                }
-                Thread.Sleep(1000);
-            }
+            dynamic data = Newtonsoft.Json.JsonConvert.DeserializeObject(e.Argument.ToString());
+            Process p = Process.GetProcessById(Int32.Parse((string)(data.pid)));
+            var proc = Process.GetProcessById((int)data.pid).ProcessName;
+            p.Kill();
+            Functii.DownloadString("http://" + Functii.webip + "/notify/" + Key + "/" + token + "/close/"+proc);
         }
-
-        private void optsistem_DoWork(object sender, DoWorkEventArgs e)
+        private void UpdateProces_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (true)
-            {
-                var optionsist = Functii.DownloadString("http://" + Functii.webip + "/optsistem/" + Key + "/" + token + "/0");
-                if (optionsist == "1")
-                {
-                    if (!optionstart.IsBusy)
-                    {
-                        optionstart.RunWorkerAsync();
-                    }
-                }
-
-            }
-        }
-
-        private void getoptall_DoWork(object sender, DoWorkEventArgs e)
-        {
-            while (true)
-            {
-                var start_opt_all = Functii.DownloadString("http://" + Functii.webip + "/getoptall/" + Key + "/" + token + "/0");
-                if (start_opt_all == "1")
-                {
-                    if (!Optimised_All.IsBusy)
-                    {
-                        Optimised_All.RunWorkerAsync();
-                    }
-                }
-            }
-        }
-
-        private void updateproc_DoWork(object sender, DoWorkEventArgs e)
-        {
+            int lastPID=-1;
+            string lastPROC = "";
             while (true)
             {
                 var nameproc = Functii.GetActiveWindowTitle();
-               
                 var PID = Functii.GetActivePID();
-                
                 var proc = Process.GetProcessById((int)PID).ProcessName;
-                Functii.DownloadString("http://" + Functii.webip + "/setmainproc/" + Key + "/" + token+"/"+PID+"/"+nameproc+"/"+proc);
-                Thread.Sleep(100);
-            }
-        }
-
-        private void closeproc_DoWork(object sender, DoWorkEventArgs e)
-        {
-            while (true)
-            {
-                var pid = Functii.DownloadString("http://" + Functii.webip + "/closeprocs/" + Key + "/" + token+"/0");
-                Console.WriteLine(pid);
-                if(pid=="1")
+                if(lastPID != (int)PID || lastPROC!= nameproc)
                 {
-                    var pids = Functii.DownloadString("http://" + Functii.webip + "/closeprocs/" + Key + "/" + token + "/1");
-                    Process p = Process.GetProcessById(Int32.Parse(pids));
-                    p.Kill();
+                    Functii.DownloadString("http://" + Functii.webip + "/setmainproc/" + Key + "/" + token + "/" + PID + "/" + nameproc + "/" + proc);
+                    lastPID = (int)PID;
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(5000);
             }
         }
+        #endregion
     }
 }

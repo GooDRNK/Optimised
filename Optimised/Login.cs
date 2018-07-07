@@ -22,7 +22,10 @@ namespace Optimised
         //Variabile Globale Star
         public static string token; //Aici este stocat token-ul pentru verificarea login-ului din aplicatie.
         public static string Key; //Aici se salveaza Parola introdusa.
-                                  //Variabile Globale End
+        public static string Id; //Aici se salveaza ID-ul.
+        public static string Email; //Aici se salveaza Email-ul.
+        public static string statie; //Aici se salveaza Statie.
+        //Variabile Globale End
         #endregion
         #region Initializare_Form
         //Initializare Form Login Start 
@@ -66,15 +69,15 @@ namespace Optimised
         {
             if (iTalk_TextBox_Big3.Text != "")
             {
-                string logininfo;
+                dynamic logininfo;
                 try
                 {
-                    logininfo = Functii.DownloadString("http://" + Functii.webip + "/loginapp/" + iTalk_TextBox_Big3.Text); //Cere informatii despre Login la API.
-                    if (logininfo.ToString().Length != 60) //Verifica daca a returnat token sau nu.
+                    logininfo = Newtonsoft.Json.JsonConvert.DeserializeObject(Functii.DownloadString("http://" + Functii.webip + "/loginapp/" + iTalk_TextBox_Big3.Text)); //Cere informatii despre Login la API.
+                    if (logininfo.token.ToString().Length != 60) //Verifica daca a returnat token sau nu.
                     {
                         try
                         {
-                            notifyIcon1.ShowBalloonTip(1000, "Optimised Login", logininfo.ToString(), ToolTipIcon.Info); //Trimite messajul primit de la API.
+                            notifyIcon1.ShowBalloonTip(1000, "Optimised Login", logininfo.error.ToString(), ToolTipIcon.Info); //Trimite messajul primit de la API.
 
                         }
                         catch (Exception)
@@ -90,7 +93,10 @@ namespace Optimised
                         RegistryKey keys = Registry.CurrentUser.OpenSubKey(@"Software\Optimised", true); //Se deschide calea catre regedit.
                         keys.SetValue("Key", iTalk_TextBox_Big3.Text.ToString()); //Se seteaza codul introdus pentru login in regedit.
                         this.Hide(); //Ascunde Form-ul de Login.
-                        token = logininfo.ToString(); //Salveaza token-ul primit.
+                        token = logininfo.token.ToString(); //Salveaza token-ul primit.
+                        Id = logininfo.id.ToString(); //Salveaza ID-ul primit.
+                        statie = logininfo.statie.ToString();
+                        Email = logininfo.email.ToString();//Salveaza Email-ul primit.
                         Key = iTalk_TextBox_Big3.Text.ToString(); //Salveaza key
                         Optimised optimised = new Optimised(); //Deschide calea catre noul Form.
                         notifyIcon1.Dispose(); //Stinge Iconita din sistem Tray.

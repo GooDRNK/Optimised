@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.AccessControl;
-using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32;
-using Microsoft.Win32.TaskScheduler;
-using Optimised;
 namespace Optimised
 {
     static class Program
@@ -53,8 +43,8 @@ namespace Optimised
             }
          
             if (!mutex.WaitOne(TimeSpan.Zero, true))
-            {        
-
+            {
+                MessageBox.Show("Nu poti deschide aplicatia de mai multe ori");
             }
             else
             {
@@ -87,31 +77,35 @@ namespace Optimised
         public static string error = string.Empty;
         public static string tokens = string.Empty;
         public static string Key = string.Empty;
-        static string logininfo;
+        public static string Id = string.Empty;
+        public static string Email = string.Empty;
+        public static string statie = string.Empty;
         static void LoginAuto(string key)
         {
-            
+            dynamic logininfo;
             try
             {
-                logininfo = Functii.DownloadString("http://" + Functii.webip + "/loginapp/" + key.ToString());
-                
+                logininfo = Newtonsoft.Json.JsonConvert.DeserializeObject(Functii.DownloadString("http://" + Functii.webip + "/loginapp/" + key.ToString()));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.ToString());
                 throw;
             }
-            if (logininfo.ToString().Length == 60)
+            if (logininfo.token.ToString().Length == 60)
             {
                 Key = key;
-                tokens = logininfo.ToString();
+                tokens = logininfo.token.ToString();
+                Id = logininfo.id.ToString();
+                Email = logininfo.email.ToString();
+                statie = logininfo.statie.ToString();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Optimised());
             }
             else
             {
-                        error = logininfo.ToString();
+                        error = logininfo.error.ToString();
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
                         Application.Run(new Login());

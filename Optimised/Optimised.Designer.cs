@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Optimised));
             iTalk.ControlRenderer controlRenderer1 = new iTalk.ControlRenderer();
             iTalk.MSColorTable msColorTable1 = new iTalk.MSColorTable();
-            this.GetApiData = new System.ComponentModel.BackgroundWorker();
             this.Optimised_Only = new System.ComponentModel.BackgroundWorker();
             this.Optimised_All = new System.ComponentModel.BackgroundWorker();
             this.ClearRam = new System.Windows.Forms.Timer(this.components);
@@ -41,14 +40,11 @@
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Optimised_Manual = new System.ComponentModel.BackgroundWorker();
-            this.opensite = new System.ComponentModel.BackgroundWorker();
+            this.OpenWebsite = new System.ComponentModel.BackgroundWorker();
             this.optionstart = new System.ComponentModel.BackgroundWorker();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.getoptall = new System.ComponentModel.BackgroundWorker();
-            this.optsistem = new System.ComponentModel.BackgroundWorker();
-            this.getwebstart = new System.ComponentModel.BackgroundWorker();
-            this.sendonline = new System.ComponentModel.BackgroundWorker();
-            this.updateproc = new System.ComponentModel.BackgroundWorker();
+            this.SendInfo = new System.Windows.Forms.Timer(this.components);
+            this.Online = new System.ComponentModel.BackgroundWorker();
+            this.UpdateProces = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1 = new iTalk.iTalk_ThemeContainer();
             this.iTalk_TabControl1 = new iTalk.iTalk_TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -70,34 +66,14 @@
             this.rfile = new iTalk.iTalk_CheckBox();
             this.muic = new iTalk.iTalk_CheckBox();
             this.iTalk_ProgressBar1 = new iTalk.iTalk_ProgressBar();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.iTalk_Separator1 = new iTalk.iTalk_Separator();
-            this.iTalk_HeaderLabel40 = new iTalk.iTalk_HeaderLabel();
-            this.iTalk_Separator5 = new iTalk.iTalk_Separator();
-            this.iTalk_Separator4 = new iTalk.iTalk_Separator();
-            this.iTalk_Separator3 = new iTalk.iTalk_Separator();
-            this.iTalk_Separator2 = new iTalk.iTalk_Separator();
-            this.iTalk_HeaderLabel46 = new iTalk.iTalk_HeaderLabel();
-            this.iTalk_HeaderLabel47 = new iTalk.iTalk_HeaderLabel();
-            this.iTalk_HeaderLabel45 = new iTalk.iTalk_HeaderLabel();
-            this.iTalk_HeaderLabel44 = new iTalk.iTalk_HeaderLabel();
-            this.iTalk_HeaderLabel43 = new iTalk.iTalk_HeaderLabel();
-            this.iTalk_HeaderLabel41 = new iTalk.iTalk_HeaderLabel();
-            this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.iTalk_ContextMenuStrip1 = new iTalk.iTalk_ContextMenuStrip();
-            this.closeproc = new System.ComponentModel.BackgroundWorker();
+            this.Notificare = new System.Windows.Forms.NotifyIcon(this.components);
+            this.TrayMeniu = new iTalk.iTalk_ContextMenuStrip();
+            this.CloseProces = new System.ComponentModel.BackgroundWorker();
             this.iTalk_ThemeContainer1.SuspendLayout();
             this.iTalk_TabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.iTalk_GroupBox1.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             this.SuspendLayout();
-            // 
-            // GetApiData
-            // 
-            this.GetApiData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.GetApiData_DoWork);
             // 
             // Optimised_Only
             // 
@@ -141,39 +117,27 @@
             this.Optimised_Manual.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Optimised_Manual_DoWork);
             this.Optimised_Manual.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Optimised_Manual_ProgressChanged);
             // 
-            // opensite
+            // OpenWebsite
             // 
-            this.opensite.WorkerReportsProgress = true;
-            this.opensite.DoWork += new System.ComponentModel.DoWorkEventHandler(this.opensite_DoWork);
+            this.OpenWebsite.WorkerReportsProgress = true;
+            this.OpenWebsite.DoWork += new System.ComponentModel.DoWorkEventHandler(this.opensite_DoWork);
             // 
             // optionstart
             // 
             this.optionstart.WorkerReportsProgress = true;
             this.optionstart.DoWork += new System.ComponentModel.DoWorkEventHandler(this.optionstart_DoWork);
             // 
-            // timer1
+            // SendInfo
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.SendInfo.Tick += new System.EventHandler(this.SendInfo_Tick);
             // 
-            // getoptall
+            // Online
             // 
-            this.getoptall.DoWork += new System.ComponentModel.DoWorkEventHandler(this.getoptall_DoWork);
+            this.Online.DoWork += new System.ComponentModel.DoWorkEventHandler(this.sendonline_DoWork);
             // 
-            // optsistem
+            // UpdateProces
             // 
-            this.optsistem.DoWork += new System.ComponentModel.DoWorkEventHandler(this.optsistem_DoWork);
-            // 
-            // getwebstart
-            // 
-            this.getwebstart.DoWork += new System.ComponentModel.DoWorkEventHandler(this.getwebstart_DoWork);
-            // 
-            // sendonline
-            // 
-            this.sendonline.DoWork += new System.ComponentModel.DoWorkEventHandler(this.sendonline_DoWork);
-            // 
-            // updateproc
-            // 
-            this.updateproc.DoWork += new System.ComponentModel.DoWorkEventHandler(this.updateproc_DoWork);
+            this.UpdateProces.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateProces_DoWork);
             // 
             // iTalk_ThemeContainer1
             // 
@@ -196,7 +160,6 @@
             // 
             this.iTalk_TabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.iTalk_TabControl1.Controls.Add(this.tabPage1);
-            this.iTalk_TabControl1.Controls.Add(this.tabPage6);
             this.iTalk_TabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.iTalk_TabControl1.Font = new System.Drawing.Font("Sitka Banner", 9F);
             this.iTalk_TabControl1.ItemSize = new System.Drawing.Size(44, 135);
@@ -288,7 +251,7 @@
             // 
             this.iTalk_Button_11.BackColor = System.Drawing.Color.Transparent;
             this.iTalk_Button_11.Font = new System.Drawing.Font("Sitka Banner", 14F);
-            this.iTalk_Button_11.Image = global::svchost.Properties.Resources.wrench_plus_icon_32;
+            this.iTalk_Button_11.Image = global::Optimised.Properties.Resources.wrench_plus_icon_32;
             this.iTalk_Button_11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iTalk_Button_11.Location = new System.Drawing.Point(118, 406);
             this.iTalk_Button_11.Name = "iTalk_Button_11";
@@ -447,185 +410,24 @@
             this.iTalk_ProgressBar1.Text = "iTalk_ProgressBar1";
             this.iTalk_ProgressBar1.Value = ((long)(0));
             // 
-            // tabPage6
+            // Notificare
             // 
-            this.tabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
-            this.tabPage6.Controls.Add(this.iTalk_Separator1);
-            this.tabPage6.Controls.Add(this.iTalk_HeaderLabel40);
-            this.tabPage6.Controls.Add(this.iTalk_Separator5);
-            this.tabPage6.Controls.Add(this.iTalk_Separator4);
-            this.tabPage6.Controls.Add(this.iTalk_Separator3);
-            this.tabPage6.Controls.Add(this.iTalk_Separator2);
-            this.tabPage6.Controls.Add(this.iTalk_HeaderLabel46);
-            this.tabPage6.Controls.Add(this.iTalk_HeaderLabel47);
-            this.tabPage6.Controls.Add(this.iTalk_HeaderLabel45);
-            this.tabPage6.Controls.Add(this.iTalk_HeaderLabel44);
-            this.tabPage6.Controls.Add(this.iTalk_HeaderLabel43);
-            this.tabPage6.Controls.Add(this.iTalk_HeaderLabel41);
-            this.tabPage6.Controls.Add(this.pictureBox15);
-            this.tabPage6.Location = new System.Drawing.Point(139, 4);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(841, 557);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "About";
+            this.Notificare.ContextMenuStrip = this.TrayMeniu;
+            this.Notificare.Icon = ((System.Drawing.Icon)(resources.GetObject("Notificare.Icon")));
+            this.Notificare.Text = "Optimised";
+            this.Notificare.Visible = true;
             // 
-            // iTalk_Separator1
+            // TrayMeniu
             // 
-            this.iTalk_Separator1.Location = new System.Drawing.Point(19, 49);
-            this.iTalk_Separator1.Name = "iTalk_Separator1";
-            this.iTalk_Separator1.Size = new System.Drawing.Size(816, 13);
-            this.iTalk_Separator1.TabIndex = 27;
-            this.iTalk_Separator1.Text = "iTalk_Separator1";
-            // 
-            // iTalk_HeaderLabel40
-            // 
-            this.iTalk_HeaderLabel40.AutoSize = true;
-            this.iTalk_HeaderLabel40.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_HeaderLabel40.Font = new System.Drawing.Font("Segoe UI", 25F);
-            this.iTalk_HeaderLabel40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.iTalk_HeaderLabel40.Location = new System.Drawing.Point(11, 0);
-            this.iTalk_HeaderLabel40.Name = "iTalk_HeaderLabel40";
-            this.iTalk_HeaderLabel40.Size = new System.Drawing.Size(478, 46);
-            this.iTalk_HeaderLabel40.TabIndex = 26;
-            this.iTalk_HeaderLabel40.Text = "Realizator: Eremia Mihai Daniel";
-            // 
-            // iTalk_Separator5
-            // 
-            this.iTalk_Separator5.Location = new System.Drawing.Point(19, 384);
-            this.iTalk_Separator5.Name = "iTalk_Separator5";
-            this.iTalk_Separator5.Size = new System.Drawing.Size(820, 13);
-            this.iTalk_Separator5.TabIndex = 25;
-            this.iTalk_Separator5.Text = "iTalk_Separator5";
-            // 
-            // iTalk_Separator4
-            // 
-            this.iTalk_Separator4.Location = new System.Drawing.Point(19, 290);
-            this.iTalk_Separator4.Name = "iTalk_Separator4";
-            this.iTalk_Separator4.Size = new System.Drawing.Size(816, 13);
-            this.iTalk_Separator4.TabIndex = 24;
-            this.iTalk_Separator4.Text = "iTalk_Separator4";
-            // 
-            // iTalk_Separator3
-            // 
-            this.iTalk_Separator3.Location = new System.Drawing.Point(19, 198);
-            this.iTalk_Separator3.Name = "iTalk_Separator3";
-            this.iTalk_Separator3.Size = new System.Drawing.Size(841, 13);
-            this.iTalk_Separator3.TabIndex = 23;
-            this.iTalk_Separator3.Text = "iTalk_Separator3";
-            // 
-            // iTalk_Separator2
-            // 
-            this.iTalk_Separator2.Location = new System.Drawing.Point(19, 124);
-            this.iTalk_Separator2.Name = "iTalk_Separator2";
-            this.iTalk_Separator2.Size = new System.Drawing.Size(816, 13);
-            this.iTalk_Separator2.TabIndex = 22;
-            this.iTalk_Separator2.Text = "iTalk_Separator2";
-            // 
-            // iTalk_HeaderLabel46
-            // 
-            this.iTalk_HeaderLabel46.AutoSize = true;
-            this.iTalk_HeaderLabel46.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_HeaderLabel46.Cursor = System.Windows.Forms.Cursors.AppStarting;
-            this.iTalk_HeaderLabel46.Font = new System.Drawing.Font("Segoe UI", 24.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iTalk_HeaderLabel46.ForeColor = System.Drawing.Color.SteelBlue;
-            this.iTalk_HeaderLabel46.Location = new System.Drawing.Point(165, 336);
-            this.iTalk_HeaderLabel46.Name = "iTalk_HeaderLabel46";
-            this.iTalk_HeaderLabel46.Size = new System.Drawing.Size(581, 45);
-            this.iTalk_HeaderLabel46.TabIndex = 21;
-            this.iTalk_HeaderLabel46.Text = "https://liceulteoreticioncantacuzino.ro/";
-            this.iTalk_HeaderLabel46.Click += new System.EventHandler(this.iTalk_HeaderLabel46_Click);
-            // 
-            // iTalk_HeaderLabel47
-            // 
-            this.iTalk_HeaderLabel47.AutoSize = true;
-            this.iTalk_HeaderLabel47.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_HeaderLabel47.Font = new System.Drawing.Font("Segoe UI", 25F);
-            this.iTalk_HeaderLabel47.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.iTalk_HeaderLabel47.Location = new System.Drawing.Point(11, 335);
-            this.iTalk_HeaderLabel47.Name = "iTalk_HeaderLabel47";
-            this.iTalk_HeaderLabel47.Size = new System.Drawing.Size(148, 46);
-            this.iTalk_HeaderLabel47.TabIndex = 20;
-            this.iTalk_HeaderLabel47.Text = "Website:";
-            // 
-            // iTalk_HeaderLabel45
-            // 
-            this.iTalk_HeaderLabel45.AutoSize = true;
-            this.iTalk_HeaderLabel45.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_HeaderLabel45.Cursor = System.Windows.Forms.Cursors.AppStarting;
-            this.iTalk_HeaderLabel45.Font = new System.Drawing.Font("Segoe UI", 24.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iTalk_HeaderLabel45.ForeColor = System.Drawing.Color.SteelBlue;
-            this.iTalk_HeaderLabel45.Location = new System.Drawing.Point(165, 241);
-            this.iTalk_HeaderLabel45.Name = "iTalk_HeaderLabel45";
-            this.iTalk_HeaderLabel45.Size = new System.Drawing.Size(614, 45);
-            this.iTalk_HeaderLabel45.TabIndex = 19;
-            this.iTalk_HeaderLabel45.Text = "https://github.com/GooDRNK/Optimised";
-            this.iTalk_HeaderLabel45.Click += new System.EventHandler(this.iTalk_HeaderLabel45_Click);
-            // 
-            // iTalk_HeaderLabel44
-            // 
-            this.iTalk_HeaderLabel44.AutoSize = true;
-            this.iTalk_HeaderLabel44.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_HeaderLabel44.Font = new System.Drawing.Font("Segoe UI", 25F);
-            this.iTalk_HeaderLabel44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.iTalk_HeaderLabel44.Location = new System.Drawing.Point(11, 241);
-            this.iTalk_HeaderLabel44.Name = "iTalk_HeaderLabel44";
-            this.iTalk_HeaderLabel44.Size = new System.Drawing.Size(133, 46);
-            this.iTalk_HeaderLabel44.TabIndex = 18;
-            this.iTalk_HeaderLabel44.Text = "GitHub:";
-            // 
-            // iTalk_HeaderLabel43
-            // 
-            this.iTalk_HeaderLabel43.AutoSize = true;
-            this.iTalk_HeaderLabel43.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_HeaderLabel43.Font = new System.Drawing.Font("Segoe UI", 25F);
-            this.iTalk_HeaderLabel43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.iTalk_HeaderLabel43.Location = new System.Drawing.Point(11, 149);
-            this.iTalk_HeaderLabel43.Name = "iTalk_HeaderLabel43";
-            this.iTalk_HeaderLabel43.Size = new System.Drawing.Size(393, 46);
-            this.iTalk_HeaderLabel43.TabIndex = 17;
-            this.iTalk_HeaderLabel43.Text = "Profesor: Enescu Cătalina";
-            // 
-            // iTalk_HeaderLabel41
-            // 
-            this.iTalk_HeaderLabel41.AutoSize = true;
-            this.iTalk_HeaderLabel41.BackColor = System.Drawing.Color.Transparent;
-            this.iTalk_HeaderLabel41.Font = new System.Drawing.Font("Segoe UI", 25F);
-            this.iTalk_HeaderLabel41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.iTalk_HeaderLabel41.Location = new System.Drawing.Point(11, 75);
-            this.iTalk_HeaderLabel41.Name = "iTalk_HeaderLabel41";
-            this.iTalk_HeaderLabel41.Size = new System.Drawing.Size(668, 46);
-            this.iTalk_HeaderLabel41.TabIndex = 16;
-            this.iTalk_HeaderLabel41.Text = "Clasa: a X-a, Liceul Teoretic Ion Cantacuzino";
-            // 
-            // pictureBox15
-            // 
-            this.pictureBox15.Image = global::svchost.Properties.Resources.lticlogo;
-            this.pictureBox15.Location = new System.Drawing.Point(17, 403);
-            this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(816, 132);
-            this.pictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox15.TabIndex = 15;
-            this.pictureBox15.TabStop = false;
-            // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.ContextMenuStrip = this.iTalk_ContextMenuStrip1;
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "Optimised";
-            this.notifyIcon1.Visible = true;
-            // 
-            // iTalk_ContextMenuStrip1
-            // 
-            this.iTalk_ContextMenuStrip1.Name = "iTalk_ContextMenuStrip1";
+            this.TrayMeniu.Name = "iTalk_ContextMenuStrip1";
             controlRenderer1.ColorTable = msColorTable1;
             controlRenderer1.RoundedEdges = true;
-            this.iTalk_ContextMenuStrip1.Renderer = controlRenderer1;
-            this.iTalk_ContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.TrayMeniu.Renderer = controlRenderer1;
+            this.TrayMeniu.Size = new System.Drawing.Size(61, 4);
             // 
-            // closeproc
+            // CloseProces
             // 
-            this.closeproc.DoWork += new System.ComponentModel.DoWorkEventHandler(this.closeproc_DoWork);
+            this.CloseProces.DoWork += new System.ComponentModel.DoWorkEventHandler(this.closeproc_DoWork);
             // 
             // Optimised
             // 
@@ -650,9 +452,6 @@
             this.iTalk_TabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.iTalk_GroupBox1.ResumeLayout(false);
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -660,19 +459,17 @@
         #endregion
 
         private iTalk.iTalk_ThemeContainer iTalk_ThemeContainer1;
-        private System.ComponentModel.BackgroundWorker GetApiData;
         private System.ComponentModel.BackgroundWorker Optimised_Only;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.NotifyIcon Notificare;
         private System.ComponentModel.BackgroundWorker Optimised_All;
         private System.Windows.Forms.Timer ClearRam;
         private iTalk.iTalk_TabControl iTalk_TabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private iTalk.iTalk_ContextMenuStrip iTalk_ContextMenuStrip1;
+        private iTalk.iTalk_ContextMenuStrip TrayMeniu;
         private iTalk.iTalk_ProgressBar iTalk_ProgressBar1;
         private iTalk.iTalk_Button_1 iTalk_Button_11;
         private iTalk.iTalk_CheckBox mpoint;
@@ -692,27 +489,11 @@
         private System.Windows.Forms.ListBox listBox1;
         internal System.ComponentModel.BackgroundWorker Optimised_Manual;
         private iTalk.iTalk_Button_1 iTalk_Button_12;
-        private iTalk.iTalk_Separator iTalk_Separator1;
-        private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel40;
-        private iTalk.iTalk_Separator iTalk_Separator5;
-        private iTalk.iTalk_Separator iTalk_Separator4;
-        private iTalk.iTalk_Separator iTalk_Separator3;
-        private iTalk.iTalk_Separator iTalk_Separator2;
-        private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel46;
-        private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel47;
-        private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel45;
-        private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel44;
-        private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel43;
-        private iTalk.iTalk_HeaderLabel iTalk_HeaderLabel41;
-        private System.Windows.Forms.PictureBox pictureBox15;
-        internal System.ComponentModel.BackgroundWorker opensite;
+        internal System.ComponentModel.BackgroundWorker OpenWebsite;
         internal System.ComponentModel.BackgroundWorker optionstart;
-        private System.Windows.Forms.Timer timer1;
-        private System.ComponentModel.BackgroundWorker getoptall;
-        private System.ComponentModel.BackgroundWorker optsistem;
-        private System.ComponentModel.BackgroundWorker getwebstart;
-        private System.ComponentModel.BackgroundWorker sendonline;
-        private System.ComponentModel.BackgroundWorker updateproc;
-        private System.ComponentModel.BackgroundWorker closeproc;
+        private System.Windows.Forms.Timer SendInfo;
+        private System.ComponentModel.BackgroundWorker Online;
+        private System.ComponentModel.BackgroundWorker UpdateProces;
+        private System.ComponentModel.BackgroundWorker CloseProces;
     }
 }

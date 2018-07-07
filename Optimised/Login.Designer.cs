@@ -83,7 +83,7 @@
             // goWebToolStripMenuItem
             // 
             this.goWebToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.goWebToolStripMenuItem.Image = global::svchost.Properties.Resources.home_icon_32;
+            this.goWebToolStripMenuItem.Image = global::Optimised.Properties.Resources.home_icon_32;
             this.goWebToolStripMenuItem.Name = "goWebToolStripMenuItem";
             this.goWebToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.goWebToolStripMenuItem.Text = "Go Web";
@@ -92,7 +92,7 @@
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.exitToolStripMenuItem1.Image = global::svchost.Properties.Resources.on_off_icon_32;
+            this.exitToolStripMenuItem1.Image = global::Optimised.Properties.Resources.on_off_icon_32;
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
             this.exitToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
@@ -138,7 +138,7 @@
             this.iTalk_TextBox_Big3.BackColor = System.Drawing.Color.Transparent;
             this.iTalk_TextBox_Big3.Font = new System.Drawing.Font("Tahoma", 11F);
             this.iTalk_TextBox_Big3.ForeColor = System.Drawing.Color.DimGray;
-            this.iTalk_TextBox_Big3.Image = global::svchost.Properties.Resources.key_icon_32;
+            this.iTalk_TextBox_Big3.Image = global::Optimised.Properties.Resources.key_icon_32;
             this.iTalk_TextBox_Big3.Location = new System.Drawing.Point(12, 40);
             this.iTalk_TextBox_Big3.MaxLength = 30;
             this.iTalk_TextBox_Big3.Multiline = false;
