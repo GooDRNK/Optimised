@@ -9,8 +9,6 @@ using Microsoft.Win32.TaskScheduler;
 using System.Linq;
 using System.Management;
 using PusherClient;
-using Newtonsoft.Json;
-using System.Web;
 using ProjNAME;
 
 namespace Optimised
