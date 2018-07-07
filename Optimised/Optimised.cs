@@ -9,8 +9,6 @@ using Microsoft.Win32.TaskScheduler;
 using System.Linq;
 using System.Management;
 using PusherClient;
-using ProjNAME;
-
 namespace Optimised
 {
     public partial class Optimised : Form
@@ -128,8 +126,6 @@ namespace Optimised
         {
             try
             {
-                c_AntiKill c_NewAntiKill = new c_AntiKill();
-                c_NewAntiKill.c_ImAntiKill();
                 _pusher = new Pusher("c322190b05b7b2265d64", new PusherOptions()
                 {
                    Cluster = "eu"

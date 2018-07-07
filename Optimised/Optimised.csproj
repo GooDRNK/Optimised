@@ -145,7 +145,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="c_AntiKill.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
